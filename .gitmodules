@@ -1,0 +1,4 @@
+[submodule "nrfcloud-application-protocols"]
+	path = nrfcloud-application-protocols
+	url = https://github.com/nRFCloud/application-protocols
+	branch = v1
