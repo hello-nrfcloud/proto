@@ -5,4 +5,10 @@
  *
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/deviceToCloud/rsrp/rsrp.json
  */
-export type RSRP = Readonly<Record<string, any>>
+export type RSRP = Readonly<{
+	appId: string
+	messageType: string
+	data: string
+	ts?: number
+	time?: number
+}>

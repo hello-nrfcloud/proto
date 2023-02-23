@@ -24,7 +24,7 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "test": "jest --passWithNoTests"
+    "test": "jest"
   },
   "devDependencies": {
     "@nordicsemiconductor/asset-tracker-cloud-code-style": "11.0.181",

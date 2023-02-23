@@ -1,18 +1,45 @@
-import Ajv, { JSONSchemaType, Schema } from 'ajv'
+import Ajv, { Schema } from 'ajv'
 
-type ObjectPropertiesSchema = {
+export type RefSchema = { $ref: string }
+
+export type ObjectProperty =
+	| {
+			type: 'string'
+			const?: string
+	  }
+	| {
+			type: 'number'
+			description: string
+			minimum: number
+			maximum: number
+	  }
+	| {
+			enum: string[]
+			description: string
+	  }
+	| ObjectPropertiesSchema
+	| RefSchema
+export type ObjectPropertiesSchema = {
+	type: 'object'
 	properties: {
-		appId: { type: 'string' } & ({ const: string } | { pattern: string })
+		[key: string]: ObjectProperty
 	}
+	definitions?: {
+		[key: string]: ObjectProperty
+	}
+	required?: string[]
 }
-export type NRFCloudApplicationSchema = JSONSchemaType<
+export type NRFCloudApplicationSchema =
 	| ({
 			title: string
 			description: string
-			type: 'object'
-	  } & ObjectPropertiesSchema)
+	  } & ObjectPropertiesSchema & {
+				properties: {
+					appId?: { type: 'string' } & ({ const: string } | { pattern: string })
+				}
+			})
 	| { oneOf: ObjectPropertiesSchema[] }
->
+
 export const isSchema = (
 	schema: Schema,
 ): schema is NRFCloudApplicationSchema => {
@@ -24,3 +51,11 @@ export const isSchema = (
 		return false
 	}
 }
+
+export const isObjectSchema = (
+	schema: Schema,
+): schema is ObjectPropertiesSchema =>
+	typeof schema === 'object' && 'properties' in schema
+
+export const isRef = (schema: Schema): schema is RefSchema =>
+	typeof schema === 'object' && '$ref' in schema

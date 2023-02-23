@@ -5,4 +5,8 @@
  *
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/cloudToDevice/light/light.json
  */
-export type LIGHT = Readonly<Record<string, any>>
+export type LIGHT = Readonly<{
+	appId: string
+	messageType: string
+	data
+}>

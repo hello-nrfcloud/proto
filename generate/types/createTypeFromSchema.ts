@@ -1,12 +1,17 @@
 import ts from 'typescript'
 import { addDocBlock } from './addDocBlock'
-import type { NRFCloudApplicationSchema } from './NRFCloudApplicationSchema'
+import {
+	isObjectSchema,
+	NRFCloudApplicationSchema,
+	ObjectPropertiesSchema,
+	ObjectProperty,
+} from './NRFCloudApplicationSchema'
 
 const customTypeName = (schema: NRFCloudApplicationSchema): string | null => {
 	if (schema.title === 'GNSS') return 'GNSS'
 	return schema.title
 }
-type Direction = 'deviceToCloud' | 'cloudToDevice'
+export type Direction = 'deviceToCloud' | 'cloudToDevice'
 const typeName = (schema: NRFCloudApplicationSchema): string | null =>
 	schema.properties?.appId.const ?? customTypeName(schema)
 export const createTypeFromSchema = (
@@ -25,10 +30,7 @@ export const createTypeFromSchema = (
 		ts.factory.createIdentifier(name),
 		undefined,
 		ts.factory.createTypeReferenceNode('Readonly', [
-			ts.factory.createTypeReferenceNode('Record', [
-				ts.factory.createTypeReferenceNode('string'),
-				ts.factory.createTypeReferenceNode('any'),
-			]),
+			createObjectTypeFromSchema(schema),
 		]),
 	)
 
@@ -47,5 +49,67 @@ export const createTypeFromSchema = (
 		typeName: name,
 		tree: [objectTypeExport],
 		direction,
+	}
+}
+
+const createObjectTypeFromSchema = (
+	schema: NRFCloudApplicationSchema,
+): ts.TypeNode => {
+	if (isObjectSchema(schema)) return createObjectTypeFromProperties(schema)
+	return ts.factory.createTypeReferenceNode('Record', [
+		ts.factory.createTypeReferenceNode('string'),
+		ts.factory.createTypeReferenceNode('any'),
+	])
+}
+
+const createObjectTypeFromProperties = ({
+	properties,
+	required,
+}: ObjectPropertiesSchema): ts.TypeNode => {
+	let type: ts.TypeNode = ts.factory.createTypeLiteralNode(
+		Object.entries(properties).map(([id, property]) => {
+			const p = ts.factory.createPropertySignature(
+				undefined,
+				ts.factory.createStringLiteral(id),
+				required?.includes(id) ?? false
+					? undefined
+					: ts.factory.createToken(ts.SyntaxKind.QuestionToken),
+				isObjectSchema(property)
+					? createObjectTypeFromProperties(property)
+					: createTypeScriptTypeFromSchemaType(property),
+			)
+			return p
+		}),
+	)
+
+	return type
+}
+
+const createTypeScriptTypeFromSchemaType = (
+	schema: ObjectProperty,
+): ts.TypeNode => {
+	switch (schema.type) {
+		case 'string':
+			return ts.factory.createTypeReferenceNode(
+				ts.factory.createIdentifier('string'),
+			)
+		case 'integer':
+		case 'number':
+			return ts.factory.createTypeReferenceNode(
+				ts.factory.createIdentifier('number'),
+			)
+		case 'boolean':
+			return ts.factory.createTypeReferenceNode(
+				ts.factory.createIdentifier('boolean'),
+			)
+		case 'enum':
+			return ts.factory.createEnumDeclaration(
+				undefined,
+				ts.factory.createIdentifier(schema.name),
+				schema.enum.map((e) => ts.factory.createEnumMember(e)),
+			)
+		default:
+			console.error(schema)
+			throw new Error(`Unknown schema type: ${schema.type}!`)
 	}
 }

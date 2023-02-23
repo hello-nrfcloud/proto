@@ -5,4 +5,8 @@
  *
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/cloudToDevice/gps/gps.json
  */
-export type GPS = Readonly<Record<string, any>>
+export type GPS = Readonly<{
+	appId: string
+	messageType: string
+	data?
+}>
