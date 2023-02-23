@@ -13,6 +13,13 @@ application
 
 ## Setup
 
+Fetch the submodules
+
+```bash
+git submodule init
+git submodule update --remote
+```
+
 Install the dependencies:
 
 ```bash

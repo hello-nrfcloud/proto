@@ -6,9 +6,9 @@
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/deviceToCloud/air_quality/air_quality.json
  */
 export type AIR_QUAL = Readonly<{
-	appId: string
-	messageType: string
-	data: string
-	ts?: number
-	time?: number
-}>
+    "appId": string;
+    "messageType": string;
+    "data": string;
+    "ts"?: number;
+    "time"?: number;
+}>;

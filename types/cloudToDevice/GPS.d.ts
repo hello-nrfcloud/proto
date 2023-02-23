@@ -6,7 +6,10 @@
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/cloudToDevice/gps/gps.json
  */
 export type GPS = Readonly<{
-	appId: string
-	messageType: string
-	data?
-}>
+    "appId": string;
+    "messageType": string;
+    "data"?: {
+        "enable"?: boolean;
+        "interval"?: number;
+    };
+}>;

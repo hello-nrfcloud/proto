@@ -6,7 +6,7 @@
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/cloudToDevice/pgps-error/pgps.json
  */
 export type PGPS = Readonly<{
-	appId: string
-	messageType: string
-	err: number
-}>
+    "appId": string;
+    "messageType": string;
+    "err": number;
+}>;
