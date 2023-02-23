@@ -20,7 +20,7 @@
   "license": "BSD-3-Clause",
   "engines": {
     "node": ">=18.0.0",
-    "npm": ">=8.0.0"
+    "npm": ">=9.0.0"
   },
   "scripts": {
     "prepare": "husky install",
