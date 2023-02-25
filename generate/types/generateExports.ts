@@ -1,5 +1,5 @@
 import ts from 'typescript'
-import type { Direction } from './createTypeFromSchema'
+import type { Direction } from './NRFCloudApplicationSchema'
 
 /**
  * This generates the TypeScript source that exports all the individual types.

@@ -1,3 +1,7 @@
+declare enum format {
+	json = 'json',
+	binary = 'binary',
+}
 /**
  * SCELL request
  *
@@ -8,5 +12,34 @@
 export type SCELL = Readonly<{
 	appId: string
 	messageType: string
-	data
+	data: {
+		/**
+		 * Does not reply, even in event of an error, if set to false. Defaults to true.
+		 */
+		doReply: boolean
+		/**
+		 * Mobile Country Code
+		 */
+		mcc: number
+		/**
+		 * Mobile Network Code
+		 */
+		mnc: number
+		/**
+		 * Tracking Area Code
+		 */
+		tac: number
+		/**
+		 * E-UTRA Cell Identifier
+		 */
+		eci: number
+		/**
+		 * Signal power
+		 */
+		rsrp: number
+		/**
+		 * Requested format. Defaults to binary.
+		 */
+		format: format
+	}
 }>
