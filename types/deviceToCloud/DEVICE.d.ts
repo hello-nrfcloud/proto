@@ -1,3 +1,4 @@
+type uiItem = Readonly<string>
 declare enum fota_v2 {
 	APP = 'APP',
 	MODEM = 'MODEM',
@@ -5,6 +6,7 @@ declare enum fota_v2 {
 	BOOTLOADER = 'BOOTLOADER',
 	SOFTDEVICE = 'SOFTDEVICE',
 }
+type fota_v2Item = Readonly<fota_v2>
 /**
  * Device meta-data containing network, sim, device, and service information
  *
@@ -58,11 +60,11 @@ export type DEVICE = Readonly<{
 			/**
 			 * List of application ids that let nRF Connect for Cloud know what cards to display before receiving messages. See schemas under device to cloud to see a list of supported application ids.
 			 */
-			ui: Array<string>
+			ui: uiItem[]
 			/**
 			 * FOTA version 2. Includes a list of supported FOTA services. Supports nRFConnect for Cloud UI
 			 */
-			fota_v2: Array<fota_v2>
+			fota_v2: fota_v2Item[]
 		}
 	}
 	/**

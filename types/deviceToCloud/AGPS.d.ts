@@ -9,6 +9,7 @@ declare enum types {
 	n_8 = '8',
 	n_9 = '9',
 }
+type typesItem = Readonly<types>
 /**
  * AGPS request
  *
@@ -43,7 +44,7 @@ export type AGPS = Readonly<{
 		/**
 		 * Message Type. 1 = utc parameters, 2 = ephemerides data, 3 = almanac data, 4 = klobuchar ionospheric correction, 5 = nequick ionospheric correction, 6 = gps time of week, 7 = gps system clock, 8 = location (lat/lon of cell tower) 9 = gps integrity info
 		 */
-		types?: Array<types>
+		types?: typesItem[]
 		/**
 		 * If true, returns only ephemeris for visible satellites. Requires cell tower info.
 		 */

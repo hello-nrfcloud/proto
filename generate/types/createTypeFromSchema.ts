@@ -160,12 +160,30 @@ const createEnumType = (
 	return ts.factory.createTypeReferenceNode(ts.factory.createIdentifier(id))
 }
 
+const arrayTypesPerFile: Record<string, string[]> = {}
+
 const createArrayType = (
 	tree: ts.Node[],
 	file: string,
 	id: string,
 	property: ArraySchema,
-): ts.TypeNode =>
-	ts.factory.createTypeReferenceNode('Array', [
-		createType(tree, file, id, property.items),
-	])
+): ts.TypeNode => {
+	if (arrayTypesPerFile[file] === undefined) arrayTypesPerFile[file] = []
+	if (!(arrayTypesPerFile[file]?.includes(id) ?? false)) {
+		tree.push(
+			ts.factory.createTypeAliasDeclaration(
+				undefined,
+				ts.factory.createIdentifier(`${id}Item`),
+				undefined,
+				ts.factory.createTypeReferenceNode('Readonly', [
+					createType(tree, file, id, property.items),
+				]),
+			),
+		)
+		arrayTypesPerFile[file]?.push(id)
+	}
+
+	return ts.factory.createArrayTypeNode(
+		ts.factory.createTypeReferenceNode(`${id}Item`),
+	)
+}
