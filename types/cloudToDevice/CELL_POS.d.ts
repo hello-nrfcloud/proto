@@ -2,18 +2,6 @@ declare enum fulfilledWith {
 	MCELL = 'MCELL',
 	SCELL = 'SCELL',
 }
-declare enum fulfilledWith {
-	MCELL = 'MCELL',
-	SCELL = 'SCELL',
-}
-declare enum fulfilledWith {
-	MCELL = 'MCELL',
-	SCELL = 'SCELL',
-}
-declare enum fulfilledWith {
-	MCELL = 'MCELL',
-	SCELL = 'SCELL',
-}
 /**
  * Responds with coordinates
  *

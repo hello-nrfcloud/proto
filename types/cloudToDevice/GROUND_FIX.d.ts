@@ -3,21 +3,6 @@ declare enum fulfilledWith {
 	SCELL = 'SCELL',
 	WIFI = 'WIFI',
 }
-declare enum fulfilledWith {
-	MCELL = 'MCELL',
-	SCELL = 'SCELL',
-	WIFI = 'WIFI',
-}
-declare enum fulfilledWith {
-	MCELL = 'MCELL',
-	SCELL = 'SCELL',
-	WIFI = 'WIFI',
-}
-declare enum fulfilledWith {
-	MCELL = 'MCELL',
-	SCELL = 'SCELL',
-	WIFI = 'WIFI',
-}
 /**
  * Responds with coordinates
  *

@@ -33,7 +33,7 @@ export const createTypeFromSchema = (
 		ts.factory.createIdentifier(name),
 		undefined,
 		ts.factory.createTypeReferenceNode('Readonly', [
-			createType(tree, name, schema),
+			createType(tree, file, name, schema),
 		]),
 	)
 
@@ -56,13 +56,14 @@ export const createTypeFromSchema = (
 
 const createObjectType = (
 	tree: ts.Node[],
+	file: string,
 	id: string,
 	schema: ObjectSchema,
 ): ts.TypeNode => {
 	const objectMembers: ts.TypeNode[] = []
 	const { properties, required } = schema
 	for (const [id, property] of Object.entries(properties)) {
-		objectMembers.push(createType(tree, id, property))
+		objectMembers.push(createType(tree, file, id, property))
 	}
 
 	return ts.factory.createTypeLiteralNode(
@@ -75,7 +76,7 @@ const createObjectType = (
 					required
 						? undefined
 						: ts.factory.createToken(ts.SyntaxKind.QuestionToken),
-					createType(tree, id, property),
+					createType(tree, file, id, property),
 				),
 			)
 		}),
@@ -84,25 +85,26 @@ const createObjectType = (
 
 const createType = (
 	tree: ts.Node[],
+	file: string,
 	id: string,
 	property: JSONSchemaType,
 ): ts.TypeNode => {
 	if (isEnumSchema(property)) {
-		return createEnumType(tree, id, property)
+		return createEnumType(tree, file, id, property)
 	}
 	if (isArraySchema(property)) {
-		return createArrayType(tree, id, property)
+		return createArrayType(tree, file, id, property)
 	}
 	if (isUnionTypeSchema(property)) {
 		const variants: ts.TypeNode[] = []
 		const { oneOf, ...rest } = property
 		for (const schema of oneOf) {
-			variants.push(createType(tree, id, { ...rest, ...schema }))
+			variants.push(createType(tree, file, id, { ...rest, ...schema }))
 		}
 		return ts.factory.createUnionTypeNode(variants)
 	}
 	if (isObjectSchema(property)) {
-		return createObjectType(tree, id, property)
+		return createObjectType(tree, file, id, property)
 	}
 	switch (property.type) {
 		case 'string':
@@ -124,37 +126,46 @@ const createType = (
 	}
 }
 
+const enumsPerFile: Record<string, string[]> = {}
+
 const createEnumType = (
 	tree: ts.Node[],
+	file: string,
 	id: string,
 	property: EnumSchema,
 ): ts.TypeNode => {
-	tree.push(
-		ts.factory.createEnumDeclaration(
-			[ts.factory.createToken(ts.SyntaxKind.DeclareKeyword)],
-			ts.factory.createIdentifier(id),
-			property.enum.map((e) => {
-				let key = e
-				let value = e
-				if (typeof key === 'number') {
-					key = `n_${key}`
-					value = value.toString()
-				}
-				return ts.factory.createEnumMember(
-					key,
-					ts.factory.createStringLiteral(value),
-				)
-			}),
-		),
-	)
+	if (enumsPerFile[file] === undefined) enumsPerFile[file] = []
+	if (!(enumsPerFile[file]?.includes(id) ?? false)) {
+		tree.push(
+			ts.factory.createEnumDeclaration(
+				[ts.factory.createToken(ts.SyntaxKind.DeclareKeyword)],
+				ts.factory.createIdentifier(id),
+				property.enum.map((e) => {
+					let key = e
+					let value = e
+					if (typeof key === 'number') {
+						key = `n_${key}`
+						value = value.toString()
+					}
+					return ts.factory.createEnumMember(
+						key,
+						ts.factory.createStringLiteral(value),
+					)
+				}),
+			),
+		)
+		enumsPerFile[file]?.push(id)
+	}
+
 	return ts.factory.createTypeReferenceNode(ts.factory.createIdentifier(id))
 }
 
 const createArrayType = (
 	tree: ts.Node[],
+	file: string,
 	id: string,
 	property: ArraySchema,
 ): ts.TypeNode =>
 	ts.factory.createTypeReferenceNode('Array', [
-		createType(tree, id, property.items),
+		createType(tree, file, id, property.items),
 	])

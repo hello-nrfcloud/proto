@@ -2,10 +2,6 @@ declare enum messageType {
 	DATA = 'DATA',
 	HELLO = 'HELLO',
 }
-declare enum messageType {
-	DATA = 'DATA',
-	HELLO = 'HELLO',
-}
 /**
  * The device's temperature sensor reading in Celsius
  *

@@ -5,55 +5,6 @@ declare enum fota_v2 {
 	BOOTLOADER = 'BOOTLOADER',
 	SOFTDEVICE = 'SOFTDEVICE',
 }
-declare enum fota_v2 {
-	APP = 'APP',
-	MODEM = 'MODEM',
-	BOOT = 'BOOT',
-	BOOTLOADER = 'BOOTLOADER',
-	SOFTDEVICE = 'SOFTDEVICE',
-}
-declare enum fota_v2 {
-	APP = 'APP',
-	MODEM = 'MODEM',
-	BOOT = 'BOOT',
-	BOOTLOADER = 'BOOTLOADER',
-	SOFTDEVICE = 'SOFTDEVICE',
-}
-declare enum fota_v2 {
-	APP = 'APP',
-	MODEM = 'MODEM',
-	BOOT = 'BOOT',
-	BOOTLOADER = 'BOOTLOADER',
-	SOFTDEVICE = 'SOFTDEVICE',
-}
-declare enum fota_v2 {
-	APP = 'APP',
-	MODEM = 'MODEM',
-	BOOT = 'BOOT',
-	BOOTLOADER = 'BOOTLOADER',
-	SOFTDEVICE = 'SOFTDEVICE',
-}
-declare enum fota_v2 {
-	APP = 'APP',
-	MODEM = 'MODEM',
-	BOOT = 'BOOT',
-	BOOTLOADER = 'BOOTLOADER',
-	SOFTDEVICE = 'SOFTDEVICE',
-}
-declare enum fota_v2 {
-	APP = 'APP',
-	MODEM = 'MODEM',
-	BOOT = 'BOOT',
-	BOOTLOADER = 'BOOTLOADER',
-	SOFTDEVICE = 'SOFTDEVICE',
-}
-declare enum fota_v2 {
-	APP = 'APP',
-	MODEM = 'MODEM',
-	BOOT = 'BOOT',
-	BOOTLOADER = 'BOOTLOADER',
-	SOFTDEVICE = 'SOFTDEVICE',
-}
 /**
  * Device meta-data containing network, sim, device, and service information
  *
