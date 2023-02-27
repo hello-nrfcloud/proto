@@ -19,14 +19,34 @@ export const generateExports = (
 					ts.factory.createExportSpecifier(
 						false,
 						ts.factory.createIdentifier(name),
-						ts.factory.createIdentifier(
-							`${name}_${direction === 'cloudToDevice' ? 'C2D' : 'D2C'}`,
-						),
+						ts.factory.createIdentifier(toTypeName({ name, direction })),
 					),
 				]),
 				ts.factory.createStringLiteral(`./${direction}/${name}`),
 			),
 		)
 	}
+	exportDefinitions.push(
+		ts.factory.createExportDeclaration(
+			undefined,
+			true,
+			ts.factory.createNamedExports([
+				ts.factory.createExportSpecifier(
+					false,
+					undefined,
+					ts.factory.createIdentifier('NRFCloudMessage'),
+				),
+			]),
+			ts.factory.createStringLiteral(`./NRFCloudMessage`),
+		),
+	)
 	return exportDefinitions
 }
+
+export const toTypeName = ({
+	name,
+	direction,
+}: {
+	direction: Direction
+	name: string
+}): string => `${name}_${direction === 'cloudToDevice' ? 'C2D' : 'D2C'}`

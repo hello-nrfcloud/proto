@@ -6,9 +6,9 @@
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/cloudToDevice/temp/temp.json
  */
 export type TEMP = Readonly<{
-	appId: string
-	messageType: string
-	data: {
+	appId: 'TEMP'
+	messageType: 'CFG_SET'
+	data?: {
 		/**
 		 * Boolean true to enable temperature reporting on the device, false to disable
 		 */

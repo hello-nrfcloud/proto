@@ -6,6 +6,6 @@
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/cloudToDevice/device/device.json
  */
 export type DEVICE = Readonly<{
-	appId: string
-	messageType: string
+	appId: 'DEVICE'
+	messageType: 'DISCON'
 }>

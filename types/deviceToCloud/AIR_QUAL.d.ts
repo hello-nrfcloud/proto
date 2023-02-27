@@ -6,8 +6,8 @@
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/deviceToCloud/air_quality/air_quality.json
  */
 export type AIR_QUAL = Readonly<{
-	appId: string
-	messageType: string
+	appId: 'AIR_QUAL'
+	messageType: 'DATA'
 	/**
 	 * IAQ index value (0-500)
 	 */
@@ -15,9 +15,9 @@ export type AIR_QUAL = Readonly<{
 	/**
 	 * Unix timestamp given in milliseconds when the data was sampled
 	 */
-	ts: number
+	ts?: number
 	/**
 	 * The same as the 'ts' property. Used for backwards compatibility for some firmware versions of ATv2. Please use the 'ts' field instead
 	 */
-	time: number
+	time?: number
 }>

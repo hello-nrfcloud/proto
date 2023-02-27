@@ -10,13 +10,13 @@ declare enum format {
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/deviceToCloud/single_cell/single-cell.json
  */
 export type SCELL = Readonly<{
-	appId: string
-	messageType: string
+	appId: 'SCELL'
+	messageType: 'DATA'
 	data: {
 		/**
 		 * Does not reply, even in event of an error, if set to false. Defaults to true.
 		 */
-		doReply: boolean
+		doReply?: boolean
 		/**
 		 * Mobile Country Code
 		 */
@@ -36,10 +36,10 @@ export type SCELL = Readonly<{
 		/**
 		 * Signal power
 		 */
-		rsrp: number
+		rsrp?: number
 		/**
 		 * Requested format. Defaults to binary.
 		 */
-		format: format
+		format?: format
 	}
 }>

@@ -6,9 +6,9 @@
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/cloudToDevice/wifi/wifi-position.json
  */
 export type WIFI = Readonly<{
-	appId: string
-	messageType: string
-	data: {
+	appId: 'WIFI'
+	messageType: 'DATA'
+	data?: {
 		/**
 		 * GPS latitude
 		 */
@@ -22,5 +22,5 @@ export type WIFI = Readonly<{
 		 */
 		uncertainty?: number
 	}
-	err: number
+	err?: number
 }>

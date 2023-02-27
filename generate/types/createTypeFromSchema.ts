@@ -57,7 +57,6 @@ export const createTypeFromSchema = (
 const createObjectType = (
 	tree: ts.Node[],
 	file: string,
-	id: string,
 	schema: ObjectSchema,
 ): ts.TypeNode => {
 	const objectMembers: ts.TypeNode[] = []
@@ -73,7 +72,7 @@ const createObjectType = (
 				ts.factory.createPropertySignature(
 					undefined,
 					ts.factory.createStringLiteral(id),
-					required
+					required?.includes(id) ?? false
 						? undefined
 						: ts.factory.createToken(ts.SyntaxKind.QuestionToken),
 					createType(tree, file, id, property),
@@ -104,10 +103,15 @@ const createType = (
 		return ts.factory.createUnionTypeNode(variants)
 	}
 	if (isObjectSchema(property)) {
-		return createObjectType(tree, file, id, property)
+		return createObjectType(tree, file, property)
 	}
 	switch (property.type) {
 		case 'string':
+			if (property.const !== undefined) {
+				return ts.factory.createLiteralTypeNode(
+					ts.factory.createStringLiteral(property.const),
+				)
+			}
 			return ts.factory.createTypeReferenceNode(
 				ts.factory.createIdentifier('string'),
 			)

@@ -4,6 +4,7 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { createTypeFromSchema } from './createTypeFromSchema'
+import { createUnionType } from './createUnionType'
 import { generateExports } from './generateExports'
 import { isSchema } from './NRFCloudApplicationSchema'
 import { printNode } from './printNode'
@@ -41,6 +42,19 @@ for (const file of glob.sync('{cloudToDevice,deviceToCloud}/*/*.json', {
 	console.log(chalk.green('Writing'), chalk.blue(typeFile))
 	exports.push({ name: typeName, direction })
 }
+
+// Union
+const NRFCloudMessageFile = path.join(
+	process.cwd(),
+	'types',
+	`NRFCloudMessage.d.ts`,
+)
+writeFileSync(
+	NRFCloudMessageFile,
+	createUnionType(exports).map(printNode).join(os.EOL),
+	'utf-8',
+)
+console.log(chalk.green('Writing'), chalk.blue(NRFCloudMessageFile))
 
 // Export
 const exportsFiles = path.join(process.cwd(), 'types', 'types.d.ts')

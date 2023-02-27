@@ -6,8 +6,8 @@
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/cloudToDevice/light/light.json
  */
 export type LIGHT = Readonly<{
-	appId: string
-	messageType: string
+	appId: 'LIGHT'
+	messageType: 'CFG_SET'
 	data: {
 		/**
 		 * Boolean true to enable light sensor on the device, false to disable

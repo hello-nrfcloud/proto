@@ -14,6 +14,9 @@ export type NRFCloudApplicationSchema = ObjectSchema & {
 		}
 		[key: string]: JSONSchemaType
 	}
+	definitions?: {
+		[key: string]: Record<string, unknown>
+	}
 }
 type BaseType = {
 	description?: string

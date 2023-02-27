@@ -11,9 +11,9 @@ declare enum fulfilledWith {
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/cloudToDevice/ground_fix/ground-fix.json
  */
 export type GROUND_FIX = Readonly<{
-	appId: string
-	messageType: string
-	data: {
+	appId: 'GROUND_FIX'
+	messageType: 'DATA'
+	data?: {
 		/**
 		 * GPS latitude
 		 */
@@ -31,5 +31,5 @@ export type GROUND_FIX = Readonly<{
 		 */
 		fulfilledWith?: fulfilledWith
 	}
-	err: number
+	err?: number
 }>

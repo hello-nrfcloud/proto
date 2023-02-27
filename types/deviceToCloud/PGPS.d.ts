@@ -6,8 +6,8 @@
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/deviceToCloud/pgps/pgps.json
  */
 export type PGPS = Readonly<{
-	appId: string
-	messageType: string
+	appId: 'PGPS'
+	messageType: 'DATA'
 	data: {
 		/**
 		 * GPS day to start the predictions.

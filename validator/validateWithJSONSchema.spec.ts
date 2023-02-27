@@ -1,0 +1,27 @@
+import { validateWithJSONSchema } from './validateWithJSONSchema.js'
+
+const typedInputSchema = {
+	type: 'object',
+	properties: {
+		cell: {
+			type: 'number',
+			minimum: 1,
+		},
+	},
+	additionalProperties: false,
+}
+
+describe('validateWithJSONSchema', () => {
+	describe('it should validate', () => {
+		const v = validateWithJSONSchema(typedInputSchema)
+		it('valid input', () => {
+			const isValid = v({ cell: 42 })
+			expect('value' in isValid).toEqual(true)
+			expect((isValid as any).value.cell).toEqual(42)
+		})
+		it('invalid input', () => {
+			const isInvalid = v({ cell: -42 })
+			expect('errors' in isInvalid).toEqual(true)
+		})
+	})
+})

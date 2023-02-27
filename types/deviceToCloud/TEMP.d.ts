@@ -10,15 +10,15 @@ declare enum messageType {
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/deviceToCloud/temp/temp.json
  */
 export type TEMP = Readonly<{
-	appId: string
+	appId: 'TEMP'
 	messageType: messageType
-	data: string
+	data?: string
 	/**
 	 * Unix timestamp given in milliseconds when the data was sampled
 	 */
-	ts: number
+	ts?: number
 	/**
 	 * The same as the 'ts' property. Used for backwards compatibility for some firmware versions of ATv2. Please use the 'ts' field instead
 	 */
-	time: number
+	time?: number
 }>

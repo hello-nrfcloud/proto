@@ -10,11 +10,11 @@ type nmrItem = Readonly<{
 	/**
 	 * Signal power
 	 */
-	rsrp: number
+	rsrp?: number
 	/**
 	 * Signal quality
 	 */
-	rsrq: number
+	rsrq?: number
 }>
 type lteItem = Readonly<{
 	/**
@@ -36,16 +36,16 @@ type lteItem = Readonly<{
 	/**
 	 * Signal power
 	 */
-	rsrp: number
+	rsrp?: number
 	/**
 	 * Signal quality
 	 */
-	rsrq: number
+	rsrq?: number
 	/**
 	 * Evolved Absolute Radio Frequency Channel (E-ARFCN).
 	 */
-	earfcn: number
-	nmr: nmrItem[]
+	earfcn?: number
+	nmr?: nmrItem[]
 }>
 /**
  * CELL_POS request
@@ -55,13 +55,13 @@ type lteItem = Readonly<{
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/deviceToCloud/cell_position/cell-position.json
  */
 export type CELL_POS = Readonly<{
-	appId: string
-	messageType: string
+	appId: 'CELL_POS'
+	messageType: 'DATA'
 	data: {
 		/**
 		 * Does not reply, even in event of an error, if set to false. Defaults to true.
 		 */
-		doReply: boolean
+		doReply?: boolean
 		lte: lteItem[]
 	}
 }>

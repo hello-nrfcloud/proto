@@ -10,9 +10,9 @@ declare enum fulfilledWith {
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/cloudToDevice/cell_position/cell-position.json
  */
 export type CELL_POS = Readonly<{
-	appId: string
-	messageType: string
-	data: {
+	appId: 'CELL_POS'
+	messageType: 'DATA'
+	data?: {
 		/**
 		 * GPS latitude
 		 */
@@ -30,5 +30,5 @@ export type CELL_POS = Readonly<{
 		 */
 		fulfilledWith?: fulfilledWith
 	}
-	err: number
+	err?: number
 }>

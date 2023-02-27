@@ -6,8 +6,8 @@
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/cloudToDevice/air_quality/air_quality.json
  */
 export type AIR_QUAL = Readonly<{
-	appId: string
-	messageType: string
+	appId: 'AIR_QUAL'
+	messageType: 'CFG_SET'
 	data: {
 		/**
 		 * Boolean true to enable air quality reporting on the device, false to disable

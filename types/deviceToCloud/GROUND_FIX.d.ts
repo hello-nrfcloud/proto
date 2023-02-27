@@ -6,19 +6,19 @@ type accessPointsItem = Readonly<{
 	/**
 	 * Name of Wi-Fi network
 	 */
-	ssid: string
+	ssid?: string
 	/**
 	 * Signal strength in dBm
 	 */
-	signalStrength: number
+	signalStrength?: number
 	/**
 	 * Channel frequency in MHz (only one of Channel or Frequency should be used)
 	 */
-	frequency: number
+	frequency?: number
 	/**
 	 * Channel number (only one of Channel or Frequency should be used)
 	 */
-	channel: number
+	channel?: number
 }>
 type nmrItem = Readonly<{
 	/**
@@ -32,11 +32,11 @@ type nmrItem = Readonly<{
 	/**
 	 * Signal power
 	 */
-	rsrp: number
+	rsrp?: number
 	/**
 	 * Signal quality
 	 */
-	rsrq: number
+	rsrq?: number
 }>
 type lteItem = Readonly<{
 	/**
@@ -58,16 +58,16 @@ type lteItem = Readonly<{
 	/**
 	 * Signal power
 	 */
-	rsrp: number
+	rsrp?: number
 	/**
 	 * Signal quality
 	 */
-	rsrq: number
+	rsrq?: number
 	/**
 	 * Evolved Absolute Radio Frequency Channel (E-ARFCN).
 	 */
-	earfcn: number
-	nmr: nmrItem[]
+	earfcn?: number
+	nmr?: nmrItem[]
 }>
 /**
  * GROUND_FIX request
@@ -77,8 +77,8 @@ type lteItem = Readonly<{
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/deviceToCloud/ground_fix/ground-fix.json
  */
 export type GROUND_FIX = Readonly<{
-	appId: string
-	messageType: string
+	appId: 'GROUND_FIX'
+	messageType: 'DATA'
 	data: {
 		/**
 		 * Does not reply, even in event of an error, if set to false. Defaults to true.

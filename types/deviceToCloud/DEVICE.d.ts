@@ -15,8 +15,8 @@ type fota_v2Item = Readonly<fota_v2>
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/deviceToCloud/device/device.json
  */
 export type DEVICE = Readonly<{
-	appId: string
-	messageType: string
+	appId: 'DEVICE'
+	messageType: 'DATA'
 	data: {
 		/**
 		 * Device's connected network information
@@ -64,15 +64,15 @@ export type DEVICE = Readonly<{
 			/**
 			 * FOTA version 2. Includes a list of supported FOTA services. Supports nRFConnect for Cloud UI
 			 */
-			fota_v2: fota_v2Item[]
+			fota_v2?: fota_v2Item[]
 		}
 	}
 	/**
 	 * Unix timestamp given in milliseconds when the data was sampled
 	 */
-	ts: number
+	ts?: number
 	/**
 	 * The same as the 'ts' property. Used for backwards compatibility for some firmware versions of ATv2. Please use the 'ts' field instead
 	 */
-	time: number
+	time?: number
 }>

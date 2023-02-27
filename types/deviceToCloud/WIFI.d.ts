@@ -6,19 +6,19 @@ type accessPointsItem = Readonly<{
 	/**
 	 * Name of Wi-Fi network
 	 */
-	ssid: string
+	ssid?: string
 	/**
 	 * Signal strength in dBm
 	 */
-	signalStrength: number
+	signalStrength?: number
 	/**
 	 * Channel frequency in MHz (only one of Channel or Frequency should be used)
 	 */
-	frequency: number
+	frequency?: number
 	/**
 	 * Channel number (only one of Channel or Frequency should be used)
 	 */
-	channel: number
+	channel?: number
 }>
 /**
  * WIFI request
@@ -28,8 +28,8 @@ type accessPointsItem = Readonly<{
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/deviceToCloud/wifi/wifi-position.json
  */
 export type WIFI = Readonly<{
-	appId?: string
-	messageType?: string
+	appId?: 'WIFI'
+	messageType?: 'DATA'
 	data?: {
 		/**
 		 * At least two access points are required

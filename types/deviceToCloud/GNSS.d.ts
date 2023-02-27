@@ -8,7 +8,7 @@
 export type GNSS = Readonly<
 	| {
 			appId: string
-			messageType: string
+			messageType: 'DATA'
 			/**
 			 * NMEA string
 			 */
@@ -16,15 +16,15 @@ export type GNSS = Readonly<
 			/**
 			 * Unix timestamp given in milliseconds when the data was sampled
 			 */
-			ts: number
+			ts?: number
 			/**
 			 * The same as the 'ts' property. Used for backwards compatibility for some firmware versions of ATv2. Please use the 'ts' field instead
 			 */
-			time: number
+			time?: number
 	  }
 	| {
 			appId: string
-			messageType: string
+			messageType: 'DATA'
 			/**
 			 * Position, Velocity and Time (PVT) payload
 			 */
@@ -44,23 +44,23 @@ export type GNSS = Readonly<
 				/**
 				 * Horizontal speed in meters per second
 				 */
-				spd: number
+				spd?: number
 				/**
 				 * Heading of movement in degrees
 				 */
-				hdg: number
+				hdg?: number
 				/**
 				 * Altitude above WGS-84 ellipsoid in meters
 				 */
-				alt: number
+				alt?: number
 			}
 			/**
 			 * Unix timestamp given in milliseconds when the data was sampled
 			 */
-			ts: number
+			ts?: number
 			/**
 			 * The same as the 'ts' property. Used for backwards compatibility for some firmware versions of asset_tracker_v2. Please use the 'ts' field instead
 			 */
-			time: number
+			time?: number
 	  }
 >

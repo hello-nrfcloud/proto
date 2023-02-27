@@ -6,9 +6,9 @@
  * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/cloudToDevice/gps/gps.json
  */
 export type GPS = Readonly<{
-	appId: string
-	messageType: string
-	data: {
+	appId: 'GPS'
+	messageType: 'CFG_SET'
+	data?: {
 		/**
 		 * Boolean true to enable GPS on the device, false to disable
 		 */
