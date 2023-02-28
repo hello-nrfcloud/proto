@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import glob from 'glob'
+import { globSync } from 'glob'
 import { readFileSync, writeFileSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
@@ -18,7 +18,7 @@ const schemasDir = path.join(
 
 const exports: Parameters<typeof generateExports>[0] = []
 
-for (const file of glob.sync('{cloudToDevice,deviceToCloud}/*/*.json', {
+for (const file of globSync('{cloudToDevice,deviceToCloud}/*/*.json', {
 	cwd: schemasDir,
 })) {
 	const schema = JSON.parse(readFileSync(path.join(schemasDir, file), 'utf-8'))
