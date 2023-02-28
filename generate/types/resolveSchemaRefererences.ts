@@ -14,25 +14,22 @@ export const resolveSchemaRefererences = <Schema extends SchemaWithDefs>(
 ): Schema => {
 	const defs = schema.definitions
 	if (defs === undefined) return schema
-	return resolve(defs, schema)
+	return resolve(defs, schema) as Schema
 }
 
-const resolve = <Schema extends unknown>(
-	defs: Definitions,
-	schema: Schema,
-): Schema => {
+const resolve = (defs: Definitions, schema: unknown): unknown => {
 	if (schema === null) return schema
 	if (isRef(schema)) {
 		const id = schema.$ref.split('/').pop() ?? ''
 		const replacement = defs[id]
 		if (replacement === undefined) return schema
-		return replacement as Schema
+		return replacement
 	}
 	if (isObject(schema)) {
 		return Object.entries(schema).reduce(
 			(obj, [k, v]) => ({ ...obj, [k]: resolve(defs, v) }),
 			{} as Record<string, unknown>,
-		) as Schema
+		)
 	}
 	return schema
 }
