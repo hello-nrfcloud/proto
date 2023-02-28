@@ -11,7 +11,7 @@ export const createUnionType = (
 			ts.factory.createImportDeclaration(
 				undefined,
 				ts.factory.createImportClause(
-					false,
+					true,
 					undefined,
 					ts.factory.createNamedImports([
 						ts.factory.createImportSpecifier(

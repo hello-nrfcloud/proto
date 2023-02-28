@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/bifravst/nRF.guide-proto/blob/saga/generate/types/envelope.schema.json",
+  "$id": "https://github.com/bifravst/nRF.guide-proto/blob/saga/schemas/NRFCloudMessage.schema.json",
   "title": "Envelope schema for nRF Cloud application messages",
   "description": "All messages received from nRF Cloud via MQTT are wrapped in this envelope",
   "type": "object",

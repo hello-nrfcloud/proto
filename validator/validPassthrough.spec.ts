@@ -25,8 +25,18 @@ describe('validPassthrough', () => {
 			})
 		})
 		it('invalid input', () => {
-			const isInvalid = validPassthrough({ temp: -42 } as any)
-			expect(isInvalid).toBeUndefined()
+			const onDropped = jest.fn()
+			const isInvalid = validPassthrough({ temp: -42 } as any, onDropped)
+			expect(isInvalid).toBeNull()
+			expect(onDropped).toHaveBeenCalledWith({ temp: -42 }, [
+				{
+					instancePath: '',
+					keyword: 'required',
+					message: "must have required property 'sender'",
+					params: { missingProperty: 'sender' },
+					schemaPath: '#/required',
+				},
+			])
 		})
 	})
 })

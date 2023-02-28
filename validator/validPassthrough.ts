@@ -1,7 +1,9 @@
+import type { ErrorObject } from 'ajv'
 import { readFileSync } from 'fs'
 import path from 'node:path/posix'
 import type { NRFCloudMessageEnvelope } from 'types/NRFCloudMessageEnvelope'
-import schema from './NRFCloudMessage.schema.json' assert { type: 'json' }
+import * as url from 'url'
+import schema from '../schemas/NRFCloudMessage.schema.json' assert { type: 'json' }
 import { validateWithJSONSchema } from './validateWithJSONSchema.js'
 
 const validator = validateWithJSONSchema(
@@ -42,7 +44,7 @@ const validator = validateWithJSONSchema(
 		...JSON.parse(
 			readFileSync(
 				path.join(
-					process.cwd(),
+					url.fileURLToPath(new URL('..', import.meta.url)),
 					'nrfcloud-application-protocols',
 					'schemas',
 					s,
@@ -55,19 +57,12 @@ const validator = validateWithJSONSchema(
 
 export const validPassthrough = (
 	v: NRFCloudMessageEnvelope,
-): NRFCloudMessageEnvelope | undefined => {
+	onDropped?: (v: unknown, errors: ErrorObject[]) => unknown,
+): NRFCloudMessageEnvelope | null => {
 	const isValid = validator(v)
 	if ('errors' in isValid) {
-		console.debug(
-			'[validPassthrough]',
-			'Dropped',
-			v,
-			{ schema },
-			{
-				errors: isValid.errors,
-			},
-		)
-		return
+		onDropped?.(v, isValid.errors)
+		return null
 	}
 	return v
 }

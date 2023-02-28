@@ -9,7 +9,15 @@
 [![ESLint: TypeScript](https://img.shields.io/badge/ESLint-TypeScript-blue.svg)](https://github.com/typescript-eslint/typescript-eslint)
 
 Documents the communication protocol between the nrf.guide backend and the web
-application
+application.
+
+## Usage
+
+```bash
+npm i --save-exact @nrf.guide/proto
+```
+
+[Example](./example.ts)
 
 ## Setup
 

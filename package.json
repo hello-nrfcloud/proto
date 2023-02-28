@@ -78,6 +78,7 @@
     "package-lock.json",
     "LICENSE",
     "README.md",
+    "example.ts",
     "export.js",
     "index.d.ts",
     "dist",

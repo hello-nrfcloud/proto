@@ -36,7 +36,7 @@ for (const file of glob.sync('{cloudToDevice,deviceToCloud}/*/*.json', {
 		process.cwd(),
 		'types',
 		direction,
-		`${typeName}.d.ts`,
+		`${typeName}.ts`,
 	)
 	writeFileSync(typeFile, tree.map(printNode).join(os.EOL), 'utf-8')
 	console.log(chalk.green('Writing'), chalk.blue(typeFile))
@@ -47,7 +47,7 @@ for (const file of glob.sync('{cloudToDevice,deviceToCloud}/*/*.json', {
 const NRFCloudMessageFile = path.join(
 	process.cwd(),
 	'types',
-	`NRFCloudMessage.d.ts`,
+	`NRFCloudMessage.ts`,
 )
 writeFileSync(
 	NRFCloudMessageFile,
@@ -57,7 +57,7 @@ writeFileSync(
 console.log(chalk.green('Writing'), chalk.blue(NRFCloudMessageFile))
 
 // Export
-const exportsFiles = path.join(process.cwd(), 'types', 'types.d.ts')
+const exportsFiles = path.join(process.cwd(), 'types', 'types.ts')
 console.log(chalk.green('Writing'), chalk.blue(exportsFiles))
 writeFileSync(
 	exportsFiles,
