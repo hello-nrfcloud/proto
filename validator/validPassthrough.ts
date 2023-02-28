@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs'
 import path from 'node:path/posix'
 import type { NRFCloudMessageEnvelope } from 'types/NRFCloudMessageEnvelope'
-import schema from './NRFCloudMessage.schema.json'
+import schema from './NRFCloudMessage.schema.json' assert { type: 'json' }
 import { validateWithJSONSchema } from './validateWithJSONSchema.js'
 
 const validator = validateWithJSONSchema(
