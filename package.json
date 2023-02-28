@@ -1,5 +1,5 @@
 {
-  "name": "@nordicsemiconductor/nrf.guide-proto",
+  "name": "@nrf.guide/proto",
   "version": "0.0.0-development",
   "description": "Documents the communication protocol between the nrf.guide backend and the web application",
   "type": "module",
