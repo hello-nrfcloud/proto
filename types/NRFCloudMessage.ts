@@ -29,34 +29,34 @@ import type { SCELL as SCELL_D2C } from './deviceToCloud/SCELL'
 import type { TEMP as TEMP_D2C } from './deviceToCloud/TEMP'
 import type { WIFI as WIFI_D2C } from './deviceToCloud/WIFI'
 export type NRFCloudMessage = Readonly<
-	| AGPS_C2D
-	| AIR_QUAL_C2D
-	| CELL_POS_C2D
-	| DEVICE_C2D
-	| ENV_C2D
-	| GPS_C2D
-	| GROUND_FIX_C2D
-	| LED_C2D
-	| LIGHT_C2D
-	| MODEM_C2D
-	| PGPS_C2D
-	| SCELL_C2D
-	| TEMP_C2D
 	| WIFI_C2D
-	| AGPS_D2C
-	| AIR_PRESS_D2C
-	| AIR_QUAL_D2C
-	| BUTTON_D2C
-	| CELL_POS_D2C
-	| DEVICE_D2C
-	| FLIP_D2C
-	| GNSS_D2C
-	| GROUND_FIX_D2C
-	| HUMID_D2C
-	| LIGHT_D2C
-	| PGPS_D2C
-	| RSRP_D2C
-	| SCELL_D2C
-	| TEMP_D2C
+	| TEMP_C2D
+	| SCELL_C2D
+	| PGPS_C2D
+	| MODEM_C2D
+	| LIGHT_C2D
+	| LED_C2D
+	| GROUND_FIX_C2D
+	| GPS_C2D
+	| ENV_C2D
+	| DEVICE_C2D
+	| CELL_POS_C2D
+	| AIR_QUAL_C2D
+	| AGPS_C2D
 	| WIFI_D2C
+	| TEMP_D2C
+	| SCELL_D2C
+	| RSRP_D2C
+	| PGPS_D2C
+	| LIGHT_D2C
+	| HUMID_D2C
+	| GROUND_FIX_D2C
+	| GNSS_D2C
+	| FLIP_D2C
+	| DEVICE_D2C
+	| CELL_POS_D2C
+	| BUTTON_D2C
+	| AIR_QUAL_D2C
+	| AIR_PRESS_D2C
+	| AGPS_D2C
 >

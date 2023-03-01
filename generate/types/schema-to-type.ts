@@ -1,8 +1,8 @@
 import chalk from 'chalk'
-import { globSync } from 'glob'
 import { readFileSync, writeFileSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
+import { messages } from '../../messages'
 import { createTypeFromSchema } from './createTypeFromSchema'
 import { createUnionType } from './createUnionType'
 import { generateExports } from './generateExports'
@@ -10,18 +10,10 @@ import { isSchema } from './NRFCloudApplicationSchema'
 import { printNode } from './printNode'
 import { resolveSchemaRefererences } from './resolveSchemaRefererences'
 
-const schemasDir = path.join(
-	process.cwd(),
-	'nrfcloud-application-protocols',
-	'schemas',
-)
-
 const exports: Parameters<typeof generateExports>[0] = []
 
-for (const file of globSync('{cloudToDevice,deviceToCloud}/*/*.json', {
-	cwd: schemasDir,
-})) {
-	const schema = JSON.parse(readFileSync(path.join(schemasDir, file), 'utf-8'))
+for (const { path: file, $id } of messages) {
+	const schema = JSON.parse(readFileSync(file, 'utf-8'))
 	if (!isSchema(schema)) {
 		console.debug(chalk.gray(`Ignoring`), chalk.blue.dim(file))
 		continue
@@ -30,6 +22,7 @@ for (const file of globSync('{cloudToDevice,deviceToCloud}/*/*.json', {
 
 	const { typeName, tree, direction } = createTypeFromSchema(
 		file,
+		$id,
 		resolveSchemaRefererences(schema),
 	)
 	const typeFile = path.join(

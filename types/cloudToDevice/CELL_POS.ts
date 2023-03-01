@@ -7,7 +7,7 @@ declare enum fulfilledWith {
  *
  * Direction: cloudToDevice
  *
- * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/cloudToDevice/cell_position/cell-position.json
+ * @see https://raw.githubusercontent.com/bifravst/nrfcloud-application-protocols/v1-asset_tracker_v2-fixes/schemas/cloudToDevice/cell_position/cell-position.json
  */
 export type CELL_POS = Readonly<{
 	appId: 'CELL_POS'

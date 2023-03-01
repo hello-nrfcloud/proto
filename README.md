@@ -39,3 +39,10 @@ npm ci
 ```bash
 npm test
 ```
+
+## Update generated code
+
+```bash
+npx tsx generate/schema/NRFCloudMessage.schema.ts
+npx tsx generate/types/schema-to-type.ts
+```

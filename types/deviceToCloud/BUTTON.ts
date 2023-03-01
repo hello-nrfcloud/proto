@@ -3,7 +3,7 @@
  *
  * Direction: deviceToCloud
  *
- * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/deviceToCloud/button/button.json
+ * @see https://raw.githubusercontent.com/bifravst/nrfcloud-application-protocols/v1-asset_tracker_v2-fixes/schemas/deviceToCloud/button/button.json
  */
 export type BUTTON = Readonly<{
 	appId: 'BUTTON'

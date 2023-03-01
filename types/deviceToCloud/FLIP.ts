@@ -11,7 +11,7 @@ declare enum data {
  *
  * Direction: deviceToCloud
  *
- * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/deviceToCloud/flip/flip.json
+ * @see https://raw.githubusercontent.com/bifravst/nrfcloud-application-protocols/v1-asset_tracker_v2-fixes/schemas/deviceToCloud/flip/flip.json
  */
 export type FLIP = Readonly<{
 	appId: 'FLIP'

@@ -12,7 +12,7 @@ type fota_v2Item = Readonly<fota_v2>
  *
  * Direction: deviceToCloud
  *
- * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/deviceToCloud/device/device.json
+ * @see https://raw.githubusercontent.com/bifravst/nrfcloud-application-protocols/v1-asset_tracker_v2-fixes/schemas/deviceToCloud/device/device.json
  */
 export type DEVICE = Readonly<{
 	appId: 'DEVICE'
@@ -23,16 +23,17 @@ export type DEVICE = Readonly<{
 		 */
 		networkInfo?: {
 			currentBand: number
-			supportedBands: string
+			supportedBands?: string
 			areaCode: number
 			/**
 			 * Combination of the mobile country code and mobile network codes
 			 */
-			mccmnc: string
+			mccmnc: number
 			ipAddress: string
-			ueMode: number
+			ueMode?: number
 			cellID: number
 			networkMode: string
+			rsrp?: number
 		}
 		/**
 		 * Device sim information
@@ -47,11 +48,12 @@ export type DEVICE = Readonly<{
 		 */
 		deviceInfo?: {
 			modemFirmware: string
-			batteryVoltage: number
+			batteryVoltage?: number
 			imei: string
 			board: string
 			appVersion: string
-			appName: string
+			appName?: string
+			iccid?: string
 		}
 		/**
 		 * Data describing the services provided by the devices for UI display on nRF Connect for Cloud.

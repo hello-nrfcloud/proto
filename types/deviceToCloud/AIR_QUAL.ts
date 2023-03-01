@@ -3,7 +3,7 @@
  *
  * Direction: deviceToCloud
  *
- * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/deviceToCloud/air_quality/air_quality.json
+ * @see https://raw.githubusercontent.com/bifravst/nrfcloud-application-protocols/v1-asset_tracker_v2-fixes/schemas/deviceToCloud/air_quality/air_quality.json
  */
 export type AIR_QUAL = Readonly<{
 	appId: 'AIR_QUAL'

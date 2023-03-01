@@ -3,7 +3,7 @@
  *
  * Direction: cloudToDevice
  *
- * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/cloudToDevice/led/led.json
+ * @see https://raw.githubusercontent.com/bifravst/nrfcloud-application-protocols/v1-asset_tracker_v2-fixes/schemas/cloudToDevice/led/led.json
  */
 export type LED = Readonly<{
 	appId: 'LED'

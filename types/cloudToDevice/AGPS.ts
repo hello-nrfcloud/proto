@@ -3,7 +3,7 @@
  *
  * Direction: cloudToDevice
  *
- * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/cloudToDevice/agps/agps.json
+ * @see https://raw.githubusercontent.com/bifravst/nrfcloud-application-protocols/v1-asset_tracker_v2-fixes/schemas/cloudToDevice/agps/agps.json
  */
 export type AGPS = Readonly<{
 	appId: 'AGPS'

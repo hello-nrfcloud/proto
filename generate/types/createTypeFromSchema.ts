@@ -16,6 +16,7 @@ import {
 
 export const createTypeFromSchema = (
 	file: string,
+	$id: URL,
 	schema: NRFCloudApplicationSchema,
 ): { typeName: string; tree: ts.Node[]; direction: Direction } => {
 	const direction = file.includes('deviceToCloud')
@@ -42,7 +43,7 @@ export const createTypeFromSchema = (
 		``,
 		`Direction: ${direction}`,
 		``,
-		`@see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/${file}`,
+		`@see ${$id.toString()}`,
 	])(objectTypeExport)
 
 	tree.push(objectTypeExport)

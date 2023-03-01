@@ -8,15 +8,15 @@ describe('examples', () => {
 		'deviceToCloud/BUTTON.json',
 		'deviceToCloud/GROUND_FIX.json',
 		'deviceToCloud/TEMP.json',
-		// FIXME: implement schemas
-		// 'deviceToCloud/DEVICE-networkInfo.json',
-		// 'deviceToCloud/DEVICE-deviceInfo.json',
+		'deviceToCloud/DEVICE-networkInfo.json',
+		'deviceToCloud/DEVICE-deviceInfo.json',
 	])('should validate %s', (example) =>
 		expect(
 			validPassthrough(
 				JSON.parse(
 					readFileSync(path.join(process.cwd(), 'examples', example), 'utf-8'),
 				),
+				(_, error) => console.error(JSON.stringify(error)),
 			),
 		).not.toBeNull(),
 	)

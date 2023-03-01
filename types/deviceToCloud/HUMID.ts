@@ -3,7 +3,7 @@
  *
  * Direction: deviceToCloud
  *
- * @see https://github.com/nRFCloud/application-protocols/tree/v1/schemas/deviceToCloud/humid/humid.json
+ * @see https://raw.githubusercontent.com/bifravst/nrfcloud-application-protocols/v1-asset_tracker_v2-fixes/schemas/deviceToCloud/humid/humid.json
  */
 export type HUMID = Readonly<{
 	appId: 'HUMID'
