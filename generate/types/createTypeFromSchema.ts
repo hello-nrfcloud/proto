@@ -8,10 +8,12 @@ import {
 	isArraySchema,
 	isEnumSchema,
 	isObjectSchema,
+	isRef,
 	isUnionTypeSchema,
 	JSONSchemaType,
 	NRFCloudApplicationSchema,
 	ObjectSchema,
+	RefSchema,
 } from './NRFCloudApplicationSchema'
 
 export const createTypeFromSchema = (
@@ -34,7 +36,7 @@ export const createTypeFromSchema = (
 		ts.factory.createIdentifier(name),
 		undefined,
 		ts.factory.createTypeReferenceNode('Readonly', [
-			createType(tree, file, name, schema),
+			createType(tree, file, name, schema, schema),
 		]),
 	)
 
@@ -59,16 +61,20 @@ const createObjectType = (
 	tree: ts.Node[],
 	file: string,
 	schema: ObjectSchema,
+	root: NRFCloudApplicationSchema,
 ): ts.TypeNode => {
 	const objectMembers: ts.TypeNode[] = []
 	const { properties, required } = schema
 	for (const [id, property] of Object.entries(properties)) {
-		objectMembers.push(createType(tree, file, id, property))
+		objectMembers.push(createType(tree, file, id, property, root))
 	}
 
 	return ts.factory.createTypeLiteralNode(
 		Object.entries(properties).map(([id, property]) => {
 			ts.factory.createTypeReferenceNode(ts.factory.createIdentifier(id))
+			if (isRef(property)) {
+				property = resolveRef(property, root)
+			}
 			return addDocBlock(property.description)(
 				ts.factory.createPropertySignature(
 					undefined,
@@ -76,7 +82,7 @@ const createObjectType = (
 					required?.includes(id) ?? false
 						? undefined
 						: ts.factory.createToken(ts.SyntaxKind.QuestionToken),
-					createType(tree, file, id, property),
+					createType(tree, file, id, property, root),
 				),
 			)
 		}),
@@ -88,23 +94,27 @@ const createType = (
 	file: string,
 	id: string,
 	property: JSONSchemaType,
+	root: NRFCloudApplicationSchema,
 ): ts.TypeNode => {
 	if (isEnumSchema(property)) {
 		return createEnumType(tree, file, id, property)
 	}
 	if (isArraySchema(property)) {
-		return createArrayType(tree, file, id, property)
+		return createArrayType(tree, file, id, property, root)
 	}
 	if (isUnionTypeSchema(property)) {
 		const variants: ts.TypeNode[] = []
 		const { oneOf, ...rest } = property
 		for (const schema of oneOf) {
-			variants.push(createType(tree, file, id, { ...rest, ...schema }))
+			variants.push(createType(tree, file, id, { ...rest, ...schema }, root))
 		}
 		return ts.factory.createUnionTypeNode(variants)
 	}
 	if (isObjectSchema(property)) {
-		return createObjectType(tree, file, property)
+		return createObjectType(tree, file, property, root)
+	}
+	if (isRef(property)) {
+		return createType(tree, file, id, resolveRef(property, root), root)
 	}
 	switch (property.type) {
 		case 'string':
@@ -172,6 +182,7 @@ const createArrayType = (
 	file: string,
 	id: string,
 	property: ArraySchema,
+	root: NRFCloudApplicationSchema,
 ): ts.TypeNode => {
 	if (arrayTypesPerFile[file] === undefined) arrayTypesPerFile[file] = []
 	if (!(arrayTypesPerFile[file]?.includes(id) ?? false)) {
@@ -181,7 +192,7 @@ const createArrayType = (
 				ts.factory.createIdentifier(`${id}Item`),
 				undefined,
 				ts.factory.createTypeReferenceNode('Readonly', [
-					createType(tree, file, id, property.items),
+					createType(tree, file, id, property.items, root),
 				]),
 			),
 		)
@@ -191,4 +202,15 @@ const createArrayType = (
 	return ts.factory.createArrayTypeNode(
 		ts.factory.createTypeReferenceNode(`${id}Item`),
 	)
+}
+
+const resolveRef = (
+	schema: RefSchema,
+	root: NRFCloudApplicationSchema,
+): JSONSchemaType => {
+	const id = schema.$ref.split('/').pop() ?? ''
+	const replacement = root.definitions?.[id]
+	if (replacement === undefined)
+		throw new Error(`Could not resolved $ref: ${schema.$ref}!`)
+	return replacement as JSONSchemaType
 }

@@ -94,3 +94,6 @@ export const isObjectSchema = (schema: BaseType): schema is ObjectSchema =>
 
 export const isUnionTypeSchema = (schema: BaseType): schema is UnionSchema =>
 	'oneOf' in schema
+
+export const isRef = (schema: unknown): schema is RefSchema =>
+	schema !== null && typeof schema === 'object' && '$ref' in schema

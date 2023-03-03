@@ -8,7 +8,6 @@ import { createUnionType } from './createUnionType'
 import { generateExports } from './generateExports'
 import { isSchema } from './NRFCloudApplicationSchema'
 import { printNode } from './printNode'
-import { resolveSchemaRefererences } from './resolveSchemaRefererences'
 
 const exports: Parameters<typeof generateExports>[0] = []
 
@@ -20,11 +19,7 @@ for (const { path: file, $id } of messages) {
 	}
 	console.debug(chalk.green.dim(`Parsing`), chalk.blue(file))
 
-	const { typeName, tree, direction } = createTypeFromSchema(
-		file,
-		$id,
-		resolveSchemaRefererences(schema),
-	)
+	const { typeName, tree, direction } = createTypeFromSchema(file, $id, schema)
 	const typeFile = path.join(
 		process.cwd(),
 		'types',
