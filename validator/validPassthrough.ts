@@ -1,5 +1,4 @@
 import type { ErrorObject } from 'ajv'
-import { readFileSync } from 'fs'
 import type { NRFCloudMessageEnvelope } from 'types/NRFCloudMessageEnvelope'
 import { messages } from '../messages'
 import schema from '../schemas/NRFCloudMessage.schema.json' assert { type: 'json' }
@@ -7,9 +6,9 @@ import { validateWithJSONSchema } from './validateWithJSONSchema.js'
 
 const validator = validateWithJSONSchema(
 	schema,
-	messages.map(({ $id, path }) => ({
+	messages.map(({ $id, schema }) => ({
 		$id: $id.toString(),
-		...JSON.parse(readFileSync(path, 'utf-8')),
+		...schema,
 	})),
 )
 

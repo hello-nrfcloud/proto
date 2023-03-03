@@ -8,7 +8,6 @@ import type { GROUND_FIX as GROUND_FIX_C2D } from './cloudToDevice/GROUND_FIX'
 import type { LED as LED_C2D } from './cloudToDevice/LED'
 import type { LIGHT as LIGHT_C2D } from './cloudToDevice/LIGHT'
 import type { MODEM as MODEM_C2D } from './cloudToDevice/MODEM'
-import type { PGPS as PGPS_C2D } from './cloudToDevice/PGPS'
 import type { SCELL as SCELL_C2D } from './cloudToDevice/SCELL'
 import type { TEMP as TEMP_C2D } from './cloudToDevice/TEMP'
 import type { WIFI as WIFI_C2D } from './cloudToDevice/WIFI'
@@ -32,7 +31,6 @@ export type NRFCloudMessage = Readonly<
 	| WIFI_C2D
 	| TEMP_C2D
 	| SCELL_C2D
-	| PGPS_C2D
 	| MODEM_C2D
 	| LIGHT_C2D
 	| LED_C2D

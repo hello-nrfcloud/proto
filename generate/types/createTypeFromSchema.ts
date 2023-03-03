@@ -1,6 +1,5 @@
 import ts from 'typescript'
 import { addDocBlock } from './addDocBlock'
-import { customTypeName, typeName } from './Direction'
 import {
 	ArraySchema,
 	Direction,
@@ -17,16 +16,11 @@ import {
 } from './NRFCloudApplicationSchema'
 
 export const createTypeFromSchema = (
-	file: string,
+	direction: Direction,
+	name: string,
 	$id: URL,
 	schema: NRFCloudApplicationSchema,
 ): { typeName: string; tree: ts.Node[]; direction: Direction } => {
-	const direction = file.includes('deviceToCloud')
-		? 'deviceToCloud'
-		: 'cloudToDevice'
-
-	const name =
-		'properties' in schema ? typeName(schema) : customTypeName(schema)
 	if (name === null) throw new Error(`Could not create name for schema`)
 
 	const tree: ts.Node[] = []
@@ -36,7 +30,7 @@ export const createTypeFromSchema = (
 		ts.factory.createIdentifier(name),
 		undefined,
 		ts.factory.createTypeReferenceNode('Readonly', [
-			createType(tree, file, name, schema, schema),
+			createType(tree, $id, name, schema, schema),
 		]),
 	)
 
@@ -59,14 +53,14 @@ export const createTypeFromSchema = (
 
 const createObjectType = (
 	tree: ts.Node[],
-	file: string,
+	$id: URL,
 	schema: ObjectSchema,
 	root: NRFCloudApplicationSchema,
 ): ts.TypeNode => {
 	const objectMembers: ts.TypeNode[] = []
 	const { properties, required } = schema
 	for (const [id, property] of Object.entries(properties)) {
-		objectMembers.push(createType(tree, file, id, property, root))
+		objectMembers.push(createType(tree, $id, id, property, root))
 	}
 
 	return ts.factory.createTypeLiteralNode(
@@ -82,7 +76,7 @@ const createObjectType = (
 					required?.includes(id) ?? false
 						? undefined
 						: ts.factory.createToken(ts.SyntaxKind.QuestionToken),
-					createType(tree, file, id, property, root),
+					createType(tree, $id, id, property, root),
 				),
 			)
 		}),
@@ -91,30 +85,30 @@ const createObjectType = (
 
 const createType = (
 	tree: ts.Node[],
-	file: string,
+	$id: URL,
 	id: string,
 	property: JSONSchemaType,
 	root: NRFCloudApplicationSchema,
 ): ts.TypeNode => {
 	if (isEnumSchema(property)) {
-		return createEnumType(tree, file, id, property)
+		return createEnumType(tree, $id, id, property)
 	}
 	if (isArraySchema(property)) {
-		return createArrayType(tree, file, id, property, root)
+		return createArrayType(tree, $id, id, property, root)
 	}
 	if (isUnionTypeSchema(property)) {
 		const variants: ts.TypeNode[] = []
 		const { oneOf, ...rest } = property
 		for (const schema of oneOf) {
-			variants.push(createType(tree, file, id, { ...rest, ...schema }, root))
+			variants.push(createType(tree, $id, id, { ...rest, ...schema }, root))
 		}
 		return ts.factory.createUnionTypeNode(variants)
 	}
 	if (isObjectSchema(property)) {
-		return createObjectType(tree, file, property, root)
+		return createObjectType(tree, $id, property, root)
 	}
 	if (isRef(property)) {
-		return createType(tree, file, id, resolveRef(property, root), root)
+		return createType(tree, $id, id, resolveRef(property, root), root)
 	}
 	switch (property.type) {
 		case 'string':
@@ -141,16 +135,17 @@ const createType = (
 	}
 }
 
-const enumsPerFile: Record<string, string[]> = {}
+const enumsPerType: Record<string, string[]> = {}
 
 const createEnumType = (
 	tree: ts.Node[],
-	file: string,
+	$id: URL,
 	id: string,
 	property: EnumSchema,
 ): ts.TypeNode => {
-	if (enumsPerFile[file] === undefined) enumsPerFile[file] = []
-	if (!(enumsPerFile[file]?.includes(id) ?? false)) {
+	if (enumsPerType[$id.toString()] === undefined)
+		enumsPerType[$id.toString()] = []
+	if (!(enumsPerType[$id.toString()]?.includes(id) ?? false)) {
 		tree.push(
 			ts.factory.createEnumDeclaration(
 				[ts.factory.createToken(ts.SyntaxKind.DeclareKeyword)],
@@ -169,34 +164,35 @@ const createEnumType = (
 				}),
 			),
 		)
-		enumsPerFile[file]?.push(id)
+		enumsPerType[$id.toString()]?.push(id)
 	}
 
 	return ts.factory.createTypeReferenceNode(ts.factory.createIdentifier(id))
 }
 
-const arrayTypesPerFile: Record<string, string[]> = {}
+const arrayTypesPerType: Record<string, string[]> = {}
 
 const createArrayType = (
 	tree: ts.Node[],
-	file: string,
+	$id: URL,
 	id: string,
 	property: ArraySchema,
 	root: NRFCloudApplicationSchema,
 ): ts.TypeNode => {
-	if (arrayTypesPerFile[file] === undefined) arrayTypesPerFile[file] = []
-	if (!(arrayTypesPerFile[file]?.includes(id) ?? false)) {
+	if (arrayTypesPerType[$id.toString()] === undefined)
+		arrayTypesPerType[$id.toString()] = []
+	if (!(arrayTypesPerType[$id.toString()]?.includes(id) ?? false)) {
 		tree.push(
 			ts.factory.createTypeAliasDeclaration(
 				undefined,
 				ts.factory.createIdentifier(`${id}Item`),
 				undefined,
 				ts.factory.createTypeReferenceNode('Readonly', [
-					createType(tree, file, id, property.items, root),
+					createType(tree, $id, id, property.items, root),
 				]),
 			),
 		)
-		arrayTypesPerFile[file]?.push(id)
+		arrayTypesPerType[$id.toString()]?.push(id)
 	}
 
 	return ts.factory.createArrayTypeNode(

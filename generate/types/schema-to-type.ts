@@ -1,25 +1,19 @@
 import chalk from 'chalk'
-import { readFileSync, writeFileSync } from 'node:fs'
+import { writeFileSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { messages } from '../../messages'
 import { createTypeFromSchema } from './createTypeFromSchema'
 import { createUnionType } from './createUnionType'
 import { generateExports } from './generateExports'
-import { isSchema } from './NRFCloudApplicationSchema'
 import { printNode } from './printNode'
 
 const exports: Parameters<typeof generateExports>[0] = []
 
-for (const { path: file, $id } of messages) {
-	const schema = JSON.parse(readFileSync(file, 'utf-8'))
-	if (!isSchema(schema)) {
-		console.debug(chalk.gray(`Ignoring`), chalk.blue.dim(file))
-		continue
-	}
-	console.debug(chalk.green.dim(`Parsing`), chalk.blue(file))
+for (const { schema, $id, direction, name } of messages) {
+	console.debug(chalk.green.dim(`Parsing`), chalk.blue($id))
 
-	const { typeName, tree, direction } = createTypeFromSchema(file, $id, schema)
+	const { typeName, tree } = createTypeFromSchema(direction, name, $id, schema)
 	const typeFile = path.join(
 		process.cwd(),
 		'types',

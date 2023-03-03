@@ -1,5 +1,3 @@
-import Ajv, { Schema } from 'ajv'
-
 export type RefSchema = { $ref: string }
 
 export type Direction = 'deviceToCloud' | 'cloudToDevice'
@@ -69,18 +67,6 @@ export type ObjectSchema = {
 	}
 	additionalProperties?: boolean
 	required?: string[]
-}
-
-export const isSchema = (
-	schema: Schema,
-): schema is NRFCloudApplicationSchema => {
-	try {
-		const ajv = new Ajv()
-		ajv.compile(schema)
-		return true
-	} catch {
-		return false
-	}
 }
 
 export const isEnumSchema = (schema: BaseType): schema is EnumSchema =>
