@@ -1,19 +1,19 @@
 import ts from 'typescript'
-import { addDocBlock } from './addDocBlock'
 import {
-	ArraySchema,
-	Direction,
-	EnumSchema,
 	isArraySchema,
 	isEnumSchema,
 	isObjectSchema,
 	isRef,
 	isUnionTypeSchema,
-	JSONSchemaType,
-	NRFCloudApplicationSchema,
-	ObjectSchema,
-	RefSchema,
+	type ArraySchema,
+	type Direction,
+	type EnumSchema,
+	type JSONSchemaType,
+	type NRFCloudApplicationSchema,
+	type ObjectSchema,
+	type RefSchema,
 } from './NRFCloudApplicationSchema'
+import { addDocBlock } from './addDocBlock'
 
 export const createTypeFromSchema = (
 	direction: Direction,

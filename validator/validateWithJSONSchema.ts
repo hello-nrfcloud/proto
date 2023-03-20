@@ -1,4 +1,4 @@
-import Ajv, { AnySchema, ErrorObject, SchemaObject } from 'ajv'
+import Ajv, { type AnySchema, type ErrorObject, type SchemaObject } from 'ajv'
 
 export const validateWithJSONSchema = (
 	schema: SchemaObject,
