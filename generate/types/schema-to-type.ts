@@ -10,19 +10,14 @@ import { printNode } from './printNode'
 
 const exports: Parameters<typeof generateExports>[0] = []
 
-for (const { schema, $id, direction, name } of messages) {
+for (const { schema, $id, name } of messages) {
 	console.debug(chalk.green.dim(`Parsing`), chalk.blue($id))
 
-	const { typeName, tree } = createTypeFromSchema(direction, name, $id, schema)
-	const typeFile = path.join(
-		process.cwd(),
-		'types',
-		direction,
-		`${typeName}.ts`,
-	)
+	const { typeName, tree } = createTypeFromSchema(name, $id, schema)
+	const typeFile = path.join(process.cwd(), 'types', `${typeName}.ts`)
 	writeFileSync(typeFile, tree.map(printNode).join(os.EOL), 'utf-8')
 	console.log(chalk.green('Writing'), chalk.blue(typeFile))
-	exports.push({ name: typeName, direction })
+	exports.push({ name: typeName })
 }
 
 // Union

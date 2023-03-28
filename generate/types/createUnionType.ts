@@ -1,12 +1,12 @@
 import ts from 'typescript'
-import { generateExports, toTypeName } from './generateExports'
+import type { generateExports } from './generateExports'
 
 export const createUnionType = (
 	exports: Parameters<typeof generateExports>[0] = [],
 ): ts.Node[] => {
 	const tree: ts.Node[] = []
 
-	for (const { name, direction } of exports) {
+	for (const { name } of exports) {
 		tree.push(
 			ts.factory.createImportDeclaration(
 				undefined,
@@ -16,12 +16,12 @@ export const createUnionType = (
 					ts.factory.createNamedImports([
 						ts.factory.createImportSpecifier(
 							false,
+							undefined,
 							ts.factory.createIdentifier(name),
-							ts.factory.createIdentifier(toTypeName({ name, direction })),
 						),
 					]),
 				),
-				ts.factory.createStringLiteral(`./${direction}/${name}`),
+				ts.factory.createStringLiteral(`./${name}`),
 			),
 		)
 	}
@@ -33,9 +33,7 @@ export const createUnionType = (
 			undefined,
 			ts.factory.createTypeReferenceNode('Readonly', [
 				ts.factory.createUnionTypeNode(
-					exports.map(({ name, direction }) =>
-						ts.factory.createTypeReferenceNode(toTypeName({ direction, name })),
-					),
+					exports.map(({ name }) => ts.factory.createTypeReferenceNode(name)),
 				),
 			]),
 		),

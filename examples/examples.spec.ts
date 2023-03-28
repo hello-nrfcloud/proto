@@ -10,6 +10,7 @@ describe('examples', () => {
 		'deviceToCloud/TEMP.json',
 		'deviceToCloud/DEVICE-networkInfo.json',
 		'deviceToCloud/DEVICE-deviceInfo.json',
+		'shadow.json',
 	])('should validate %s', (example) =>
 		expect(
 			validPassthrough(

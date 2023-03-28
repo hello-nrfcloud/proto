@@ -1,14 +1,11 @@
 import ts from 'typescript'
-import type { Direction } from './NRFCloudApplicationSchema'
 
 /**
  * This generates the TypeScript source that exports all the individual types.
  */
-export const generateExports = (
-	types: { direction: Direction; name: string }[],
-): ts.Node[] => {
+export const generateExports = (types: { name: string }[]): ts.Node[] => {
 	const exportDefinitions: ts.Node[] = []
-	for (const { name, direction } of types.sort(({ name: n1 }, { name: n2 }) =>
+	for (const { name } of types.sort(({ name: n1 }, { name: n2 }) =>
 		n1.localeCompare(n2),
 	)) {
 		exportDefinitions.push(
@@ -18,11 +15,11 @@ export const generateExports = (
 				ts.factory.createNamedExports([
 					ts.factory.createExportSpecifier(
 						false,
+						undefined,
 						ts.factory.createIdentifier(name),
-						ts.factory.createIdentifier(toTypeName({ name, direction })),
 					),
 				]),
-				ts.factory.createStringLiteral(`./${direction}/${name}`),
+				ts.factory.createStringLiteral(`./${name}`),
 			),
 		)
 	}
@@ -42,11 +39,3 @@ export const generateExports = (
 	)
 	return exportDefinitions
 }
-
-export const toTypeName = ({
-	name,
-	direction,
-}: {
-	direction: Direction
-	name: string
-}): string => `${name}_${direction === 'cloudToDevice' ? 'C2D' : 'D2C'}`

@@ -6,7 +6,6 @@ import {
 	isRef,
 	isUnionTypeSchema,
 	type ArraySchema,
-	type Direction,
 	type EnumSchema,
 	type JSONSchemaType,
 	type NRFCloudApplicationSchema,
@@ -16,11 +15,10 @@ import {
 import { addDocBlock } from './addDocBlock'
 
 export const createTypeFromSchema = (
-	direction: Direction,
 	name: string,
 	$id: URL,
 	schema: NRFCloudApplicationSchema,
-): { typeName: string; tree: ts.Node[]; direction: Direction } => {
+): { typeName: string; tree: ts.Node[] } => {
 	if (name === null) throw new Error(`Could not create name for schema`)
 
 	const tree: ts.Node[] = []
@@ -34,20 +32,15 @@ export const createTypeFromSchema = (
 		]),
 	)
 
-	addDocBlock([
-		schema.description,
-		``,
-		`Direction: ${direction}`,
-		``,
-		`@see ${$id.toString()}`,
-	])(objectTypeExport)
+	addDocBlock([schema.description, ``, `@see ${$id.toString()}`])(
+		objectTypeExport,
+	)
 
 	tree.push(objectTypeExport)
 
 	return {
 		typeName: name,
 		tree,
-		direction,
 	}
 }
 
