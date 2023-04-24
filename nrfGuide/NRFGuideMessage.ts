@@ -1,11 +1,21 @@
 import { Type } from '@sinclair/typebox'
 import os from 'node:os'
+import { device as deviceContext, transformed } from './Context.js'
+import { Model } from './proto.js'
 
 export const ts = Type.Integer({
 	description: `Timestamp as Unix epoch with millisecond precision (UTC)`,
 	minimum: 1234567890123,
 	examples: [1584533788029],
 })
+
+const Thingy91WithSolarShieldContext = (transformerId: string) =>
+	Type.Literal(
+		transformed({
+			model: Model.Thingy91WithSolarShield,
+			transformerId,
+		}).toString(),
+	)
 
 /**
  * The %CONEVAL AT command returns amongst other data the energy estimate: Relative estimated energy consumption of data transmission compared to nominal consumption. A higher value means smaller energy consumption. 5: Difficulties in setting up connections. Maximum number of repetitions might be needed for data.
@@ -92,9 +102,7 @@ const NetworkInfoShadow = Type.Intersect([
 ])
 
 const Reported = Type.Object({
-	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/reported',
-	),
+	'@context': Thingy91WithSolarShieldContext('reported'),
 	ts,
 	connected: Type.Boolean(),
 	version: Type.Integer({
@@ -181,9 +189,7 @@ const Reported = Type.Object({
 })
 
 const Gain = Type.Object({
-	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/gain',
-	),
+	'@context': Thingy91WithSolarShieldContext('gain'),
 	ts,
 	mA: Type.Number({
 		minimum: 0,
@@ -193,9 +199,7 @@ const Gain = Type.Object({
 })
 
 const Voltage = Type.Object({
-	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/voltage',
-	),
+	'@context': Thingy91WithSolarShieldContext('voltage'),
 	ts,
 	v: Type.Number({
 		minimum: 0,
@@ -206,17 +210,13 @@ const Voltage = Type.Object({
 
 const NetworkInfo = Type.Intersect([
 	Type.Object({
-		'@context': Type.Literal(
-			'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/networkInfo',
-		),
+		'@context': Thingy91WithSolarShieldContext('networkInfo'),
 		ts,
 	}),
 	NetworkInfoShadow,
 ])
 const RSRP = Type.Object({
-	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/rsrp',
-	),
+	'@context': Thingy91WithSolarShieldContext('rsrp'),
 	ts,
 	rsrp: Type.Number({
 		minimum: -199,
@@ -229,9 +229,7 @@ const RSRP = Type.Object({
 })
 
 const AirPressure = Type.Object({
-	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/airPressure',
-	),
+	'@context': Thingy91WithSolarShieldContext('airPressure'),
 	ts,
 	kPa: Type.Number({
 		description: 'Atmospheric pressure reading from external sensor in kPa',
@@ -241,9 +239,7 @@ const AirPressure = Type.Object({
 })
 
 const AirQuality = Type.Object({
-	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/airQuality',
-	),
+	'@context': Thingy91WithSolarShieldContext('airQuality'),
 	ts,
 	IAQ: Type.Number({
 		description: [
@@ -263,18 +259,14 @@ const AirQuality = Type.Object({
 
 const DeviceInfo = Type.Intersect([
 	Type.Object({
-		'@context': Type.Literal(
-			'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/deviceInfo',
-		),
+		'@context': Thingy91WithSolarShieldContext('deviceInfo'),
 		ts,
 	}),
 	DeviceInfoShadow,
 ])
 
 const AirTemperature = Type.Object({
-	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/airTemperature',
-	),
+	'@context': Thingy91WithSolarShieldContext('airTemperature'),
 	ts,
 	c: Type.Number({
 		examples: [25.73],
@@ -283,15 +275,21 @@ const AirTemperature = Type.Object({
 })
 
 const AirHumidity = Type.Object({
-	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/airHumidity',
-	),
+	'@context': Thingy91WithSolarShieldContext('airHumidity'),
 	ts,
 	p: Type.Number({
 		minimum: 0,
 		maximum: 100,
 		examples: [23.16],
 		description: 'Humidity in percent',
+	}),
+})
+
+const Device = Type.Object({
+	'@context': Type.Literal(deviceContext.toString()),
+	model: Type.Enum(Model, {
+		description: 'the device model',
+		examples: ['PCA20035', 'PCA20035+solar'],
 	}),
 })
 
@@ -309,4 +307,5 @@ export const NRFGuideMessage = Type.Union([
 	DeviceInfo,
 	AirTemperature,
 	AirHumidity,
+	Device,
 ])

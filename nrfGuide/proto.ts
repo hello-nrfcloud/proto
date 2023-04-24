@@ -2,7 +2,8 @@ import type { Static } from '@sinclair/typebox'
 import jsonata from 'jsonata'
 import type { NRFGuideMessage } from './NRFGuideMessage.js'
 import { convert, type errorFn } from './convert.js'
-enum Model {
+
+export enum Model {
 	Thingy91WithSolarShield = 'PCA20035+solar',
 }
 

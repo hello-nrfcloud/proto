@@ -17,3 +17,7 @@ export const transformed = ({
 			transformerId,
 		)}`,
 	)
+
+export const device = new URL(
+	`https://${baseContext.host}${baseContext.path?.replace('.git', '')}/device`,
+)

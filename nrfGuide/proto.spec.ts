@@ -12,6 +12,13 @@ import voltage from './solarThingy/VOLTAGE.json'
 import { validPassthrough } from './validPassthrough.js'
 
 describe('nRF Guide messages', () => {
+	it('should validate a device message', () => {
+		const deviceInfoMessage = {
+			'@context': 'https://github.com/bifravst/nRF-Guide-proto/device',
+			model: 'PCA20035+solar',
+		}
+		expect(validPassthrough(deviceInfoMessage)).toMatchObject(deviceInfoMessage)
+	})
 	describe('PCA20035+solar: Thingy:91 with solar shield messages', () => {
 		it.each([
 			[
