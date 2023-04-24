@@ -10,14 +10,14 @@
       "node": "./export.js"
     },
     "./nrfGuide": {
-      "import": "./nrfGuide/export.js",
-      "node": "./nrfGuide/export.js",
-      "types": "./nrfGuide/index.d.ts"
+      "import": "./dist/nrfGuide/export.js",
+      "node": "./dist/nrfGuide/export.js",
+      "types": "./src/nrfGuide/index.d.ts"
     },
     "./nrfCloud": {
-      "import": "./nrfCloud/export.js",
-      "node": "./nrfCloud/export.js",
-      "types": "./nrfGuide/index.d.ts"
+      "import": "./dist/nrfCloud/export.js",
+      "node": "./dist/nrfCloud/export.js",
+      "types": "./src/nrfGuide/index.d.ts"
     }
   },
   "repository": {
@@ -42,7 +42,7 @@
   "scripts": {
     "prepare": "husky install",
     "test": "jest",
-    "prepublish": "npx swc -C jsc.experimental.keepImportAssertions=true -d dist/validator ./validator && npx swc -C jsc.experimental.keepImportAssertions=true -d dist/nrfCloud ./nrfCloud && npx swc -C jsc.experimental.keepImportAssertions=true -d dist/nrfGuide ./nrfGuide"
+    "prepublish": "npx swc -C jsc.experimental.keepImportAssertions=true -d dist ./src"
   },
   "devDependencies": {
     "@nordicsemiconductor/asset-tracker-cloud-code-style": "12.0.25",

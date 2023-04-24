@@ -1,11 +1,4 @@
-import { parse } from 'node:url'
-import { repository } from '../package.json'
-
-const baseContext = parse(repository.url)
-const baseURL = `https://${baseContext.host}${baseContext.path?.replace(
-	'.git',
-	'',
-)}`
+const baseURL = `https://github.com/bifravst/nRF-Guide-proto`
 
 export const Context = {
 	deviceIdentity: new URL(`${baseURL}/deviceIdentity`),
