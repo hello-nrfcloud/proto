@@ -285,7 +285,7 @@ const AirHumidity = Type.Object({
 	}),
 })
 
-const Device = Type.Object({
+export const Device = Type.Object({
 	'@context': Type.Literal(deviceContext.toString()),
 	model: Type.Enum(Model, {
 		description: 'the device model',
