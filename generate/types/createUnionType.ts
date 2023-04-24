@@ -21,7 +21,7 @@ export const createUnionType = (
 						),
 					]),
 				),
-				ts.factory.createStringLiteral(`./${name}`),
+				ts.factory.createStringLiteral(`./generated/${name}`),
 			),
 		)
 	}

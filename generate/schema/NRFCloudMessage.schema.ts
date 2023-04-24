@@ -1,9 +1,12 @@
 import chalk from 'chalk'
 import { writeFileSync } from 'fs'
 import path from 'node:path/posix'
-import { messages } from '../../messages'
+import { SOLAR } from '../../nrfCloud/types/solarThingy/SOLAR.js'
+import { VOLTAGE } from '../../nrfCloud/types/solarThingy/VOLTAGE.js'
+import { ipShadowMessage, messages } from './messages.js'
 const outfile = path.join(
 	process.cwd(),
+	'nrfCloud',
 	'schemas',
 	'NRFCloudMessage.schema.json',
 )
@@ -16,28 +19,21 @@ writeFileSync(
 		{
 			$schema: 'http://json-schema.org/draft-07/schema#',
 			$id: 'https://github.com/bifravst/nRF.guide-proto/blob/saga/schemas/NRFCloudMessage.schema.json',
-			title: 'Envelope schema for nRF Cloud application messages',
-			description:
-				'All messages received from nRF Cloud via MQTT are wrapped in this envelope',
-			type: 'object',
-			properties: {
-				sender: {
-					type: 'string',
-					minLength: 1,
+			title: 'Schema for messages received from the nRF Cloud MQTT bridge',
+			oneOf: [
+				...messages.map(({ $id }) => ({
+					$ref: $id.toString(),
+				})),
+				{
+					$ref: ipShadowMessage.$id.toString(),
 				},
-				topic: {
-					type: 'string',
-					minLength: 1,
+				{
+					$ref: SOLAR.$id.toString(),
 				},
-				payload: {
-					oneOf: messages.map(({ $id }) => ({
-						$ref: $id.toString(),
-					})),
+				{
+					$ref: VOLTAGE.$id.toString(),
 				},
-				additionalProperties: false,
-			},
-			required: ['sender', 'topic', 'payload'],
-			additionalProperties: false,
+			],
 		},
 		null,
 		2,

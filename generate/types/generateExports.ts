@@ -19,7 +19,7 @@ export const generateExports = (types: { name: string }[]): ts.Node[] => {
 						ts.factory.createIdentifier(name),
 					),
 				]),
-				ts.factory.createStringLiteral(`./${name}`),
+				ts.factory.createStringLiteral(`./generated/${name}`),
 			),
 		)
 	}

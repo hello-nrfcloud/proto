@@ -18,7 +18,9 @@
     "verbatimModuleSyntax": true,
     "baseUrl": ".",
     "paths": {
-      "@nrf.guide/proto": ["index.d.ts"]
+      "@nrf.guide/proto": ["index.d.ts"],
+      "@nrf.guide/proto/nrfGuide": ["nrfGuide/index.d.ts"],
+      "@nrf.guide/proto/nrfCloud": ["nrfCloud/index.d.ts"]
     }
   },
   "exclude": ["nrfcloud-application-protocols"]

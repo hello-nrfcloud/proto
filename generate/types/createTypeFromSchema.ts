@@ -11,8 +11,8 @@ import {
 	type NRFCloudApplicationSchema,
 	type ObjectSchema,
 	type RefSchema,
-} from './NRFCloudApplicationSchema'
-import { addDocBlock } from './addDocBlock'
+} from './NRFCloudApplicationSchema.js'
+import { addDocBlock } from './addDocBlock.js'
 
 export const createTypeFromSchema = (
 	name: string,

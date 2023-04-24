@@ -1,2 +1,2 @@
-export * from './dist/validPassthrough.js'
-export * from './dist/validateWithJSONSchema.js'
+export * from './dist/validator/validateWithJSONSchema.js'
+export * from './dist/validator/validateWithTypeBox.js'

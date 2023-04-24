@@ -8,6 +8,14 @@
     ".": {
       "import": "./export.js",
       "node": "./export.js"
+    },
+    "./nrfGuide": {
+      "import": "./nrfGuide/export.js",
+      "node": "./nrfGuide/export.js"
+    },
+    "./nrfCloud": {
+      "import": "./nrfCloud/export.js",
+      "node": "./nrfCloud/export.js"
     }
   },
   "repository": {
@@ -32,7 +40,7 @@
   "scripts": {
     "prepare": "husky install",
     "test": "jest",
-    "prepublish": "npx swc -C jsc.experimental.keepImportAssertions=true -d dist ./validator"
+    "prepublish": "npx swc -C jsc.experimental.keepImportAssertions=true -d dist/validator ./validator && npx swc -C jsc.experimental.keepImportAssertions=true -d dist/nrfCloud ./nrfCloud && npx swc -C jsc.experimental.keepImportAssertions=true -d dist/nrfGuide ./nrfGuide"
   },
   "devDependencies": {
     "@nordicsemiconductor/asset-tracker-cloud-code-style": "12.0.25",
@@ -115,6 +123,8 @@
     ]
   },
   "dependencies": {
-    "ajv": "8.12.0"
+    "@sinclair/typebox": "0.28.2",
+    "ajv": "8.12.0",
+    "jsonata": "2.0.3"
   }
 }

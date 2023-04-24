@@ -1,29 +1,28 @@
-import { validPassthrough } from '@nrf.guide/proto'
-import assert from 'node:assert/strict'
+import { proto, validPassthrough } from '@nrf.guide/proto/nrfGuide'
+import assert from 'node:assert'
 
-const isValid = validPassthrough({
-	sender: 'nrf-350457794611739',
-	topic: 'data/m/d/nrf-350457794611739/d2c',
-	payload: {
-		appId: 'TEMP',
-		messageType: 'DATA',
-		ts: 1676366336476,
-		data: '25.73',
-	},
+// Convert nRF Cloud message to nRF Guide format
+const converted = await proto()('PCA20035+solar', {
+	appId: 'SOLAR',
+	messageType: 'DATA',
+	ts: 1681985624779,
+	data: '3.897601',
 })
 
-const isInvalid = validPassthrough({
-	temp: -42,
-} as any)
+// multiple conversions may have been applied
+const convertedMessage = converted[0]
 
-assert.deepEqual(isValid, {
-	sender: 'nrf-350457794611739',
-	topic: 'data/m/d/nrf-350457794611739/d2c',
-	payload: {
-		appId: 'TEMP',
-		messageType: 'DATA',
-		ts: 1676366336476,
-		data: '25.73',
-	},
+assert.equal(
+	JSON.stringify(convertedMessage),
+	JSON.stringify({
+		'@context': `https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/gain`,
+		mA: 3.897601,
+		ts: 1681985624779,
+	}),
+)
+
+// Validate nRF Guide format
+const maybeValid = validPassthrough(convertedMessage, (v, errors) => {
+	console.error(errors)
 })
-assert.equal(isInvalid, null)
+assert.equal(maybeValid, convertedMessage)

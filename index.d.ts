@@ -1,4 +1,2 @@
-export * from './types/NRFCloudMessage'
-export * from './types/NRFCloudMessageEnvelope'
-export * from './types/types'
-export * from './validator/validPassthrough'
+export * from './validator/validateWithJSONSchema.js'
+export * from './validator/validateWithTypeBox.js'

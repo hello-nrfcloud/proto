@@ -1,6 +1,6 @@
 import Ajv, { type AnySchema, type ErrorObject, type SchemaObject } from 'ajv'
 
-export const validateWithJSONSchema = (
+export const validateWithJSONSchema = <T extends Record<string, any>>(
 	schema: SchemaObject,
 	schemas?:
 		| AnySchema[]
@@ -9,7 +9,7 @@ export const validateWithJSONSchema = (
 		  },
 ): ((
 	value: unknown,
-) => { value: unknown } | { errors: ErrorObject[]; input: unknown }) => {
+) => { value: T } | { errors: ErrorObject[]; input: unknown }) => {
 	const ajv = new Ajv({ schemas })
 	const v = ajv.compile(schema)
 	return (value: unknown) => {
@@ -20,6 +20,6 @@ export const validateWithJSONSchema = (
 				input: value,
 			}
 		}
-		return { value }
+		return { value: value as T }
 	}
 }
