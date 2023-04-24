@@ -1,6 +1,6 @@
 import jsonata from 'jsonata'
 import { validator } from '../nrfCloud/validator.js'
-import { transformed as transformedContext } from './Context.js'
+import { Context } from './Context.js'
 
 export type ConvertedMessage = {
 	['@context']: URL
@@ -90,7 +90,7 @@ export const convert =
 
 		const converted: ConvertedMessage[] = []
 		for (const { transform, transformerId } of matchedTransformers) {
-			const context = transformedContext({ model, transformerId })
+			const context = Context.model(model).transformed(transformerId)
 			if (transform === undefined) {
 				converted.push({
 					...nrfCloudMessage,

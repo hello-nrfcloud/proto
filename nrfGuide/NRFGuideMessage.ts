@@ -1,6 +1,6 @@
 import { Type } from '@sinclair/typebox'
 import os from 'node:os'
-import { device as deviceContext, transformed } from './Context.js'
+import { Context } from './Context.js'
 import { Model } from './proto.js'
 
 export const ts = Type.Integer({
@@ -11,10 +11,9 @@ export const ts = Type.Integer({
 
 const Thingy91WithSolarShieldContext = (transformerId: string) =>
 	Type.Literal(
-		transformed({
-			model: Model.Thingy91WithSolarShield,
-			transformerId,
-		}).toString(),
+		Context.model(Model.Thingy91WithSolarShield)
+			.transformed(transformerId)
+			.toString(),
 	)
 
 /**
@@ -285,9 +284,10 @@ const AirHumidity = Type.Object({
 	}),
 })
 
-export const Device = Type.Object({
-	'@context': Type.Literal(deviceContext.toString()),
-	model: Type.Enum(Model, {
+export const DeviceIdentity = Type.Object({
+	'@context': Type.Literal(Context.deviceIdentity.toString()),
+	model: Type.String({
+		minLength: 1,
 		description: 'the device model',
 		examples: ['PCA20035', 'PCA20035+solar'],
 	}),
@@ -307,5 +307,5 @@ export const NRFGuideMessage = Type.Union([
 	DeviceInfo,
 	AirTemperature,
 	AirHumidity,
-	Device,
+	DeviceIdentity,
 ])

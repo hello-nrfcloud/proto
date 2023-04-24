@@ -1,3 +1,4 @@
+import type { Static } from '@sinclair/typebox'
 import AIR_PRESS from '../nrfCloud/examples/deviceToCloud/AIR_PRESS.json'
 import AIR_QUAL from '../nrfCloud/examples/deviceToCloud/AIR_QUAL.json'
 import DEVICE from '../nrfCloud/examples/deviceToCloud/DEVICE-deviceInfo.json'
@@ -5,6 +6,7 @@ import HUMID from '../nrfCloud/examples/deviceToCloud/HUMID.json'
 import RSRP from '../nrfCloud/examples/deviceToCloud/RSRP.json'
 import TEMP from '../nrfCloud/examples/deviceToCloud/TEMP.json'
 import shadow from '../nrfCloud/examples/shadow.json'
+import type { DeviceIdentity } from './NRFGuideMessage'
 import { proto } from './proto.js'
 import deviceWithEnergyEstimate from './solarThingy/DEVICE-networkInfo-with-eest.json'
 import solar from './solarThingy/SOLAR.json'
@@ -12,12 +14,14 @@ import voltage from './solarThingy/VOLTAGE.json'
 import { validPassthrough } from './validPassthrough.js'
 
 describe('nRF Guide messages', () => {
-	it('should validate a device message', () => {
-		const deviceInfoMessage = {
-			'@context': 'https://github.com/bifravst/nRF-Guide-proto/device',
+	it('should validate a device identity message', () => {
+		const deviceIdentityMessage: Static<typeof DeviceIdentity> = {
+			'@context': 'https://github.com/bifravst/nRF-Guide-proto/deviceIdentity',
 			model: 'PCA20035+solar',
 		}
-		expect(validPassthrough(deviceInfoMessage)).toMatchObject(deviceInfoMessage)
+		expect(validPassthrough(deviceIdentityMessage)).toMatchObject(
+			deviceIdentityMessage,
+		)
 	})
 	describe('PCA20035+solar: Thingy:91 with solar shield messages', () => {
 		it.each([
