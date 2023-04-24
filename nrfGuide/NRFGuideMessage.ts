@@ -93,7 +93,7 @@ const NetworkInfoShadow = Type.Intersect([
 
 const Reported = Type.Object({
 	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/reported',
+		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/reported',
 	),
 	ts,
 	connected: Type.Boolean(),
@@ -182,7 +182,7 @@ const Reported = Type.Object({
 
 const Gain = Type.Object({
 	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/gain',
+		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/gain',
 	),
 	ts,
 	mA: Type.Number({
@@ -194,7 +194,7 @@ const Gain = Type.Object({
 
 const Voltage = Type.Object({
 	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/voltage',
+		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/voltage',
 	),
 	ts,
 	v: Type.Number({
@@ -207,7 +207,7 @@ const Voltage = Type.Object({
 const NetworkInfo = Type.Intersect([
 	Type.Object({
 		'@context': Type.Literal(
-			'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/networkInfo',
+			'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/networkInfo',
 		),
 		ts,
 	}),
@@ -215,7 +215,7 @@ const NetworkInfo = Type.Intersect([
 ])
 const RSRP = Type.Object({
 	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/rsrp',
+		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/rsrp',
 	),
 	ts,
 	rsrp: Type.Number({
@@ -230,7 +230,7 @@ const RSRP = Type.Object({
 
 const AirPressure = Type.Object({
 	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/airPressure',
+		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/airPressure',
 	),
 	ts,
 	kPa: Type.Number({
@@ -242,7 +242,7 @@ const AirPressure = Type.Object({
 
 const AirQuality = Type.Object({
 	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/airQuality',
+		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/airQuality',
 	),
 	ts,
 	IAQ: Type.Number({
@@ -264,7 +264,7 @@ const AirQuality = Type.Object({
 const DeviceInfo = Type.Intersect([
 	Type.Object({
 		'@context': Type.Literal(
-			'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/deviceInfo',
+			'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/deviceInfo',
 		),
 		ts,
 	}),
@@ -273,7 +273,7 @@ const DeviceInfo = Type.Intersect([
 
 const AirTemperature = Type.Object({
 	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/airTemperature',
+		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/airTemperature',
 	),
 	ts,
 	c: Type.Number({
@@ -284,7 +284,7 @@ const AirTemperature = Type.Object({
 
 const AirHumidity = Type.Object({
 	'@context': Type.Literal(
-		'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/airHumidity',
+		'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/airHumidity',
 	),
 	ts,
 	p: Type.Number({

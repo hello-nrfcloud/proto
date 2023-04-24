@@ -25,7 +25,7 @@ describe('convert()', () => {
 		).toMatchObject([
 			{
 				['@context']: new URL(
-					'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/voltage',
+					'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/voltage',
 				),
 				ts: 1681985385063,
 				v: 4.085,
@@ -55,7 +55,7 @@ describe('convert()', () => {
 		expect(res).toMatchObject([
 			{
 				['@context']: new URL(
-					'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/reported',
+					'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/reported',
 				),
 				version: 8835,
 			},
@@ -85,7 +85,7 @@ describe('convert()', () => {
 		).toMatchObject([
 			{
 				['@context']: new URL(
-					'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/voltage',
+					'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/voltage',
 				),
 				ts: 1681985385063,
 				appId: 'VOLTAGE',

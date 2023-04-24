@@ -18,7 +18,7 @@ writeFileSync(
 	JSON.stringify(
 		{
 			$schema: 'http://json-schema.org/draft-07/schema#',
-			$id: 'https://github.com/bifravst/nRF.guide-proto/blob/saga/schemas/NRFCloudMessage.schema.json',
+			$id: 'https://github.com/bifravst/nRF-Guide-proto/blob/saga/schemas/NRFCloudMessage.schema.json',
 			title: 'Schema for messages received from the nRF Cloud MQTT bridge',
 			oneOf: [
 				...messages.map(({ $id }) => ({

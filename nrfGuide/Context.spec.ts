@@ -11,7 +11,7 @@ describe('transformed()', () => {
 			}),
 		).toMatchObject(
 			new URL(
-				`https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/${transformerId}`,
+				`https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/${transformerId}`,
 			),
 		))
 })

@@ -7,7 +7,7 @@ enum Model {
 }
 
 /**
- * Defines converters for messages handled by nRF.guide.
+ * Defines converters for messages handled by nRF Guide.
  */
 export const proto =
 	({ onError }: { onError?: errorFn } = {}) =>

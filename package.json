@@ -1,7 +1,7 @@
 {
-  "name": "@nrf.guide/proto",
+  "name": "@nrf-guide/proto",
   "version": "0.0.0-development",
-  "description": "Documents the communication protocol between the nrf.guide backend and the web application",
+  "description": "Documents the communication protocol between the nRF Guide backend and the web application",
   "type": "module",
   "types": "./index.d.ts",
   "exports": {
@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bifravst/nRF.guide-proto.git"
+    "url": "git+https://github.com/bifravst/nRF-Guide-proto.git"
   },
   "bugs": {
-    "url": "https://github.com/bifravst/nRF.guide-proto/issues"
+    "url": "https://github.com/bifravst/nRF-Guide-proto/issues"
   },
-  "homepage": "https://nrf.guide",
+  "homepage": "https://guide.nrfcloud.com",
   "keywords": [
     "nordicsemiconductor",
     "cellular-iot",

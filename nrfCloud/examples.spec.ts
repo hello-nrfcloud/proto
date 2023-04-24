@@ -1,4 +1,4 @@
-import type { NRFCloudMessage, ipShadow } from '@nrf.guide/proto/nrfCloud'
+import type { NRFCloudMessage, ipShadow } from '@nrf-guide/proto/nrfCloud'
 import AIR_PRESS from '../nrfCloud/examples/deviceToCloud/AIR_PRESS.json'
 import AIR_QUAL from '../nrfCloud/examples/deviceToCloud/AIR_QUAL.json'
 import BUTTON from '../nrfCloud/examples/deviceToCloud/BUTTON.json'

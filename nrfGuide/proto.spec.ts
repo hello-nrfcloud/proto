@@ -18,7 +18,7 @@ describe('nRF Guide messages', () => {
 				shadow.state,
 				{
 					'@context': new URL(
-						'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/reported',
+						'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/reported',
 					).toString(),
 					connected: true,
 					version: 8835,
@@ -66,7 +66,7 @@ describe('nRF Guide messages', () => {
 				solar,
 				{
 					'@context': new URL(
-						'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/gain',
+						'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/gain',
 					).toString(),
 					ts: solar.ts,
 					mA: 3.123456,
@@ -76,7 +76,7 @@ describe('nRF Guide messages', () => {
 				voltage,
 				{
 					'@context': new URL(
-						'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/voltage',
+						'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/voltage',
 					).toString(),
 					ts: voltage.ts,
 					v: 4.085,
@@ -86,7 +86,7 @@ describe('nRF Guide messages', () => {
 				deviceWithEnergyEstimate,
 				{
 					'@context': new URL(
-						'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/networkInfo',
+						'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/networkInfo',
 					).toString(),
 					ts: deviceWithEnergyEstimate.ts,
 					currentBand: 20,
@@ -104,7 +104,7 @@ describe('nRF Guide messages', () => {
 				{
 					ts: RSRP.ts,
 					'@context': new URL(
-						'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/rsrp',
+						'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/rsrp',
 					).toString(),
 					rsrp: -96,
 				},
@@ -114,7 +114,7 @@ describe('nRF Guide messages', () => {
 				{
 					ts: AIR_PRESS.ts,
 					'@context': new URL(
-						'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/airPressure',
+						'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/airPressure',
 					).toString(),
 					kPa: 102.31,
 				},
@@ -124,7 +124,7 @@ describe('nRF Guide messages', () => {
 				{
 					ts: AIR_QUAL.ts,
 					'@context': new URL(
-						'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/airQuality',
+						'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/airQuality',
 					).toString(),
 					IAQ: 177,
 				},
@@ -134,7 +134,7 @@ describe('nRF Guide messages', () => {
 				{
 					ts: DEVICE.ts,
 					'@context': new URL(
-						'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/deviceInfo',
+						'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/deviceInfo',
 					).toString(),
 					imei: '350457794611739',
 					iccid: '8931080620054223678',
@@ -148,7 +148,7 @@ describe('nRF Guide messages', () => {
 				{
 					ts: TEMP.ts,
 					'@context': new URL(
-						'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/airTemperature',
+						'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/airTemperature',
 					).toString(),
 					c: 25.73,
 				},
@@ -158,7 +158,7 @@ describe('nRF Guide messages', () => {
 				{
 					ts: HUMID.ts,
 					'@context': new URL(
-						'https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/airHumidity',
+						'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/airHumidity',
 					).toString(),
 					p: 23.16,
 				},

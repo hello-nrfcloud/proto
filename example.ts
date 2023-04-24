@@ -1,4 +1,4 @@
-import { proto, validPassthrough } from '@nrf.guide/proto/nrfGuide'
+import { proto, validPassthrough } from '@nrf-guide/proto/nrfGuide'
 import assert from 'node:assert'
 
 // Convert nRF Cloud message to nRF Guide format
@@ -15,7 +15,7 @@ const convertedMessage = converted[0]
 assert.equal(
 	JSON.stringify(convertedMessage),
 	JSON.stringify({
-		'@context': `https://github.com/bifravst/nRF.guide-proto/transformed/PCA20035%2Bsolar/gain`,
+		'@context': `https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/gain`,
 		mA: 3.897601,
 		ts: 1681985624779,
 	}),

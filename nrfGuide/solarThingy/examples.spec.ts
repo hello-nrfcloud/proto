@@ -1,4 +1,4 @@
-import type { NRFCloudMessage, ipShadow } from '@nrf.guide/proto/nrfCloud'
+import type { NRFCloudMessage, ipShadow } from '@nrf-guide/proto/nrfCloud'
 import { validPassthrough } from '../../nrfCloud/validPassthrough.js'
 import DEVICE_eest from './DEVICE-networkInfo-with-eest.json'
 import SOLAR from './SOLAR.json'
