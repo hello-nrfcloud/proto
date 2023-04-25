@@ -1,5 +1,5 @@
-import schema from '../../src/nrfCloud/schemas/NRFCloudMessage.schema.json'
 import { ipShadowMessage, messages } from '../generate/schema/messages.js'
+import schema from '../schemas/NRFCloudMessage.schema.json'
 import { validateWithJSONSchema } from '../validator/validateWithJSONSchema.js'
 import type { NRFCloudMessage } from './types/NRFCloudMessage.js'
 import { SOLAR, type TYPE as SOLAR_TYPE } from './types/solarThingy/SOLAR.js'

@@ -6,7 +6,6 @@ import { VOLTAGE } from '../../nrfCloud/types/solarThingy/VOLTAGE.js'
 import { ipShadowMessage, messages } from './messages.js'
 const outfile = path.join(
 	process.cwd(),
-	'nrfCloud',
 	'schemas',
 	'NRFCloudMessage.schema.json',
 )
