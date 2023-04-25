@@ -1,14 +1,14 @@
 import type { NRFCloudMessage, ipShadow } from '@nrf-guide/proto/nrfCloud'
-import AIR_PRESS from '../nrfCloud/examples/deviceToCloud/AIR_PRESS.json'
-import AIR_QUAL from '../nrfCloud/examples/deviceToCloud/AIR_QUAL.json'
-import BUTTON from '../nrfCloud/examples/deviceToCloud/BUTTON.json'
-import DEVICE_info from '../nrfCloud/examples/deviceToCloud/DEVICE-deviceInfo.json'
-import DEVICE_network from '../nrfCloud/examples/deviceToCloud/DEVICE-networkInfo.json'
-import GROUND_FIX from '../nrfCloud/examples/deviceToCloud/GROUND_FIX.json'
-import HUMID from '../nrfCloud/examples/deviceToCloud/HUMID.json'
-import RSRP from '../nrfCloud/examples/deviceToCloud/RSRP.json'
-import TEMP from '../nrfCloud/examples/deviceToCloud/TEMP.json'
-import shadow from '../nrfCloud/examples/shadow.json'
+import AIR_PRESS from '../nrfCloud/examples/deviceToCloud/AIR_PRESS.json' assert { type: 'json' }
+import AIR_QUAL from '../nrfCloud/examples/deviceToCloud/AIR_QUAL.json' assert { type: 'json' }
+import BUTTON from '../nrfCloud/examples/deviceToCloud/BUTTON.json' assert { type: 'json' }
+import DEVICE_info from '../nrfCloud/examples/deviceToCloud/DEVICE-deviceInfo.json' assert { type: 'json' }
+import DEVICE_network from '../nrfCloud/examples/deviceToCloud/DEVICE-networkInfo.json' assert { type: 'json' }
+import GROUND_FIX from '../nrfCloud/examples/deviceToCloud/GROUND_FIX.json' assert { type: 'json' }
+import HUMID from '../nrfCloud/examples/deviceToCloud/HUMID.json' assert { type: 'json' }
+import RSRP from '../nrfCloud/examples/deviceToCloud/RSRP.json' assert { type: 'json' }
+import TEMP from '../nrfCloud/examples/deviceToCloud/TEMP.json' assert { type: 'json' }
+import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
 import { validPassthrough } from './validPassthrough.js'
 
 describe('nRF Cloud example messages', () => {

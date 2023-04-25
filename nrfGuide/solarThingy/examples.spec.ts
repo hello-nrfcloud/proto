@@ -1,8 +1,8 @@
 import type { NRFCloudMessage, ipShadow } from '@nrf-guide/proto/nrfCloud'
 import { validPassthrough } from '../../nrfCloud/validPassthrough.js'
-import DEVICE_eest from './DEVICE-networkInfo-with-eest.json'
-import SOLAR from './SOLAR.json'
-import VOLTAGE from './VOLTAGE.json'
+import DEVICE_eest from './DEVICE-networkInfo-with-eest.json' assert { type: 'json' }
+import SOLAR from './SOLAR.json' assert { type: 'json' }
+import VOLTAGE from './VOLTAGE.json' assert { type: 'json' }
 
 describe('Solar Thingy example messages', () => {
 	it.each([DEVICE_eest, SOLAR, VOLTAGE])(

@@ -1,16 +1,16 @@
 import type { Static } from '@sinclair/typebox'
-import AIR_PRESS from '../nrfCloud/examples/deviceToCloud/AIR_PRESS.json'
-import AIR_QUAL from '../nrfCloud/examples/deviceToCloud/AIR_QUAL.json'
-import DEVICE from '../nrfCloud/examples/deviceToCloud/DEVICE-deviceInfo.json'
-import HUMID from '../nrfCloud/examples/deviceToCloud/HUMID.json'
-import RSRP from '../nrfCloud/examples/deviceToCloud/RSRP.json'
-import TEMP from '../nrfCloud/examples/deviceToCloud/TEMP.json'
-import shadow from '../nrfCloud/examples/shadow.json'
+import AIR_PRESS from '../nrfCloud/examples/deviceToCloud/AIR_PRESS.json' assert { type: 'json' }
+import AIR_QUAL from '../nrfCloud/examples/deviceToCloud/AIR_QUAL.json' assert { type: 'json' }
+import DEVICE from '../nrfCloud/examples/deviceToCloud/DEVICE-deviceInfo.json' assert { type: 'json' }
+import HUMID from '../nrfCloud/examples/deviceToCloud/HUMID.json' assert { type: 'json' }
+import RSRP from '../nrfCloud/examples/deviceToCloud/RSRP.json' assert { type: 'json' }
+import TEMP from '../nrfCloud/examples/deviceToCloud/TEMP.json' assert { type: 'json' }
+import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
 import type { DeviceIdentity } from './NRFGuideMessage'
 import { proto } from './proto.js'
-import deviceWithEnergyEstimate from './solarThingy/DEVICE-networkInfo-with-eest.json'
-import solar from './solarThingy/SOLAR.json'
-import voltage from './solarThingy/VOLTAGE.json'
+import deviceWithEnergyEstimate from './solarThingy/DEVICE-networkInfo-with-eest.json' assert { type: 'json' }
+import solar from './solarThingy/SOLAR.json' assert { type: 'json' }
+import voltage from './solarThingy/VOLTAGE.json' assert { type: 'json' }
 import { validPassthrough } from './validPassthrough.js'
 
 describe('nRF Guide messages', () => {

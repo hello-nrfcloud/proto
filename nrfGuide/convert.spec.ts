@@ -1,5 +1,5 @@
 import jsonata from 'jsonata'
-import shadow from '../nrfCloud/examples/shadow.json'
+import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
 import { convert } from './convert.js'
 
 describe('convert()', () => {

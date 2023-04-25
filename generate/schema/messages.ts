@@ -1,21 +1,21 @@
-import ipShadowConfig from '../../nrfcloud-application-protocols/schemas/deviceShadow/ipShadow/config.json'
-import ipShadow from '../../nrfcloud-application-protocols/schemas/deviceShadow/ipShadow/ipShadow.json'
-import agps from '../../nrfcloud-application-protocols/schemas/deviceToCloud/agps/agps.json'
-import air_press from '../../nrfcloud-application-protocols/schemas/deviceToCloud/air_press/air_press.json'
-import air_quality from '../../nrfcloud-application-protocols/schemas/deviceToCloud/air_quality/air_quality.json'
-import button from '../../nrfcloud-application-protocols/schemas/deviceToCloud/button/button.json'
-import cell_position from '../../nrfcloud-application-protocols/schemas/deviceToCloud/cell_position/cell-position.json'
-import device from '../../nrfcloud-application-protocols/schemas/deviceToCloud/device/device.json'
-import flip from '../../nrfcloud-application-protocols/schemas/deviceToCloud/flip/flip.json'
-import gnss from '../../nrfcloud-application-protocols/schemas/deviceToCloud/gnss/gnss.json'
-import ground_fix from '../../nrfcloud-application-protocols/schemas/deviceToCloud/ground_fix/ground-fix.json'
-import humid from '../../nrfcloud-application-protocols/schemas/deviceToCloud/humid/humid.json'
-import light from '../../nrfcloud-application-protocols/schemas/deviceToCloud/light/light.json'
-import pgps from '../../nrfcloud-application-protocols/schemas/deviceToCloud/pgps/pgps.json'
-import rsrp from '../../nrfcloud-application-protocols/schemas/deviceToCloud/rsrp/rsrp.json'
-import scell from '../../nrfcloud-application-protocols/schemas/deviceToCloud/single_cell/single-cell.json'
-import temp from '../../nrfcloud-application-protocols/schemas/deviceToCloud/temp/temp.json'
-import wifi from '../../nrfcloud-application-protocols/schemas/deviceToCloud/wifi/wifi-position.json'
+import ipShadowConfig from '../../nrfcloud-application-protocols/schemas/deviceShadow/ipShadow/config.json' assert { type: 'json' }
+import ipShadow from '../../nrfcloud-application-protocols/schemas/deviceShadow/ipShadow/ipShadow.json' assert { type: 'json' }
+import agps from '../../nrfcloud-application-protocols/schemas/deviceToCloud/agps/agps.json' assert { type: 'json' }
+import air_press from '../../nrfcloud-application-protocols/schemas/deviceToCloud/air_press/air_press.json' assert { type: 'json' }
+import air_quality from '../../nrfcloud-application-protocols/schemas/deviceToCloud/air_quality/air_quality.json' assert { type: 'json' }
+import button from '../../nrfcloud-application-protocols/schemas/deviceToCloud/button/button.json' assert { type: 'json' }
+import cell_position from '../../nrfcloud-application-protocols/schemas/deviceToCloud/cell_position/cell-position.json' assert { type: 'json' }
+import device from '../../nrfcloud-application-protocols/schemas/deviceToCloud/device/device.json' assert { type: 'json' }
+import flip from '../../nrfcloud-application-protocols/schemas/deviceToCloud/flip/flip.json' assert { type: 'json' }
+import gnss from '../../nrfcloud-application-protocols/schemas/deviceToCloud/gnss/gnss.json' assert { type: 'json' }
+import ground_fix from '../../nrfcloud-application-protocols/schemas/deviceToCloud/ground_fix/ground-fix.json' assert { type: 'json' }
+import humid from '../../nrfcloud-application-protocols/schemas/deviceToCloud/humid/humid.json' assert { type: 'json' }
+import light from '../../nrfcloud-application-protocols/schemas/deviceToCloud/light/light.json' assert { type: 'json' }
+import pgps from '../../nrfcloud-application-protocols/schemas/deviceToCloud/pgps/pgps.json' assert { type: 'json' }
+import rsrp from '../../nrfcloud-application-protocols/schemas/deviceToCloud/rsrp/rsrp.json' assert { type: 'json' }
+import scell from '../../nrfcloud-application-protocols/schemas/deviceToCloud/single_cell/single-cell.json' assert { type: 'json' }
+import temp from '../../nrfcloud-application-protocols/schemas/deviceToCloud/temp/temp.json' assert { type: 'json' }
+import wifi from '../../nrfcloud-application-protocols/schemas/deviceToCloud/wifi/wifi-position.json' assert { type: 'json' }
 
 const toId = (id: string): URL =>
 	new URL(
