@@ -7,4 +7,6 @@ npx swc -C jsc.experimental.keepImportAssertions=true -d dist/nrfCloud ./nrfClou
 npx swc -C jsc.experimental.keepImportAssertions=true -d dist/nrfGuide ./nrfGuide
 npx swc -C jsc.experimental.keepImportAssertions=true -d dist/validator ./validator
 npx swc -C jsc.experimental.keepImportAssertions=true -d dist/generate ./generate
-cp -r schemas ./dist
+cp -r ./schemas ./dist
+mkdir ./dist/nrfcloud-application-protocols
+cp -r ./nrfcloud-application-protocols/schemas ./dist/nrfcloud-application-protocols
