@@ -164,8 +164,8 @@ export type ipShadow = Readonly<{
 			}
 		}
 	}
-	version?: number
-	metadata?: {
+	version: number
+	metadata: {
 		desired?: {
 			timestamp?: number
 		}

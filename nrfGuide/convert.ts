@@ -1,4 +1,6 @@
 import jsonata from 'jsonata'
+import { getShadowUpdateTime } from '../nrfCloud/getShadowUpdateTime.js'
+import type { ipShadow } from '../nrfCloud/types/types.js'
 import { validator } from '../nrfCloud/validator.js'
 import { Context } from './Context.js'
 
@@ -70,10 +72,16 @@ export const convert =
 
 		const nrfCloudMessage = isValid.value
 		// Some nRF Cloud message formats do not specify a timestamp (e.g. Wi-Fi site survey)
-		const ts =
+		let ts =
 			'ts' in nrfCloudMessage && nrfCloudMessage.ts !== undefined
 				? nrfCloudMessage.ts
 				: Date.now()
+
+		if ('metadata' in nrfCloudMessage) {
+			ts =
+				getShadowUpdateTime((nrfCloudMessage as unknown as ipShadow).metadata) *
+				1000
+		}
 
 		// Find all transformers, which filter expression evaluated to `true`
 		const matchedTransformers = (

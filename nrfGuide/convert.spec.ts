@@ -58,6 +58,7 @@ describe('convert()', () => {
 					'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/reported',
 				),
 				version: 8835,
+				ts: 1682072423000,
 			},
 		])
 
