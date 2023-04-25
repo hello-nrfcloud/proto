@@ -107,6 +107,8 @@
     "nrfCloud",
     "nrfGuide",
     "validator",
+    "schemas",
+    "generate",
     "nrfcloud-application-protocols/schemas"
   ],
   "jest": {
