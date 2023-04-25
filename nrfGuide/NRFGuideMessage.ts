@@ -286,6 +286,11 @@ const AirHumidity = Type.Object({
 
 export const DeviceIdentity = Type.Object({
 	'@context': Type.Literal(Context.deviceIdentity.toString()),
+	id: Type.String({
+		minLength: 1,
+		description: 'the device ID',
+		examples: ['nrf-352656108602296'],
+	}),
 	model: Type.String({
 		minLength: 1,
 		description: 'the device model',

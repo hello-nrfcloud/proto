@@ -17,6 +17,7 @@ describe('nRF Guide messages', () => {
 	it('should validate a device identity message', () => {
 		const deviceIdentityMessage: Static<typeof DeviceIdentity> = {
 			'@context': 'https://github.com/bifravst/nRF-Guide-proto/deviceIdentity',
+			id: 'nrf-352656108602296',
 			model: 'PCA20035+solar',
 		}
 		expect(validPassthrough(deviceIdentityMessage)).toMatchObject(
