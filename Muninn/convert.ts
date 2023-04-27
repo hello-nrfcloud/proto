@@ -17,7 +17,7 @@ export type errorFn = (
 ) => unknown
 
 /**
- * Converts incoming messages from nRF Cloud to the messages relevant for nRF Guide using JSONata
+ * Converts incoming messages from nRF Cloud to the messages relevant for Muninn using JSONata
  *
  * Conversion are applied per model, where model is for example a Thingy:91, a 9160DK, a Thingy:91 with a solar shield.
  *

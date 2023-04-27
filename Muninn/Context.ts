@@ -1,4 +1,4 @@
-const baseURL = `https://github.com/bifravst/nRF-Guide-proto`
+const baseURL = `https://github.com/bifravst/Muninn-proto`
 
 export const Context = {
 	deviceIdentity: new URL(`${baseURL}/deviceIdentity`),

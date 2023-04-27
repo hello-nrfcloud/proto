@@ -299,9 +299,9 @@ export const DeviceIdentity = Type.Object({
 })
 
 /**
- * Defines the messages sent by the nRF Guide backend.
+ * Defines the messages sent by the Muninn backend.
  */
-export const NRFGuideMessage = Type.Union([
+export const MuninnMessage = Type.Union([
 	Reported,
 	Gain,
 	Voltage,

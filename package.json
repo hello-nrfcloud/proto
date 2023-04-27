@@ -1,7 +1,7 @@
 {
-  "name": "@nrf-guide/proto",
+  "name": "@bifravst/muninn-proto",
   "version": "0.0.0-development",
-  "description": "Documents the communication protocol between the nRF Guide backend and the web application",
+  "description": "Documents the communication protocol between the Muninn backend and the web application",
   "type": "module",
   "types": "./index.d.ts",
   "exports": {
@@ -9,29 +9,29 @@
       "import": "./export.js",
       "node": "./export.js"
     },
-    "./nrfGuide": {
-      "import": "./dist/nrfGuide/export.js",
-      "node": "./dist/nrfGuide/export.js",
-      "types": "./nrfGuide/index.d.ts"
+    "./Muninn": {
+      "import": "./dist/Muninn/export.js",
+      "node": "./dist/Muninn/export.js",
+      "types": "./Muninn/index.d.ts"
     },
     "./nrfCloud": {
       "import": "./dist/nrfCloud/export.js",
       "node": "./dist/nrfCloud/export.js",
-      "types": "./nrfGuide/index.d.ts"
+      "types": "./Muninn/index.d.ts"
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bifravst/nRF-Guide-proto.git"
+    "url": "git+https://github.com/bifravst/Muninn-proto.git"
   },
   "bugs": {
-    "url": "https://github.com/bifravst/nRF-Guide-proto/issues"
+    "url": "https://github.com/bifravst/Muninn-proto/issues"
   },
-  "homepage": "https://guide.nrfcloud.com",
+  "homepage": "https://muninn.thingy.rocks",
   "keywords": [
     "nordicsemiconductor",
     "cellular-iot",
-    "nrf-guide"
+    "muninn"
   ],
   "author": "Nordic Semiconductor ASA | nordicsemi.no",
   "license": "BSD-3-Clause",
@@ -105,7 +105,7 @@
     "index.d.ts",
     "dist",
     "nrfCloud",
-    "nrfGuide",
+    "Muninn",
     "validator",
     "schemas",
     "generate",

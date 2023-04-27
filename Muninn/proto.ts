@@ -1,6 +1,6 @@
 import type { Static } from '@sinclair/typebox'
 import jsonata from 'jsonata'
-import type { NRFGuideMessage } from './NRFGuideMessage.js'
+import type { MuninnMessage } from './MuninnMessage.js'
 import { convert, type errorFn } from './convert.js'
 
 export enum Model {
@@ -8,14 +8,14 @@ export enum Model {
 }
 
 /**
- * Defines converters for messages handled by nRF Guide.
+ * Defines converters for messages handled by Muninn.
  */
 export const proto =
 	({ onError }: { onError?: errorFn } = {}) =>
 	async (
 		model: string,
 		message: unknown,
-	): Promise<Static<typeof NRFGuideMessage>[]> => {
+	): Promise<Static<typeof MuninnMessage>[]> => {
 		const converted = await convert({
 			getTransformExpressions: async (model: string) => {
 				switch (model) {
@@ -87,5 +87,5 @@ export const proto =
 		return converted.map(({ ['@context']: context, ...rest }) => ({
 			'@context': context.toString(),
 			...rest,
-		})) as Static<typeof NRFGuideMessage>[]
+		})) as Static<typeof MuninnMessage>[]
 	}

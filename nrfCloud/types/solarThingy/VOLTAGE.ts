@@ -3,7 +3,7 @@ import { messageType, ts } from '../nrfCloud/NRFCloud.js'
 
 export const VOLTAGE = {
 	$id: new URL(
-		`https://raw.githubusercontent.com/bifravst/nRF-Guide-proto/types/VOLTAGE.ts`,
+		`https://raw.githubusercontent.com/bifravst/Muninn-proto/types/VOLTAGE.ts`,
 	),
 	schema: Type.Object(
 		{

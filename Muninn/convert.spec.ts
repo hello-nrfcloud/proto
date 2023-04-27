@@ -3,7 +3,7 @@ import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
 import { convert } from './convert.js'
 
 describe('convert()', () => {
-	it('should convert the nRF Cloud message format to the nRF Guide message format', async () => {
+	it('should convert the nRF Cloud message format to the Muninn message format', async () => {
 		const getTransformExpressions = jest.fn(async () =>
 			Promise.resolve({
 				voltage: {
@@ -25,7 +25,7 @@ describe('convert()', () => {
 		).toMatchObject([
 			{
 				['@context']: new URL(
-					'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/voltage',
+					'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/voltage',
 				),
 				ts: 1681985385063,
 				v: 4.085,
@@ -55,7 +55,7 @@ describe('convert()', () => {
 		expect(res).toMatchObject([
 			{
 				['@context']: new URL(
-					'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/reported',
+					'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/reported',
 				),
 				version: 8835,
 				ts: 1682072423000,
@@ -86,7 +86,7 @@ describe('convert()', () => {
 		).toMatchObject([
 			{
 				['@context']: new URL(
-					'https://github.com/bifravst/nRF-Guide-proto/transformed/PCA20035%2Bsolar/voltage',
+					'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/voltage',
 				),
 				ts: 1681985385063,
 				appId: 'VOLTAGE',
