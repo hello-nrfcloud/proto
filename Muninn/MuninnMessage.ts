@@ -21,6 +21,10 @@ const Thingy91WithSolarShieldContext = (transformerId: string) =>
  */
 enum EnergyEstimate {
 	/**
+	 * Bad conditions. Difficulties in setting up connections. Maximum number of repetitions might be needed for data.
+	 */
+	Bad = 5,
+	/**
 	 * Poor conditions. Setting up a connection might require retries and a higher number of repetitions for data.
 	 */
 	Poor = 6,
