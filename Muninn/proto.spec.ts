@@ -9,6 +9,7 @@ import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
 import type { DeviceIdentity } from './MuninnMessage'
 import { proto } from './proto.js'
 import deviceWithEnergyEstimate from './solarThingy/DEVICE-networkInfo-with-eest.json' assert { type: 'json' }
+import location from './solarThingy/LOCATION.json' assert { type: 'json' }
 import solar from './solarThingy/SOLAR.json' assert { type: 'json' }
 import voltage from './solarThingy/VOLTAGE.json' assert { type: 'json' }
 import { validPassthrough } from './validPassthrough.js'
@@ -92,6 +93,18 @@ describe('Muninn messages', () => {
 					).toString(),
 					ts: voltage.ts,
 					v: 4.085,
+				},
+			],
+			[
+				location,
+				{
+					'@context': new URL(
+						'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/location',
+					).toString(),
+					ts: location.ts,
+					lat: 45.524098,
+					lng: -122.688408,
+					acc: 200,
 				},
 			],
 			[

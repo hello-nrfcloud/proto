@@ -288,6 +288,27 @@ const AirHumidity = Type.Object({
 	}),
 })
 
+const Location = Type.Object({
+	'@context': Thingy91WithSolarShieldContext('location'),
+	ts,
+	lat: Type.Number({
+		minimum: -90,
+		maximum: 90,
+		examples: [45.524098],
+		description: 'Latitude',
+	}),
+	lng: Type.Number({
+		minimum: -180,
+		maximum: 180,
+		examples: [-122.688408],
+		description: 'Longitude',
+	}),
+	acc: Type.Number({
+		examples: [300],
+		description: 'HPE (horizontal positioning error) in meters',
+	}),
+})
+
 export const DeviceIdentity = Type.Object({
 	'@context': Type.Literal(Context.deviceIdentity.toString()),
 	id: Type.String({
@@ -316,5 +337,6 @@ export const MuninnMessage = Type.Union([
 	DeviceInfo,
 	AirTemperature,
 	AirHumidity,
+	Location,
 	DeviceIdentity,
 ])

@@ -2,6 +2,10 @@ import { ipShadowMessage, messages } from '../generate/schema/messages.js'
 import schema from '../schemas/NRFCloudMessage.schema.json' assert { type: 'json' }
 import { validateWithJSONSchema } from '../validator/validateWithJSONSchema.js'
 import type { NRFCloudMessage } from './types/NRFCloudMessage.js'
+import {
+	LOCATION,
+	type TYPE as LOCATION_TYPE,
+} from './types/solarThingy/LOCATION.js'
 import { SOLAR, type TYPE as SOLAR_TYPE } from './types/solarThingy/SOLAR.js'
 import {
 	VOLTAGE,
@@ -9,7 +13,7 @@ import {
 } from './types/solarThingy/VOLTAGE.js'
 
 export const validator = validateWithJSONSchema<
-	NRFCloudMessage | SOLAR_TYPE | VOLTAGE_TYPE
+	NRFCloudMessage | SOLAR_TYPE | VOLTAGE_TYPE | LOCATION_TYPE
 >(schema, [
 	{
 		$id: ipShadowMessage.$id.toString(),
@@ -22,6 +26,10 @@ export const validator = validateWithJSONSchema<
 	{
 		$id: VOLTAGE.$id.toString(),
 		...VOLTAGE.schema,
+	},
+	{
+		$id: LOCATION.$id.toString(),
+		...LOCATION.schema,
 	},
 	...messages.map(({ $id, schema }) => ({
 		$id: $id.toString(),

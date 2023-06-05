@@ -1,6 +1,7 @@
 import chalk from 'chalk'
 import { writeFileSync } from 'fs'
 import path from 'node:path/posix'
+import { LOCATION } from '../../nrfCloud/types/solarThingy/LOCATION.js'
 import { SOLAR } from '../../nrfCloud/types/solarThingy/SOLAR.js'
 import { VOLTAGE } from '../../nrfCloud/types/solarThingy/VOLTAGE.js'
 import { ipShadowMessage, messages } from './messages.js'
@@ -31,6 +32,9 @@ writeFileSync(
 				},
 				{
 					$ref: VOLTAGE.$id.toString(),
+				},
+				{
+					$ref: LOCATION.$id.toString(),
 				},
 			],
 		},

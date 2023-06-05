@@ -61,6 +61,17 @@ export const proto =
 								filter: jsonata(`appId = 'AIR_PRESS'`),
 								transform: jsonata(`{ 'kPa': $number(data) }`),
 							},
+							location: {
+								filter: jsonata(
+									`\`@context\` = 'https://github.com/bifravst/Muninn-backend/device-location'`,
+								),
+								transform: jsonata(`{
+									"lat": lat,
+									"lng": lng,
+									"acc": acc,
+									"ts": ts
+								}`),
+							},
 							reported: {
 								filter: jsonata(
 									`$exists(version) and $exists(reported) and $exists(metadata)`,

@@ -59,6 +59,9 @@
     },
     {
       "$ref": "https://raw.githubusercontent.com/bifravst/Muninn-proto/types/VOLTAGE.ts"
+    },
+    {
+      "$ref": "https://raw.githubusercontent.com/bifravst/Muninn-proto/types/LOCATION.ts"
     }
   ]
 }
