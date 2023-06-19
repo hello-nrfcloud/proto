@@ -1,4 +1,7 @@
-import type { NRFCloudMessage, ipShadow } from '@hello.nrfcloud.com/proto/nrfCloud'
+import type {
+	NRFCloudMessage,
+	ipShadow,
+} from '@hello.nrfcloud.com/proto/nrfCloud'
 import AIR_PRESS from '../nrfCloud/examples/deviceToCloud/AIR_PRESS.json' assert { type: 'json' }
 import AIR_QUAL from '../nrfCloud/examples/deviceToCloud/AIR_QUAL.json' assert { type: 'json' }
 import BUTTON from '../nrfCloud/examples/deviceToCloud/BUTTON.json' assert { type: 'json' }
