@@ -7,9 +7,7 @@ export const validateWithJSONSchema = <T extends Record<string, any>>(
 		| {
 				[Key in string]?: AnySchema
 		  },
-): ((
-	value: unknown,
-) => { value: T } | { errors: ErrorObject[]; input: unknown }) => {
+): ((value: unknown) => { value: T } | { errors: ErrorObject[] }) => {
 	const ajv = new Ajv({ schemas })
 	const v = ajv.compile(schema)
 	return (value: unknown) => {
@@ -17,7 +15,6 @@ export const validateWithJSONSchema = <T extends Record<string, any>>(
 		if (valid !== true) {
 			return {
 				errors: v.errors as ErrorObject[],
-				input: value,
 			}
 		}
 		return { value: value as T }

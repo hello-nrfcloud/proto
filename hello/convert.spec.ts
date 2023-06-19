@@ -120,6 +120,7 @@ describe('convert()', () => {
 			},
 			'Thingy:91',
 			`No expressions defined.`,
+			[],
 		)
 	})
 
@@ -133,12 +134,14 @@ describe('convert()', () => {
 				foo: 'bar',
 			}),
 		).toMatchObject([])
+
 		expect(errorLog).toHaveBeenCalledWith(
 			{
 				foo: 'bar',
 			},
 			'Thingy:91',
 			`Not a nRF Cloud Message.`,
+			expect.anything(),
 		)
 	})
 })

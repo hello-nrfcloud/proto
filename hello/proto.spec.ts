@@ -52,7 +52,7 @@ describe('hello.nrfcloud.com messages', () => {
 							modemFirmware: 'mfw_nrf9160_1.3.4',
 							imei: '352656108602296',
 							board: 'thingy91_nrf9160',
-							sdkVer: 'APP_VERSION',
+							sdkVer: 'v2.4.0',
 							appName: 'asset_tracker_v2',
 							zephyrVer: 'f8f113382356',
 							hwVer: 'nRF9160 SICA B1A',
