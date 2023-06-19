@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/bifravst/Muninn-proto/blob/saga/schemas/NRFCloudMessage.schema.json",
+  "$id": "https://github.com/hello-nrfcloud/proto/blob/saga/schemas/NRFCloudMessage.schema.json",
   "title": "Schema for messages received from the nRF Cloud MQTT bridge",
   "oneOf": [
     {
@@ -55,13 +55,13 @@
       "$ref": "https://raw.githubusercontent.com/bifravst/nrfcloud-application-protocols/v1-asset_tracker_v2-fixes/schemas/deviceShadow/ipShadow/ipShadow.json"
     },
     {
-      "$ref": "https://raw.githubusercontent.com/bifravst/Muninn-proto/types/SOLAR.ts"
+      "$ref": "https://raw.githubusercontent.com/hello-nrfcloud/proto/types/SOLAR.ts"
     },
     {
-      "$ref": "https://raw.githubusercontent.com/bifravst/Muninn-proto/types/VOLTAGE.ts"
+      "$ref": "https://raw.githubusercontent.com/hello-nrfcloud/proto/types/VOLTAGE.ts"
     },
     {
-      "$ref": "https://raw.githubusercontent.com/bifravst/Muninn-proto/types/LOCATION.ts"
+      "$ref": "https://raw.githubusercontent.com/hello-nrfcloud/proto/types/LOCATION.ts"
     }
   ]
 }

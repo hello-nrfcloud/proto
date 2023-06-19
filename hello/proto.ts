@@ -1,6 +1,6 @@
 import type { Static } from '@sinclair/typebox'
 import jsonata from 'jsonata'
-import type { MuninnMessage } from './MuninnMessage.js'
+import type { HelloMessage } from './HelloMessage.js'
 import { convert, type errorFn } from './convert.js'
 
 export enum Model {
@@ -8,14 +8,14 @@ export enum Model {
 }
 
 /**
- * Defines converters for messages handled by Muninn.
+ * Defines converters for messages handled by hello.nrfcloud.com.
  */
 export const proto =
 	({ onError }: { onError?: errorFn } = {}) =>
 	async (
 		model: string,
 		message: unknown,
-	): Promise<Static<typeof MuninnMessage>[]> => {
+	): Promise<Static<typeof HelloMessage>[]> => {
 		const converted = await convert({
 			getTransformExpressions: async (model: string) => {
 				switch (model) {
@@ -63,7 +63,7 @@ export const proto =
 							},
 							location: {
 								filter: jsonata(
-									`\`@context\` = 'https://github.com/bifravst/Muninn-backend/device-location'`,
+									`\`@context\` = 'https://github.com/hello-nrfcloud/backend/device-location'`,
 								),
 								transform: jsonata(`{
 									"lat": lat,
@@ -98,5 +98,5 @@ export const proto =
 		return converted.map(({ ['@context']: context, ...rest }) => ({
 			'@context': context.toString(),
 			...rest,
-		})) as Static<typeof MuninnMessage>[]
+		})) as Static<typeof HelloMessage>[]
 	}

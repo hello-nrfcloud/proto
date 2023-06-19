@@ -4,7 +4,7 @@ set -e
 set -x
 
 npx swc -C jsc.experimental.keepImportAssertions=true -d dist/nrfCloud ./nrfCloud
-npx swc -C jsc.experimental.keepImportAssertions=true -d dist/Muninn ./Muninn
+npx swc -C jsc.experimental.keepImportAssertions=true -d dist/hello ./hello
 npx swc -C jsc.experimental.keepImportAssertions=true -d dist/validator ./validator
 npx swc -C jsc.experimental.keepImportAssertions=true -d dist/generate ./generate
 cp -r ./schemas ./dist

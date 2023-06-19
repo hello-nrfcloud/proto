@@ -324,9 +324,9 @@ export const DeviceIdentity = Type.Object({
 })
 
 /**
- * Defines the messages sent by the Muninn backend.
+ * Defines the messages sent by the hello.nrfcloud.com backend.
  */
-export const MuninnMessage = Type.Union([
+export const HelloMessage = Type.Union([
 	Reported,
 	Gain,
 	Voltage,

@@ -1,6 +1,6 @@
 # Contributing to the project
 
-This guide is intended for providing information on contributing to the Muninn
+This guide is intended for providing information on contributing to the hello.nrfcloud.com
 codebase. As a first step, see [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 ## Finding open issues

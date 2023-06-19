@@ -1,12 +1,12 @@
 import type { Static } from '@sinclair/typebox'
 import type { ErrorObject } from 'ajv'
-import type { MuninnMessage } from './MuninnMessage.js'
+import type { HelloMessage } from './HelloMessage.js'
 import { validator } from './validator.js'
 
 export const validPassthrough = (
 	v: unknown,
 	onDropped?: (v: unknown, errors: ErrorObject[]) => unknown,
-): Static<typeof MuninnMessage> | null => {
+): Static<typeof HelloMessage> | null => {
 	const isValid = validator(v)
 	if ('errors' in isValid) {
 		onDropped?.(v, isValid.errors)

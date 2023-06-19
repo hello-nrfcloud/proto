@@ -1,5 +1,5 @@
 export * from './Context.js'
-export * from './MuninnMessage.js'
+export * from './HelloMessage.js'
 export * from './convert.js'
 export * from './proto.js'
 export * from './validPassthrough.js'

@@ -6,7 +6,7 @@ import HUMID from '../nrfCloud/examples/deviceToCloud/HUMID.json' assert { type:
 import RSRP from '../nrfCloud/examples/deviceToCloud/RSRP.json' assert { type: 'json' }
 import TEMP from '../nrfCloud/examples/deviceToCloud/TEMP.json' assert { type: 'json' }
 import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
-import type { DeviceIdentity } from './MuninnMessage'
+import type { DeviceIdentity } from './HelloMessage'
 import { proto } from './proto.js'
 import deviceWithEnergyEstimate from './solarThingy/DEVICE-networkInfo-with-eest.json' assert { type: 'json' }
 import location from './solarThingy/LOCATION.json' assert { type: 'json' }
@@ -14,10 +14,10 @@ import solar from './solarThingy/SOLAR.json' assert { type: 'json' }
 import voltage from './solarThingy/VOLTAGE.json' assert { type: 'json' }
 import { validPassthrough } from './validPassthrough.js'
 
-describe('Muninn messages', () => {
+describe('hello.nrfcloud.com messages', () => {
 	it('should validate a device identity message', () => {
 		const deviceIdentityMessage: Static<typeof DeviceIdentity> = {
-			'@context': 'https://github.com/bifravst/Muninn-proto/deviceIdentity',
+			'@context': 'https://github.com/hello-nrfcloud/proto/deviceIdentity',
 			id: 'nrf-352656108602296',
 			model: 'PCA20035+solar',
 		}
@@ -31,7 +31,7 @@ describe('Muninn messages', () => {
 				shadow.state,
 				{
 					'@context': new URL(
-						'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/reported',
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/reported',
 					).toString(),
 					connected: true,
 					version: 8835,
@@ -79,7 +79,7 @@ describe('Muninn messages', () => {
 				solar,
 				{
 					'@context': new URL(
-						'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/gain',
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/gain',
 					).toString(),
 					ts: solar.ts,
 					mA: 3.123456,
@@ -89,7 +89,7 @@ describe('Muninn messages', () => {
 				voltage,
 				{
 					'@context': new URL(
-						'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/voltage',
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/voltage',
 					).toString(),
 					ts: voltage.ts,
 					v: 4.085,
@@ -99,7 +99,7 @@ describe('Muninn messages', () => {
 				location,
 				{
 					'@context': new URL(
-						'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/location',
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/location',
 					).toString(),
 					ts: location.ts,
 					lat: 45.524098,
@@ -111,7 +111,7 @@ describe('Muninn messages', () => {
 				deviceWithEnergyEstimate,
 				{
 					'@context': new URL(
-						'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/networkInfo',
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/networkInfo',
 					).toString(),
 					ts: deviceWithEnergyEstimate.ts,
 					currentBand: 20,
@@ -129,7 +129,7 @@ describe('Muninn messages', () => {
 				{
 					ts: RSRP.ts,
 					'@context': new URL(
-						'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/rsrp',
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/rsrp',
 					).toString(),
 					rsrp: -96,
 				},
@@ -139,7 +139,7 @@ describe('Muninn messages', () => {
 				{
 					ts: AIR_PRESS.ts,
 					'@context': new URL(
-						'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/airPressure',
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/airPressure',
 					).toString(),
 					kPa: 102.31,
 				},
@@ -149,7 +149,7 @@ describe('Muninn messages', () => {
 				{
 					ts: AIR_QUAL.ts,
 					'@context': new URL(
-						'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/airQuality',
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/airQuality',
 					).toString(),
 					IAQ: 177,
 				},
@@ -159,7 +159,7 @@ describe('Muninn messages', () => {
 				{
 					ts: DEVICE.ts,
 					'@context': new URL(
-						'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/deviceInfo',
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/deviceInfo',
 					).toString(),
 					imei: '350457794611739',
 					iccid: '8931080620054223678',
@@ -173,7 +173,7 @@ describe('Muninn messages', () => {
 				{
 					ts: TEMP.ts,
 					'@context': new URL(
-						'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/airTemperature',
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/airTemperature',
 					).toString(),
 					c: 25.73,
 				},
@@ -183,7 +183,7 @@ describe('Muninn messages', () => {
 				{
 					ts: HUMID.ts,
 					'@context': new URL(
-						'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/airHumidity',
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/airHumidity',
 					).toString(),
 					p: 23.16,
 				},

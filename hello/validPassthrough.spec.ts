@@ -4,13 +4,13 @@ describe('validPassthrough', () => {
 	it('should let valid input pass', () => {
 		const isValid = validPassthrough({
 			'@context':
-				'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/airHumidity',
+				'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/airHumidity',
 			p: 23.16,
 			ts: 1681985384511,
 		})
 		expect(isValid).toMatchObject({
 			'@context':
-				'https://github.com/bifravst/Muninn-proto/transformed/PCA20035%2Bsolar/airHumidity',
+				'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/airHumidity',
 			p: 23.16,
 			ts: 1681985384511,
 		})

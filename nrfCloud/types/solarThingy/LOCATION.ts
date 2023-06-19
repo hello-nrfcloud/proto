@@ -3,12 +3,12 @@ import { ts } from '../nrfCloud/NRFCloud.js'
 
 export const LOCATION = {
 	$id: new URL(
-		`https://raw.githubusercontent.com/bifravst/Muninn-proto/types/LOCATION.ts`,
+		`https://raw.githubusercontent.com/hello-nrfcloud/proto/types/LOCATION.ts`,
 	),
 	schema: Type.Object(
 		{
 			'@context': Type.Literal(
-				'https://github.com/bifravst/Muninn-backend/device-location',
+				'https://github.com/hello-nrfcloud/backend/device-location',
 			),
 			ts,
 			lat: Type.Number({

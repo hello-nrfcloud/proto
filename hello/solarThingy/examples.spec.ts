@@ -1,4 +1,4 @@
-import type { NRFCloudMessage, ipShadow } from '@bifravst/muninn-proto/nrfCloud'
+import type { NRFCloudMessage, ipShadow } from '@hello.nrfcloud.com/proto/nrfCloud'
 import { validPassthrough } from '../../nrfCloud/validPassthrough.js'
 import DEVICE_eest from './DEVICE-networkInfo-with-eest.json' assert { type: 'json' }
 import SOLAR from './SOLAR.json' assert { type: 'json' }
