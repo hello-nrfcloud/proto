@@ -1,0 +1,10 @@
+{
+  "appId": "GROUND_FIX",
+  "messageType": "DATA",
+  "data": {
+    "lat": 59.3381238,
+    "lon": 18.00908089,
+    "uncertainty": 883,
+    "fulfilledWith": "MCELL"
+  }
+}
