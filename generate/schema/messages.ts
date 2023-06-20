@@ -1,3 +1,4 @@
+import ground_fix_response from '../../nrfcloud-application-protocols/schemas/cloudToDevice/ground_fix/ground-fix.json' assert { type: 'json' }
 import ipShadowConfig from '../../nrfcloud-application-protocols/schemas/deviceShadow/ipShadow/config.json' assert { type: 'json' }
 import ipShadow from '../../nrfcloud-application-protocols/schemas/deviceShadow/ipShadow/ipShadow.json' assert { type: 'json' }
 import agps from '../../nrfcloud-application-protocols/schemas/deviceToCloud/agps/agps.json' assert { type: 'json' }
@@ -61,6 +62,11 @@ export const groundFixMessage = {
 	$id: toId('deviceToCloud/ground_fix/ground-fix.json'),
 	schema: ground_fix,
 	name: `${ground_fix.properties.appId.const}`,
+}
+export const groundFixResponseMessage = {
+	$id: toId('cloudToDevice/ground_fix/ground-fix.json'),
+	schema: ground_fix_response,
+	name: `${ground_fix_response.properties.appId.const}_C2D`,
 }
 export const gnssMessage = {
 	$id: toId('deviceToCloud/gnss/gnss.json'),
@@ -137,6 +143,7 @@ export const messages: {
 	lightMessage,
 	humidMessage,
 	groundFixMessage,
+	groundFixResponseMessage,
 	gnssMessage,
 	flipMessage,
 	deviceInfoMessage,

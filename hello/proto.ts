@@ -63,13 +63,13 @@ export const proto =
 							},
 							location: {
 								filter: jsonata(
-									`\`@context\` = 'https://github.com/hello-nrfcloud/backend/device-location'`,
+									`appId = 'GROUND_FIX' and $exists(data.lat) and $exists(data.lon) and $exists(data.uncertainty) and $exists(data.fulfilledWith)`,
 								),
 								transform: jsonata(`{
-									"lat": lat,
-									"lng": lng,
-									"acc": acc,
-									"ts": ts
+									"lat": data.lat,
+									"lng": data.lon,
+									"acc": data.uncertainty,
+									"src": data.fulfilledWith
 								}`),
 							},
 							reported: {
