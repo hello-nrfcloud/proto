@@ -156,6 +156,28 @@ export type ipShadow = Readonly<{
 					| Record<string, any>
 		  }
 		| Record<string, any>
+	/**
+	 * The difference between the desired and the reported properties.
+	 */
+	delta?:
+		| {
+				/**
+				 * Client set device configuration.
+				 */
+				config?:
+					| {
+							/**
+							 * Enable GPS
+							 */
+							GPS?:
+								| {
+										enable: boolean
+								  }
+								| Record<string, any>
+					  }
+					| Record<string, any>
+		  }
+		| Record<string, any>
 	version?: number
 	metadata?:
 		| {

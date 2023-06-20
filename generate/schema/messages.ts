@@ -200,6 +200,13 @@ export const ipShadowMessage: {
 				},
 				additionalProperties: true,
 			},
+			Delta: {
+				...ipShadow.definitions.Delta,
+				properties: {
+					config: ipShadowConfig.definitions.Config,
+				},
+				additionalProperties: true,
+			},
 			Reported: {
 				...ipShadow.definitions.Reported,
 				properties: {
