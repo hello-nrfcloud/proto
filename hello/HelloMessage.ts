@@ -100,7 +100,7 @@ export const NetworkInfoShadow = Type.Intersect([
 		},
 	),
 	Type.Object({
-		eest: Type.Enum(EnergyEstimate),
+		eest: Type.Optional(Type.Enum(EnergyEstimate)),
 	}),
 ])
 
