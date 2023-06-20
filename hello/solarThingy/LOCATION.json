@@ -1,7 +1,0 @@
-{
-  "@context": "https://github.com/hello-nrfcloud/backend/device-location",
-  "ts": 1681985385063,
-  "lat": 45.524098,
-  "lng": -122.688408,
-  "acc": 200
-}

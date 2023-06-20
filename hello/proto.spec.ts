@@ -1,4 +1,5 @@
 import type { Static } from '@sinclair/typebox'
+import GROUND_FIX_RESPONSE from '../nrfCloud/examples/cloudToDevice/GROUND_FIX.json' assert { type: 'json' }
 import AIR_PRESS from '../nrfCloud/examples/deviceToCloud/AIR_PRESS.json' assert { type: 'json' }
 import AIR_QUAL from '../nrfCloud/examples/deviceToCloud/AIR_QUAL.json' assert { type: 'json' }
 import DEVICE from '../nrfCloud/examples/deviceToCloud/DEVICE-deviceInfo.json' assert { type: 'json' }
@@ -9,7 +10,6 @@ import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
 import type { DeviceIdentity } from './HelloMessage'
 import { proto } from './proto.js'
 import deviceWithEnergyEstimate from './solarThingy/DEVICE-networkInfo-with-eest.json' assert { type: 'json' }
-import location from './solarThingy/LOCATION.json' assert { type: 'json' }
 import solar from './solarThingy/SOLAR.json' assert { type: 'json' }
 import voltage from './solarThingy/VOLTAGE.json' assert { type: 'json' }
 import { validPassthrough } from './validPassthrough.js'
@@ -96,15 +96,15 @@ describe('hello.nrfcloud.com messages', () => {
 				},
 			],
 			[
-				location,
+				GROUND_FIX_RESPONSE,
 				{
 					'@context': new URL(
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/location',
 					).toString(),
-					ts: location.ts,
-					lat: 45.524098,
-					lng: -122.688408,
-					acc: 200,
+					lat: 59.3381238,
+					lng: 18.00908089,
+					acc: 883,
+					src: 'MCELL',
 				},
 			],
 			[
