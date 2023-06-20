@@ -1,5 +1,5 @@
 export * from './Context.js'
-export * from './MuninnMessage.js'
+export * from './HelloMessage.js'
 export * from './chart/ChartType.js'
 export * from './chart/HistoricalData.js'
 export * from './chart/HistoricalDataRequest.js'

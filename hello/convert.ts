@@ -1,3 +1,4 @@
+import type { ErrorObject } from 'ajv'
 import jsonata from 'jsonata'
 import { getShadowUpdateTime } from '../nrfCloud/getShadowUpdateTime.js'
 import type { ipShadow } from '../nrfCloud/types/types.js'
@@ -14,10 +15,11 @@ export type errorFn = (
 	message: unknown,
 	model: string,
 	error: string,
+	validationErrors: ErrorObject[],
 ) => unknown
 
 /**
- * Converts incoming messages from nRF Cloud to the messages relevant for Muninn using JSONata
+ * Converts incoming messages from nRF Cloud to the messages relevant for hello.nrfcloud.com using JSONata
  *
  * Conversion are applied per model, where model is for example a Thingy:91, a 9160DK, a Thingy:91 with a solar shield.
  *
@@ -51,7 +53,7 @@ export const convert =
 		// Validate incoming message
 		const isValid = validator(message)
 		if ('errors' in isValid) {
-			onError?.(message, model, `Not a nRF Cloud Message.`)
+			onError?.(message, model, `Not a nRF Cloud Message.`, isValid.errors)
 			return []
 		}
 
@@ -66,7 +68,7 @@ export const convert =
 
 		// Nothing to process
 		if (compiledModelExpressions.length === 0) {
-			onError?.(message, model, `No expressions defined.`)
+			onError?.(message, model, `No expressions defined.`, [])
 			return []
 		}
 
@@ -79,8 +81,9 @@ export const convert =
 
 		if ('metadata' in nrfCloudMessage) {
 			ts =
-				getShadowUpdateTime((nrfCloudMessage as unknown as ipShadow).metadata) *
-				1000
+				getShadowUpdateTime(
+					(nrfCloudMessage as unknown as ipShadow).metadata ?? {},
+				) * 1000
 		}
 
 		// Find all transformers, which filter expression evaluated to `true`

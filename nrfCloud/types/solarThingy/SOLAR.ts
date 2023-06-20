@@ -3,7 +3,7 @@ import { messageType, ts } from '../nrfCloud/NRFCloud.js'
 
 export const SOLAR = {
 	$id: new URL(
-		`https://raw.githubusercontent.com/bifravst/Muninn-proto/types/SOLAR.ts`,
+		`https://raw.githubusercontent.com/hello-nrfcloud/proto/types/SOLAR.ts`,
 	),
 	schema: Type.Object(
 		{

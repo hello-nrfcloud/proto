@@ -19,7 +19,7 @@ const Thingy91WithSolarShieldContext = (transformerId: string) =>
 /**
  * The %CONEVAL AT command returns amongst other data the energy estimate: Relative estimated energy consumption of data transmission compared to nominal consumption. A higher value means smaller energy consumption. 5: Difficulties in setting up connections. Maximum number of repetitions might be needed for data.
  */
-enum EnergyEstimate {
+export enum EnergyEstimate {
 	/**
 	 * Bad conditions. Difficulties in setting up connections. Maximum number of repetitions might be needed for data.
 	 */
@@ -45,7 +45,7 @@ enum EnergyEstimate {
 /**
  * @see nrfcloud-application-protocols/schemas/deviceShadow/ipShadow/ipShadow.json
  */
-const DeviceInfoShadow = Type.Object(
+export const DeviceInfoShadow = Type.Object(
 	{
 		appVersion: Type.String(),
 		board: Type.String(),
@@ -63,7 +63,7 @@ const DeviceInfoShadow = Type.Object(
 /**
  * @see nrfcloud-application-protocols/schemas/deviceShadow/ipShadow/ipShadow.json
  */
-const SimInfo = Type.Object(
+export const SimInfo = Type.Object(
 	{
 		uiccMode: Type.Integer(),
 		iccid: Type.String(),
@@ -78,7 +78,7 @@ const SimInfo = Type.Object(
 /**
  * @see nrfcloud-application-protocols/schemas/deviceShadow/ipShadow/ipShadow.json
  */
-const NetworkInfoShadow = Type.Intersect([
+export const NetworkInfoShadow = Type.Intersect([
 	Type.Object(
 		{
 			areaCode: Type.Integer(),
@@ -100,11 +100,11 @@ const NetworkInfoShadow = Type.Intersect([
 		},
 	),
 	Type.Object({
-		eest: Type.Enum(EnergyEstimate),
+		eest: Type.Optional(Type.Enum(EnergyEstimate)),
 	}),
 ])
 
-const Reported = Type.Object({
+export const Reported = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('reported'),
 	ts,
 	connected: Type.Boolean(),
@@ -191,7 +191,7 @@ const Reported = Type.Object({
 	),
 })
 
-const Gain = Type.Object({
+export const Gain = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('gain'),
 	ts,
 	mA: Type.Number({
@@ -201,7 +201,7 @@ const Gain = Type.Object({
 	}),
 })
 
-const Voltage = Type.Object({
+export const Voltage = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('voltage'),
 	ts,
 	v: Type.Number({
@@ -211,14 +211,14 @@ const Voltage = Type.Object({
 	}),
 })
 
-const NetworkInfo = Type.Intersect([
+export const NetworkInfo = Type.Intersect([
 	Type.Object({
 		'@context': Thingy91WithSolarShieldContext('networkInfo'),
 		ts,
 	}),
 	NetworkInfoShadow,
 ])
-const RSRP = Type.Object({
+export const RSRP = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('rsrp'),
 	ts,
 	rsrp: Type.Number({
@@ -231,7 +231,7 @@ const RSRP = Type.Object({
 	}),
 })
 
-const AirPressure = Type.Object({
+export const AirPressure = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('airPressure'),
 	ts,
 	kPa: Type.Number({
@@ -241,7 +241,7 @@ const AirPressure = Type.Object({
 	}),
 })
 
-const AirQuality = Type.Object({
+export const AirQuality = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('airQuality'),
 	ts,
 	IAQ: Type.Number({
@@ -260,7 +260,7 @@ const AirQuality = Type.Object({
 	}),
 })
 
-const DeviceInfo = Type.Intersect([
+export const DeviceInfo = Type.Intersect([
 	Type.Object({
 		'@context': Thingy91WithSolarShieldContext('deviceInfo'),
 		ts,
@@ -268,7 +268,7 @@ const DeviceInfo = Type.Intersect([
 	DeviceInfoShadow,
 ])
 
-const AirTemperature = Type.Object({
+export const AirTemperature = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('airTemperature'),
 	ts,
 	c: Type.Number({
@@ -277,7 +277,7 @@ const AirTemperature = Type.Object({
 	}),
 })
 
-const AirHumidity = Type.Object({
+export const AirHumidity = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('airHumidity'),
 	ts,
 	p: Type.Number({
@@ -288,7 +288,7 @@ const AirHumidity = Type.Object({
 	}),
 })
 
-const Location = Type.Object({
+export const Location = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('location'),
 	ts,
 	lat: Type.Number({
@@ -324,9 +324,9 @@ export const DeviceIdentity = Type.Object({
 })
 
 /**
- * Defines the messages sent by the Muninn backend.
+ * Defines the messages sent by the hello.nrfcloud.com backend.
  */
-export const MuninnMessage = Type.Union([
+export const HelloMessage = Type.Union([
 	Reported,
 	Gain,
 	Voltage,

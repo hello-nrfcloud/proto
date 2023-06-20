@@ -1,7 +1,6 @@
 import chalk from 'chalk'
 import { writeFileSync } from 'fs'
 import path from 'node:path/posix'
-import { LOCATION } from '../../nrfCloud/types/solarThingy/LOCATION.js'
 import { SOLAR } from '../../nrfCloud/types/solarThingy/SOLAR.js'
 import { VOLTAGE } from '../../nrfCloud/types/solarThingy/VOLTAGE.js'
 import { ipShadowMessage, messages } from './messages.js'
@@ -18,7 +17,7 @@ writeFileSync(
 	JSON.stringify(
 		{
 			$schema: 'http://json-schema.org/draft-07/schema#',
-			$id: 'https://github.com/bifravst/Muninn-proto/blob/saga/schemas/NRFCloudMessage.schema.json',
+			$id: 'https://github.com/hello-nrfcloud/proto/blob/saga/schemas/NRFCloudMessage.schema.json',
 			title: 'Schema for messages received from the nRF Cloud MQTT bridge',
 			oneOf: [
 				...messages.map(({ $id }) => ({
@@ -32,9 +31,6 @@ writeFileSync(
 				},
 				{
 					$ref: VOLTAGE.$id.toString(),
-				},
-				{
-					$ref: LOCATION.$id.toString(),
 				},
 			],
 		},

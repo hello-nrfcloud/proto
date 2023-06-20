@@ -56,24 +56,34 @@ const createObjectType = (
 		objectMembers.push(createType(tree, $id, id, property, root))
 	}
 
-	return ts.factory.createTypeLiteralNode(
-		Object.entries(properties).map(([id, property]) => {
-			ts.factory.createTypeReferenceNode(ts.factory.createIdentifier(id))
-			if (isRef(property)) {
-				property = resolveRef(property, root)
-			}
-			return addDocBlock(property.description)(
-				ts.factory.createPropertySignature(
-					undefined,
-					ts.factory.createStringLiteral(id),
-					required?.includes(id) ?? false
-						? undefined
-						: ts.factory.createToken(ts.SyntaxKind.QuestionToken),
-					createType(tree, $id, id, property, root),
+	const objectProperties = Object.entries(properties).map(([id, property]) => {
+		ts.factory.createTypeReferenceNode(ts.factory.createIdentifier(id))
+		if (isRef(property)) {
+			property = resolveRef(property, root)
+		}
+		return addDocBlock(property.description)(
+			ts.factory.createPropertySignature(
+				undefined,
+				ts.factory.createStringLiteral(id),
+				required?.includes(id) ?? false
+					? undefined
+					: ts.factory.createToken(ts.SyntaxKind.QuestionToken),
+				createType(tree, $id, id, property, root),
+			),
+		)
+	})
+	if (schema.additionalProperties !== false) {
+		return ts.factory.createUnionTypeNode([
+			ts.factory.createTypeLiteralNode(objectProperties),
+			ts.factory.createTypeReferenceNode('Record', [
+				ts.factory.createTypeReferenceNode(
+					ts.factory.createIdentifier('string'),
 				),
-			)
-		}),
-	)
+				ts.factory.createTypeReferenceNode(ts.factory.createIdentifier('any')),
+			]),
+		])
+	}
+	return ts.factory.createTypeLiteralNode(objectProperties)
 }
 
 const createType = (

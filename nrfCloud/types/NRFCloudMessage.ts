@@ -7,6 +7,7 @@ import type { DEVICE } from './generated/DEVICE'
 import type { FLIP } from './generated/FLIP'
 import type { GNSS } from './generated/GNSS'
 import type { GROUND_FIX } from './generated/GROUND_FIX'
+import type { GROUND_FIX_C2D } from './generated/GROUND_FIX_C2D'
 import type { HUMID } from './generated/HUMID'
 import type { LIGHT } from './generated/LIGHT'
 import type { PGPS } from './generated/PGPS'
@@ -23,6 +24,7 @@ export type NRFCloudMessage = Readonly<
 	| LIGHT
 	| HUMID
 	| GROUND_FIX
+	| GROUND_FIX_C2D
 	| GNSS
 	| FLIP
 	| DEVICE

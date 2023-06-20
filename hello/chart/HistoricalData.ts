@@ -1,5 +1,5 @@
 import { Type } from '@sinclair/typebox'
-import { ts } from '..'
+import { ts } from '../HelloMessage.js'
 
 export const VoltageData = Type.Object({
 	v: Type.Number({

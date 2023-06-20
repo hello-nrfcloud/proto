@@ -45,7 +45,12 @@ export const historicalConvert =
 		// Validate incoming message
 		const isValid = validator(message)
 		if ('errors' in isValid) {
-			onError?.(message, model, `Not a historical data request.`)
+			onError?.(
+				message,
+				model,
+				`Not a historical data request.`,
+				isValid.errors,
+			)
 			return []
 		}
 
@@ -60,7 +65,7 @@ export const historicalConvert =
 
 		// Nothing to process
 		if (compiledModelExpressions.length === 0) {
-			onError?.(message, model, `No expressions defined.`)
+			onError?.(message, model, `No expressions defined.`, [])
 			return []
 		}
 
