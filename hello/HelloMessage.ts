@@ -289,6 +289,7 @@ export const AirHumidity = Type.Object({
 	}),
 })
 
+export const LocationSource = fulfilledWith
 export const Location = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('location'),
 	ts,
@@ -308,7 +309,7 @@ export const Location = Type.Object({
 		examples: [300],
 		description: 'HPE (horizontal positioning error) in meters',
 	}),
-	src: Type.Enum(fulfilledWith, {
+	src: Type.Enum(LocationSource, {
 		description:
 			'How the request was fulfilled. WIFI is prioritized by the cloud. Falls back to SCELL/MCELL.',
 	}),
