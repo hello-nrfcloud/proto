@@ -1,4 +1,4 @@
-declare enum types {
+export enum types {
 	n_1 = '1',
 	n_2 = '2',
 	n_3 = '3',

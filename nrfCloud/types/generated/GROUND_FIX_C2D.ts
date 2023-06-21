@@ -1,4 +1,4 @@
-declare enum fulfilledWith {
+export enum fulfilledWith {
 	MCELL = 'MCELL',
 	SCELL = 'SCELL',
 	WIFI = 'WIFI',

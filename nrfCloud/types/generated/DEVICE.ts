@@ -1,4 +1,4 @@
-declare enum eest {
+export enum eest {
 	n_5 = '5',
 	n_6 = '6',
 	n_7 = '7',
@@ -6,7 +6,7 @@ declare enum eest {
 	n_9 = '9',
 }
 type uiItem = Readonly<string>
-declare enum fota_v2 {
+export enum fota_v2 {
 	APP = 'APP',
 	MODEM = 'MODEM',
 	BOOT = 'BOOT',

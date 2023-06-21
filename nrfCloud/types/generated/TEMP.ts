@@ -1,4 +1,4 @@
-declare enum messageType {
+export enum messageType {
 	DATA = 'DATA',
 }
 /**

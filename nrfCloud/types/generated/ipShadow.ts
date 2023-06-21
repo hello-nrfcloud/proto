@@ -1,8 +1,8 @@
-declare enum status {
+export enum status {
 	connected = 'connected',
 	disconnected = 'disconnected',
 }
-declare enum ui {
+export enum ui {
 	GNSS = 'GNSS',
 	BUTTON = 'BUTTON',
 	TEMP = 'TEMP',
@@ -12,7 +12,7 @@ declare enum ui {
 	RSRP = 'RSRP',
 }
 type uiItem = Readonly<ui>
-declare enum fota_v2 {
+export enum fota_v2 {
 	APP = 'APP',
 	MODEM = 'MODEM',
 	BOOT = 'BOOT',

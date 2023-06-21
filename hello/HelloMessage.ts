@@ -1,5 +1,6 @@
 import { Type } from '@sinclair/typebox'
 import os from 'node:os'
+import { fulfilledWith } from '../nrfCloud/types/generated/GROUND_FIX_C2D.js'
 import { Context } from './Context.js'
 import { Model } from './proto.js'
 
@@ -306,6 +307,10 @@ export const Location = Type.Object({
 	acc: Type.Number({
 		examples: [300],
 		description: 'HPE (horizontal positioning error) in meters',
+	}),
+	src: Type.Enum(fulfilledWith, {
+		description:
+			'How the request was fulfilled. WIFI is prioritized by the cloud. Falls back to SCELL/MCELL.',
 	}),
 })
 

@@ -1,7 +1,7 @@
-declare enum messageType {
+export enum messageType {
 	DATA = 'DATA',
 }
-declare enum data {
+export enum data {
 	NORMAL = 'NORMAL',
 	UPSIDE_DOWN = 'UPSIDE_DOWN',
 }

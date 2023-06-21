@@ -151,7 +151,7 @@ const createEnumType = (
 	if (!(enumsPerType[$id.toString()]?.includes(id) ?? false)) {
 		tree.push(
 			ts.factory.createEnumDeclaration(
-				[ts.factory.createToken(ts.SyntaxKind.DeclareKeyword)],
+				[ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
 				ts.factory.createIdentifier(id),
 				property.enum.map((e) => {
 					let key = e

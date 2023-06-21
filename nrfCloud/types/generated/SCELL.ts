@@ -1,4 +1,4 @@
-declare enum format {
+export enum format {
 	json = 'json',
 	binary = 'binary',
 }
