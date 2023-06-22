@@ -187,7 +187,8 @@ export const Reported = Type.Object({
 		Type.Object({
 			deviceInfo: DeviceInfoShadow,
 			simInfo: SimInfo,
-			networkInfo: NetworkInfoShadow,
+			// Initial shadow message has no network info
+			networkInfo: Type.Optional(NetworkInfoShadow),
 		}),
 	),
 })

@@ -11,6 +11,7 @@ import GROUND_FIX from '../nrfCloud/examples/deviceToCloud/GROUND_FIX.json' asse
 import HUMID from '../nrfCloud/examples/deviceToCloud/HUMID.json' assert { type: 'json' }
 import RSRP from '../nrfCloud/examples/deviceToCloud/RSRP.json' assert { type: 'json' }
 import TEMP from '../nrfCloud/examples/deviceToCloud/TEMP.json' assert { type: 'json' }
+import shadowNoNetworkInfo from '../nrfCloud/examples/shadow-no-networkInfo.json' assert { type: 'json' }
 import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
 import { validPassthrough } from './validPassthrough.js'
 
@@ -27,6 +28,8 @@ describe('nRF Cloud example messages', () => {
 		BUTTON,
 		// Partial response from GET https://api.nrfcloud.com/v1/devices/${deviceId}
 		shadow.state,
+		// Devices will send initial shadow without network info
+		shadowNoNetworkInfo.state,
 	])('should validate message %j', (example) => {
 		const result = validPassthrough(
 			example as NRFCloudMessage | ipShadow,

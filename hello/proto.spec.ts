@@ -6,6 +6,7 @@ import DEVICE from '../nrfCloud/examples/deviceToCloud/DEVICE-deviceInfo.json' a
 import HUMID from '../nrfCloud/examples/deviceToCloud/HUMID.json' assert { type: 'json' }
 import RSRP from '../nrfCloud/examples/deviceToCloud/RSRP.json' assert { type: 'json' }
 import TEMP from '../nrfCloud/examples/deviceToCloud/TEMP.json' assert { type: 'json' }
+import shadowNoNetworkInfo from '../nrfCloud/examples/shadow-no-networkInfo.json' assert { type: 'json' }
 import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
 import type { DeviceIdentity } from './HelloMessage'
 import { proto } from './proto.js'
@@ -71,6 +72,31 @@ describe('hello.nrfcloud.com messages', () => {
 							cellID: 21679616,
 							ipAddress: '100.74.127.55',
 							eest: 7,
+						},
+					},
+				},
+			],
+			[
+				shadowNoNetworkInfo.state,
+				{
+					'@context': new URL(
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/reported',
+					).toString(),
+					device: {
+						deviceInfo: {
+							appVersion: '1.10.0+thingy91.low-power.solar.memfault.nrfcloud',
+							modemFirmware: 'mfw_nrf9160_1.3.4',
+							imei: '352656108602296',
+							board: 'thingy91_nrf9160',
+							sdkVer: 'v2.4.0',
+							appName: 'asset_tracker_v2',
+							zephyrVer: 'f8f113382356',
+							hwVer: 'nRF9160 SICA B1A',
+						},
+						simInfo: {
+							uiccMode: 0,
+							iccid: '89457387300008502299',
+							imsi: '234500070442919',
 						},
 					},
 				},
