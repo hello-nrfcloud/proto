@@ -129,7 +129,7 @@ describe('hello.nrfcloud.com messages', () => {
 					).toString(),
 					lat: 59.3381238,
 					lng: 18.00908089,
-					acc: 883,
+					acc: 883.66,
 					src: 'MCELL',
 				},
 			],
