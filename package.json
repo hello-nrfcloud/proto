@@ -9,6 +9,11 @@
       "import": "./export.js",
       "node": "./export.js"
     },
+    "./fingerprint": {
+      "import": "./dist/fingerprint/export.js",
+      "node": "./dist/fingerprint/export.js",
+      "types": "./fingerprint/index.d.ts"
+    },
     "./hello": {
       "import": "./dist/hello/export.js",
       "node": "./dist/hello/export.js",
