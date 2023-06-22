@@ -115,6 +115,7 @@
     "dist",
     "nrfCloud",
     "hello",
+    "fingerprint",
     "validator",
     "schemas",
     "generate",
