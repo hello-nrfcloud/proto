@@ -25,9 +25,9 @@ export const proto =
 								filter: jsonata(`appId = 'SOLAR'`),
 								transform: jsonata(`{ 'mA': $number(data) }`),
 							},
-							voltage: {
-								filter: jsonata(`appId = 'VOLTAGE'`),
-								transform: jsonata(`{ 'v': $number(data)/1000 }`),
+							battery: {
+								filter: jsonata(`appId = 'BATTERY'`),
+								transform: jsonata(`{ '%': $number(data) }`),
 							},
 							networkInfo: {
 								filter: jsonata(

@@ -1,8 +1,8 @@
 import chalk from 'chalk'
 import { writeFileSync } from 'fs'
 import path from 'node:path/posix'
+import { BATTERY } from '../../nrfCloud/types/solarThingy/BATTERY.js'
 import { SOLAR } from '../../nrfCloud/types/solarThingy/SOLAR.js'
-import { VOLTAGE } from '../../nrfCloud/types/solarThingy/VOLTAGE.js'
 import { ipShadowMessage, messages } from './messages.js'
 const outfile = path.join(
 	process.cwd(),
@@ -30,7 +30,7 @@ writeFileSync(
 					$ref: SOLAR.$id.toString(),
 				},
 				{
-					$ref: VOLTAGE.$id.toString(),
+					$ref: BATTERY.$id.toString(),
 				},
 			],
 		},

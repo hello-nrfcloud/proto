@@ -10,9 +10,9 @@ import shadowNoNetworkInfo from '../nrfCloud/examples/shadow-no-networkInfo.json
 import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
 import type { DeviceIdentity } from './HelloMessage'
 import { proto } from './proto.js'
+import battery from './solarThingy/BATTERY.json' assert { type: 'json' }
 import deviceWithEnergyEstimate from './solarThingy/DEVICE-networkInfo-with-eest.json' assert { type: 'json' }
 import solar from './solarThingy/SOLAR.json' assert { type: 'json' }
-import voltage from './solarThingy/VOLTAGE.json' assert { type: 'json' }
 import { validPassthrough } from './validPassthrough.js'
 
 describe('hello.nrfcloud.com messages', () => {
@@ -112,13 +112,13 @@ describe('hello.nrfcloud.com messages', () => {
 				},
 			],
 			[
-				voltage,
+				battery,
 				{
 					'@context': new URL(
-						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/voltage',
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/battery',
 					).toString(),
-					ts: voltage.ts,
-					v: 4.085,
+					ts: battery.ts,
+					'%': 94,
 				},
 			],
 			[

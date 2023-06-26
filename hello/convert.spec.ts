@@ -6,9 +6,9 @@ describe('convert()', () => {
 	it('should convert the nRF Cloud message format to the hello.nrfcloud.com message format', async () => {
 		const getTransformExpressions = jest.fn(async () =>
 			Promise.resolve({
-				voltage: {
-					filter: jsonata(`appId = 'VOLTAGE'`),
-					transform: jsonata(`{ 'v': $number(data)/1000 }`),
+				battery: {
+					filter: jsonata(`appId = 'BATTERY'`),
+					transform: jsonata(`{ '%': $number(data) }`),
 				},
 			}),
 		)
@@ -17,18 +17,18 @@ describe('convert()', () => {
 			await convert({
 				getTransformExpressions,
 			})('PCA20035+solar')({
-				appId: 'VOLTAGE',
+				appId: 'BATTERY',
 				messageType: 'DATA',
 				ts: 1681985385063,
-				data: '4085',
+				data: '94',
 			}),
 		).toMatchObject([
 			{
 				['@context']: new URL(
-					'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/voltage',
+					'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/battery',
 				),
 				ts: 1681985385063,
-				v: 4.085,
+				'%': 94,
 			},
 		])
 
@@ -68,8 +68,8 @@ describe('convert()', () => {
 	it('should pass messages as is if no transformer defined', async () => {
 		const getTransformExpressions = jest.fn(async () =>
 			Promise.resolve({
-				voltage: {
-					filter: jsonata(`appId = 'VOLTAGE'`),
+				battery: {
+					filter: jsonata(`appId = 'BATTERY'`),
 				},
 			}),
 		)
@@ -78,20 +78,20 @@ describe('convert()', () => {
 			await convert({
 				getTransformExpressions,
 			})('PCA20035+solar')({
-				appId: 'VOLTAGE',
+				appId: 'BATTERY',
 				messageType: 'DATA',
 				ts: 1681985385063,
-				data: '4085',
+				data: '94',
 			}),
 		).toMatchObject([
 			{
 				['@context']: new URL(
-					'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/voltage',
+					'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/battery',
 				),
 				ts: 1681985385063,
-				appId: 'VOLTAGE',
+				appId: 'BATTERY',
 				messageType: 'DATA',
-				data: '4085',
+				data: '94',
 			},
 		])
 

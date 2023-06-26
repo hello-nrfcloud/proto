@@ -203,13 +203,14 @@ export const Gain = Type.Object({
 	}),
 })
 
-export const Voltage = Type.Object({
-	'@context': Thingy91WithSolarShieldContext('voltage'),
+export const Battery = Type.Object({
+	'@context': Thingy91WithSolarShieldContext('battery'),
 	ts,
-	v: Type.Number({
+	'%': Type.Integer({
 		minimum: 0,
-		examples: [3.1234],
-		description: 'Battery voltage as measure by the solar shield',
+		maximum: 100,
+		examples: [94],
+		description: 'Battery capacity in percent',
 	}),
 })
 
@@ -336,7 +337,7 @@ export const DeviceIdentity = Type.Object({
 export const HelloMessage = Type.Union([
 	Reported,
 	Gain,
-	Voltage,
+	Battery,
 	NetworkInfo,
 	RSRP,
 	AirPressure,
