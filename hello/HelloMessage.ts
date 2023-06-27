@@ -19,6 +19,8 @@ const Thingy91WithSolarShieldContext = (transformerId: string) =>
 
 /**
  * The %CONEVAL AT command returns amongst other data the energy estimate: Relative estimated energy consumption of data transmission compared to nominal consumption. A higher value means smaller energy consumption. 5: Difficulties in setting up connections. Maximum number of repetitions might be needed for data.
+ *
+ * @see https://infocenter.nordicsemi.com/topic/ref_at_commands/REF/at_commands/mob_termination_ctrl_status/coneval_set.html
  */
 export enum EnergyEstimate {
 	/**
@@ -38,9 +40,9 @@ export enum EnergyEstimate {
 	 */
 	Good = 8,
 	/**
-	 * Very good conditions. Efficient data transfer estimated also for larger amounts of data.
+	 * Excellent conditions. Efficient data transfer estimated also for larger amounts of data.
 	 */
-	VeryGood = 9,
+	Excellent = 9,
 }
 
 /**
