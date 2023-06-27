@@ -120,7 +120,6 @@ export type ipShadow = Readonly<{
 							deviceInfo?:
 								| {
 										modemFirmware: string
-										batteryVoltage?: number
 										imei: string
 										board: string
 										appVersion: string

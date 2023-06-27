@@ -57,7 +57,6 @@ export type DEVICE = Readonly<{
 		 */
 		deviceInfo?: {
 			modemFirmware: string
-			batteryVoltage?: number
 			imei: string
 			board: string
 			appVersion: string
