@@ -1,5 +1,4 @@
 import { Type } from '@sinclair/typebox'
-import os from 'node:os'
 import { fulfilledWith } from '../nrfCloud/types/generated/GROUND_FIX_C2D.js'
 import { Context } from './Context.js'
 import { Model } from './proto.js'
@@ -259,7 +258,7 @@ export const AirQuality = Type.Object({
 			'201-250 Heavily polluted Exposition might lead to effects like headache depending on type of VOCs',
 			'251-350 Severely polluted More severe health issue possible if harmful VOC present',
 			'> 351 Extremely polluted Headaches, additional neurotoxic effects possible',
-		].join(os.EOL),
+		].join('\n'),
 		minimum: 0,
 		examples: [177],
 	}),
