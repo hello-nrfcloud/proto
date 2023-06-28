@@ -1,7 +1,7 @@
 import { Type, type Static } from '@sinclair/typebox'
 import { ts } from '../HelloMessage.js'
-import { ChartDuration } from './ChartType.js'
 import { GainData, LocationData, VoltageData } from './HistoricalData.js'
+import { ChartType } from './Type.js'
 
 const Aggregate = Type.Union([
 	Type.Literal('avg'),
@@ -50,7 +50,7 @@ const CommonRequest = Type.Object({
 		'https://github.com/hello-nrfcloud/proto/historical-data-request',
 	),
 	'@id': Type.String(),
-	type: Type.KeyOf(ChartDuration),
+	type: Type.KeyOf(ChartType),
 	ts,
 })
 

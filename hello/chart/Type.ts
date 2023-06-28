@@ -22,7 +22,7 @@ const LastMonth = Type.Object({
 /**
  * Defines the chart types provided by the hello.nrfcloud.com backend.
  */
-export const ChartDuration = Type.Object({
+export const ChartType = Type.Object({
 	lastHour: LastHour,
 	lastDay: LastDay,
 	lastMonth: LastMonth,
