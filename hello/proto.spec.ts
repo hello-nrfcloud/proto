@@ -8,6 +8,7 @@ import RSRP from '../nrfCloud/examples/deviceToCloud/RSRP.json' assert { type: '
 import TEMP from '../nrfCloud/examples/deviceToCloud/TEMP.json' assert { type: 'json' }
 import shadowNoNetworkInfo from '../nrfCloud/examples/shadow-no-networkInfo.json' assert { type: 'json' }
 import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
+import { getShadowUpdateTime } from '../nrfCloud/getShadowUpdateTime.js'
 import type { DeviceIdentity } from './HelloMessage'
 import { proto } from './proto.js'
 import battery from './solarThingy/BATTERY.json' assert { type: 'json' }
@@ -72,6 +73,19 @@ describe('hello.nrfcloud.com messages', () => {
 							cellID: 21679616,
 							ipAddress: '100.74.127.55',
 							eest: 7,
+						},
+					},
+					ts: getShadowUpdateTime(shadow.state.metadata) * 1000,
+					lastUpdate: {
+						device: {
+							networkInfo: {
+								networkMode: 1682072423000,
+								mccmnc: 1682072423000,
+								eest: 1682072423000,
+							},
+							deviceInfo: {
+								appVersion: 1681975785000,
+							},
 						},
 					},
 				},
