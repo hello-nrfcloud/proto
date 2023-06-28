@@ -59,7 +59,7 @@ export const proto =
 							},
 							airPressure: {
 								filter: jsonata(`appId = 'AIR_PRESS'`),
-								transform: jsonata(`{ 'kPa': $number(data) }`),
+								transform: jsonata(`{ 'mbar': $number(data) * 10 }`),
 							},
 							location: {
 								filter: jsonata(

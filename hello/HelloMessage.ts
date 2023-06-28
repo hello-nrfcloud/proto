@@ -242,10 +242,11 @@ export const RSRP = Type.Object({
 export const AirPressure = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('airPressure'),
 	ts,
-	kPa: Type.Number({
-		description: 'Atmospheric pressure reading from external sensor in kPa',
+	mbar: Type.Number({
+		description:
+			'Atmospheric pressure reading from external sensor in millibar',
 		minimum: 0,
-		examples: [102.31],
+		examples: [1023.1],
 	}),
 })
 

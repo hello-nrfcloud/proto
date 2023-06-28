@@ -167,7 +167,7 @@ describe('hello.nrfcloud.com messages', () => {
 					'@context': new URL(
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/airPressure',
 					).toString(),
-					kPa: 102.31,
+					mbar: 1023.1,
 				},
 			],
 			[
