@@ -196,6 +196,23 @@ export const Reported = Type.Object({
 			networkInfo: Type.Optional(NetworkInfoShadow),
 		}),
 	),
+	lastUpdate: Type.Object(
+		{
+			device: Type.Object({
+				networkInfo: Type.Object({
+					networkMode: Type.Optional(ts),
+					mccmnc: Type.Optional(ts),
+					eest: Type.Optional(ts),
+				}),
+				deviceInfo: Type.Object({
+					appVersion: Type.Optional(ts),
+				}),
+			}),
+		},
+		{
+			description: 'Contains update timestamps of some properties of interest',
+		},
+	),
 })
 
 export const Gain = Type.Object({
