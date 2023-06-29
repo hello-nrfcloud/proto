@@ -354,6 +354,21 @@ export const DeviceIdentity = Type.Object({
 	}),
 })
 
+export const Button = Type.Object(
+	{
+		'@context': Thingy91WithSolarShieldContext('button'),
+		ts,
+		id: Type.Integer({
+			minimum: 1,
+			examples: [1],
+			description: 'The button ID',
+		}),
+	},
+	{
+		description: 'A button has been pressed.',
+	},
+)
+
 /**
  * Defines the messages sent by the hello.nrfcloud.com backend.
  */
@@ -370,4 +385,5 @@ export const HelloMessage = Type.Union([
 	AirHumidity,
 	Location,
 	DeviceIdentity,
+	Button,
 ])

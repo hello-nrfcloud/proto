@@ -61,6 +61,10 @@ export const proto =
 								filter: jsonata(`appId = 'AIR_PRESS'`),
 								transform: jsonata(`{ 'mbar': $number(data) * 10 }`),
 							},
+							button: {
+								filter: jsonata(`appId = 'BUTTON'`),
+								transform: jsonata(`{ 'id': $number(data) }`),
+							},
 							location: {
 								filter: jsonata(
 									`appId = 'GROUND_FIX' and $exists(data.lat) and $exists(data.lon) and $exists(data.uncertainty) and $exists(data.fulfilledWith)`,

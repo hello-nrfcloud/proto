@@ -2,6 +2,7 @@ import type { Static } from '@sinclair/typebox'
 import GROUND_FIX_RESPONSE from '../nrfCloud/examples/cloudToDevice/GROUND_FIX.json' assert { type: 'json' }
 import AIR_PRESS from '../nrfCloud/examples/deviceToCloud/AIR_PRESS.json' assert { type: 'json' }
 import AIR_QUAL from '../nrfCloud/examples/deviceToCloud/AIR_QUAL.json' assert { type: 'json' }
+import BUTTON from '../nrfCloud/examples/deviceToCloud/BUTTON.json' assert { type: 'json' }
 import DEVICE from '../nrfCloud/examples/deviceToCloud/DEVICE-deviceInfo.json' assert { type: 'json' }
 import HUMID from '../nrfCloud/examples/deviceToCloud/HUMID.json' assert { type: 'json' }
 import RSRP from '../nrfCloud/examples/deviceToCloud/RSRP.json' assert { type: 'json' }
@@ -226,6 +227,16 @@ describe('hello.nrfcloud.com messages', () => {
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/airHumidity',
 					).toString(),
 					p: 23.16,
+				},
+			],
+			[
+				BUTTON,
+				{
+					ts: BUTTON.ts,
+					'@context': new URL(
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/button',
+					).toString(),
+					id: 1,
 				},
 			],
 		])(
