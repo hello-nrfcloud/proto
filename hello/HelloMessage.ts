@@ -42,10 +42,6 @@ export enum EnergyEstimate {
 	 * Excellent conditions. Efficient data transfer estimated also for larger amounts of data.
 	 */
 	Excellent = 9,
-	/**
-	 * The device was not able to determine the energy estimate.
-	 */
-	Unknown = 124,
 }
 
 /**
