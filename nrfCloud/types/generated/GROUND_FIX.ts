@@ -37,6 +37,10 @@ type nmrItem = Readonly<{
 	 * Signal quality
 	 */
 	rsrq?: number
+	/**
+	 * Milliseconds that the neighbor cell was observed after the serving cell was observed. Improves accuracy for devices in motion.
+	 */
+	timeDiff?: number
 }>
 type lteItem = Readonly<{
 	/**

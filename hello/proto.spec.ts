@@ -4,6 +4,7 @@ import AIR_PRESS from '../nrfCloud/examples/deviceToCloud/AIR_PRESS.json' assert
 import AIR_QUAL from '../nrfCloud/examples/deviceToCloud/AIR_QUAL.json' assert { type: 'json' }
 import BUTTON from '../nrfCloud/examples/deviceToCloud/BUTTON.json' assert { type: 'json' }
 import DEVICE from '../nrfCloud/examples/deviceToCloud/DEVICE-deviceInfo.json' assert { type: 'json' }
+import GROUND_FIX_REQUEST from '../nrfCloud/examples/deviceToCloud/GROUND_FIX.json' assert { type: 'json' }
 import HUMID from '../nrfCloud/examples/deviceToCloud/HUMID.json' assert { type: 'json' }
 import RSRP from '../nrfCloud/examples/deviceToCloud/RSRP.json' assert { type: 'json' }
 import TEMP from '../nrfCloud/examples/deviceToCloud/TEMP.json' assert { type: 'json' }
@@ -250,6 +251,17 @@ describe('hello.nrfcloud.com messages', () => {
 				const maybeValid = validPassthrough(res[0])
 				expect(maybeValid).not.toBeNull()
 				expect(maybeValid).toMatchObject(transformed)
+			},
+		)
+	})
+	describe('there are messages that are known, but currently not handled', () => {
+		it.each([[GROUND_FIX_REQUEST]])(
+			'should handle not convert %j',
+			async (message) => {
+				const onError = jest.fn().mockName('error callback')
+				const res = await proto({ onError })('PCA20035+solar', message)
+				expect(onError).not.toHaveBeenCalled()
+				expect(res).toHaveLength(0)
 			},
 		)
 	})
