@@ -15,6 +15,7 @@ import type { DeviceIdentity } from './HelloMessage'
 import { proto } from './proto.js'
 import battery from './solarThingy/BATTERY.json' assert { type: 'json' }
 import deviceWithEnergyEstimate from './solarThingy/DEVICE-networkInfo-with-eest.json' assert { type: 'json' }
+import GROUND_FIX_REQUEST2 from './solarThingy/GROUND_FIX.json' assert { type: 'json' }
 import solar from './solarThingy/SOLAR.json' assert { type: 'json' }
 import { validPassthrough } from './validPassthrough.js'
 
@@ -255,7 +256,7 @@ describe('hello.nrfcloud.com messages', () => {
 		)
 	})
 	describe('there are messages that are known, but currently not handled', () => {
-		it.each([[GROUND_FIX_REQUEST]])(
+		it.each([[GROUND_FIX_REQUEST], [GROUND_FIX_REQUEST2]])(
 			'should handle not convert %j',
 			async (message) => {
 				const onError = jest.fn().mockName('error callback')

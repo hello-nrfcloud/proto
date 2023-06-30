@@ -11,6 +11,7 @@
         "earfcn": 6400,
         "rsrp": -91,
         "rsrq": -10.5,
+        "adv": 65,
         "nmr": [
           {
             "earfcn": 6400,
