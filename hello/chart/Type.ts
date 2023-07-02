@@ -1,4 +1,5 @@
 import { Type } from '@sinclair/typebox'
+import { Value } from '@sinclair/typebox/value'
 
 const LastHour = Type.Object({
 	bin: Type.Literal('1minute'),
@@ -27,3 +28,5 @@ export const ChartType = Type.Object({
 	lastDay: LastDay,
 	lastMonth: LastMonth,
 })
+
+export const AvailableCharts = Value.Create(ChartType)
