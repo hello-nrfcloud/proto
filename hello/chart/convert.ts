@@ -1,19 +1,18 @@
+import type { Static } from '@sinclair/typebox'
 import { validateWithJSONSchema } from '../../validator/validateWithJSONSchema.js'
 import { Context } from '../Context.js'
 import { type errorFn, type evaluateFn } from '../convert.js'
-import {
-	HistoricalDataRequest,
-	type HistoricalDataRequestType,
-} from './HistoricalDataRequest.js'
+import { HistoricalDataRequest } from './HistoricalDataRequest.js'
 
-export type HistoryResponse = {
+export type HistoricalResponse = {
 	['@context']: URL
 	['@id']: string
 	ts: number
 	[key: string]: any
 }
 
-const validator = validateWithJSONSchema<HistoricalDataRequestType>(
+// const validator = validateWithJSONSchema<HistoricalDataRequestType>(
+const validator = validateWithJSONSchema<Static<typeof HistoricalDataRequest>>(
 	HistoricalDataRequest,
 )
 
@@ -48,12 +47,12 @@ export const historicalConvert =
 		onError?: errorFn
 	}) =>
 	(model: string) =>
-	async (message: unknown): Promise<HistoryResponse[]> => {
+	async (request: unknown): Promise<HistoricalResponse[]> => {
 		// Validate incoming message
-		const isValid = validator(message)
+		const isValid = validator(request)
 		if ('errors' in isValid) {
 			onError?.(
-				message,
+				request,
 				model,
 				`Not a historical data request.`,
 				isValid.errors,
@@ -72,18 +71,18 @@ export const historicalConvert =
 
 		// Nothing to process
 		if (compiledModelExpressions.length === 0) {
-			onError?.(message, model, `No expressions defined.`, [])
+			onError?.(request, model, `No expressions defined.`, [])
 			return []
 		}
 
-		const request = isValid.value
+		const validRequest = isValid.value
 
 		// Find all transformers, which filter expression evaluated to `true`
 		const matchedTransformers = (
 			await Promise.all(
 				compiledModelExpressions.map(
 					async ({ filter, transform, transformerId }) => ({
-						matched: await filter.evaluate(request),
+						matched: await filter.evaluate(validRequest),
 						transform,
 						transformerId,
 					}),
@@ -91,20 +90,20 @@ export const historicalConvert =
 			)
 		).filter(({ matched }) => matched === true)
 
-		const converted: HistoryResponse[] = []
+		const converted: HistoricalResponse[] = []
 		for (const { transform, transformerId } of matchedTransformers) {
 			const context = Context.model(model).transformed(transformerId)
 			if (transform === undefined) {
 				converted.push({
-					...request,
+					...validRequest,
 					'@context': context,
-					'@id': request['@id'],
-					ts: request.ts,
+					'@id': validRequest['@id'],
+					ts: validRequest.ts,
 				})
 				continue
 			}
 
-			const transformed = await transform.evaluate(request)
+			const transformed = await transform.evaluate(validRequest)
 			if (typeof transformed !== 'object') {
 				continue
 			}
@@ -112,8 +111,8 @@ export const historicalConvert =
 			converted.push({
 				...transformed,
 				['@context']: context,
-				['@id']: request['@id'],
-				ts: request.ts,
+				['@id']: validRequest['@id'],
+				ts: validRequest.ts,
 			})
 		}
 

@@ -1,4 +1,4 @@
-import { Type, type Static } from '@sinclair/typebox'
+import { Type } from '@sinclair/typebox'
 import { ts } from '../HelloMessage.js'
 import { GainData, LocationData, VoltageData } from './HistoricalData.js'
 import { ChartType } from './Type.js'
@@ -62,5 +62,3 @@ export const HistoricalDataRequest = Type.Union([
 	Type.Composite([CommonRequest, VoltageRequest]),
 	Type.Composite([CommonRequest, LocationRequest]),
 ])
-
-export type HistoricalDataRequestType = Static<typeof HistoricalDataRequest>

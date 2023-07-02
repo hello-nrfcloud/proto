@@ -1,4 +1,4 @@
-import { Type, type Static } from '@sinclair/typebox'
+import { Type } from '@sinclair/typebox'
 import { ts } from '../HelloMessage.js'
 import { GainData, LocationData, VoltageData } from './HistoricalData.js'
 
@@ -17,5 +17,3 @@ export const HistoricalDataResponse = Type.Object({
 	attributes: Type.Union([GainResponse, VoltageResponse, LocationResponse]),
 	ts,
 })
-
-export type HistoricalDataResponseType = Static<typeof HistoricalDataResponse>

@@ -1,18 +1,19 @@
+import type { Static } from '@sinclair/typebox'
 import jsonata from 'jsonata'
 import { type errorFn } from '../convert.js'
 import { Model } from '../proto.js'
-import type { HistoricalDataResponseType } from './HistoricalDataResponse.js'
+import type { HistoricalDataResponse } from './HistoricalDataResponse.js'
 import { historicalConvert } from './convert.js'
 
 /**
- * Defines converters for messages handled by hello.nrfcloud.com.
+ * Defines converters for historical device data request handled by hello.nrfcloud.com.
  */
 export const chartProto =
 	({ onError }: { onError?: errorFn } = {}) =>
 	async (
 		model: string,
-		message: unknown,
-	): Promise<HistoricalDataResponseType[]> => {
+		request: unknown,
+	): Promise<Static<typeof HistoricalDataResponse>[]> => {
 		const converted = await historicalConvert({
 			getTransformExpressions: async (model: string) => {
 				switch (model) {
@@ -28,10 +29,10 @@ export const chartProto =
 				}
 			},
 			onError,
-		})(model)(message)
+		})(model)(request)
 
 		return converted.map(({ ['@context']: context, ...rest }) => ({
 			'@context': context.toString(),
 			...rest,
-		})) as HistoricalDataResponseType[]
+		})) as Static<typeof HistoricalDataResponse>[]
 	}
