@@ -264,7 +264,6 @@ describe('hello.nrfcloud.com messages', () => {
 		])('should handle not convert %j', async (message) => {
 			const onError = jest.fn().mockName('error callback')
 			const res = await proto({ onError })('PCA20035+solar', message)
-			console.log(JSON.stringify(onError.mock.calls[0], null, 2))
 			expect(onError).not.toHaveBeenCalled()
 			expect(res).toHaveLength(0)
 		})
