@@ -71,6 +71,10 @@ type lteItem = Readonly<{
 	 * Evolved Absolute Radio Frequency Channel (E-ARFCN).
 	 */
 	earfcn?: number
+	/**
+	 * TimingAdvance: The length of time a signal takes to reach the base station from a mobile phone (half of rtt=round trip time). The units are symbols (Ts) as specified in 3GPP TS 36.211 (LTE). The expected resolution for nRF Cloud API is 1 Ts. Range 0..20512.
+	 */
+	adv?: number
 	nmr?: nmrItem[]
 }>
 /**
