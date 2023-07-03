@@ -1,4 +1,3 @@
-import type { Static } from '@sinclair/typebox'
 import GROUND_FIX_RESPONSE from '../nrfCloud/examples/cloudToDevice/GROUND_FIX.json' assert { type: 'json' }
 import AIR_PRESS from '../nrfCloud/examples/deviceToCloud/AIR_PRESS.json' assert { type: 'json' }
 import AIR_QUAL from '../nrfCloud/examples/deviceToCloud/AIR_QUAL.json' assert { type: 'json' }
@@ -11,7 +10,6 @@ import TEMP from '../nrfCloud/examples/deviceToCloud/TEMP.json' assert { type: '
 import shadowNoNetworkInfo from '../nrfCloud/examples/shadow-no-networkInfo.json' assert { type: 'json' }
 import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
 import { getShadowUpdateTime } from '../nrfCloud/getShadowUpdateTime.js'
-import type { DeviceIdentity } from './HelloMessage'
 import { proto } from './proto.js'
 import battery from './solarThingy/BATTERY.json' assert { type: 'json' }
 import deviceWithEnergyEstimate from './solarThingy/DEVICE-networkInfo-with-eest.json' assert { type: 'json' }
@@ -21,16 +19,27 @@ import solar from './solarThingy/SOLAR.json' assert { type: 'json' }
 import { validPassthrough } from './validPassthrough.js'
 
 describe('hello.nrfcloud.com messages', () => {
-	it('should validate a device identity message', () => {
-		const deviceIdentityMessage: Static<typeof DeviceIdentity> = {
-			'@context': 'https://github.com/hello-nrfcloud/proto/deviceIdentity',
-			id: 'nrf-352656108602296',
-			model: 'PCA20035+solar',
-		}
-		expect(validPassthrough(deviceIdentityMessage)).toMatchObject(
-			deviceIdentityMessage,
-		)
-	})
+	it.each([
+		[
+			{
+				'@context': 'https://github.com/hello-nrfcloud/proto/deviceIdentity',
+				id: 'nrf-352656108602296',
+				model: 'PCA20035+solar',
+			},
+			{
+				'@context': 'https://github.com/hello-nrfcloud/proto/deviceIdentity',
+				id: 'nrf-352656108602296',
+				model: 'PCA20035+solar',
+				lastSeen: new Date().toISOString(),
+			},
+		],
+	])(
+		'should validate the device identity message %j',
+		(deviceIdentityMessage) =>
+			expect(validPassthrough(deviceIdentityMessage)).toMatchObject(
+				deviceIdentityMessage,
+			),
+	)
 	describe('PCA20035+solar: Thingy:91 with solar shield messages', () => {
 		it.each([
 			[
