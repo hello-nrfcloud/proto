@@ -1,5 +1,4 @@
 import { Type } from '@sinclair/typebox'
-import { ts } from '../HelloMessage.js'
 import { GainData, LocationData, VoltageData } from './HistoricalData.js'
 import { ChartType } from './Type.js'
 
@@ -41,6 +40,7 @@ const LocationRequest = Type.Object({
 		lat: Type.Object({ attribute: Type.Literal('lat') }),
 		lng: Type.Object({ attribute: Type.Literal('lng') }),
 		acc: Type.Object({ attribute: Type.Literal('acc') }),
+		ts: Type.Object({ attribute: Type.Literal('ts') }),
 	}),
 	data: Type.Array(LocationData),
 })
@@ -51,7 +51,6 @@ const CommonRequest = Type.Object({
 	),
 	'@id': Type.String(),
 	type: Type.KeyOf(ChartType),
-	ts,
 })
 
 /**

@@ -1,5 +1,4 @@
 import { Type } from '@sinclair/typebox'
-import { ts } from '../HelloMessage.js'
 import { GainData, LocationData, VoltageData } from './HistoricalData.js'
 
 const VoltageResponse = Type.Record(Type.String(), Type.Array(VoltageData))
@@ -15,5 +14,4 @@ export const HistoricalDataResponse = Type.Object({
 	'@context': Type.String(),
 	'@id': Type.String(),
 	attributes: Type.Union([GainResponse, VoltageResponse, LocationResponse]),
-	ts,
 })

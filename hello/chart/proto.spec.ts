@@ -25,7 +25,6 @@ describe('hello.nrfcloud.com historical request', () => {
 							},
 						],
 					},
-					ts: 1686911202000,
 				},
 				{
 					'@context': new URL(
@@ -44,7 +43,6 @@ describe('hello.nrfcloud.com historical request', () => {
 							},
 						],
 					},
-					ts: 1686911202000,
 				},
 			],
 			[
@@ -69,7 +67,6 @@ describe('hello.nrfcloud.com historical request', () => {
 							},
 						],
 					},
-					ts: 1686911202000,
 				},
 				{
 					'@context': new URL(
@@ -88,7 +85,6 @@ describe('hello.nrfcloud.com historical request', () => {
 							},
 						],
 					},
-					ts: 1686911202000,
 				},
 			],
 			[
@@ -124,7 +120,6 @@ describe('hello.nrfcloud.com historical request', () => {
 							},
 						],
 					},
-					ts: 1686911202000,
 				},
 				{
 					'@context': new URL(
@@ -153,7 +148,6 @@ describe('hello.nrfcloud.com historical request', () => {
 							},
 						],
 					},
-					ts: 1686911202000,
 				},
 			],
 			[
@@ -183,7 +177,6 @@ describe('hello.nrfcloud.com historical request', () => {
 							ts: 1686911203000,
 						},
 					],
-					ts: 1686911202000,
 				},
 				{
 					'@context': new URL(
@@ -204,7 +197,6 @@ describe('hello.nrfcloud.com historical request', () => {
 							ts: 1686911203000,
 						},
 					],
-					ts: 1686911202000,
 				},
 			],
 		])(

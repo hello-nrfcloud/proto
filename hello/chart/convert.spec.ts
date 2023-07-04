@@ -34,7 +34,6 @@ describe('historicalConvert()', () => {
 					},
 				],
 			},
-			ts: 1681985385063,
 		})
 		expect(res).toMatchObject([
 			{
@@ -56,7 +55,6 @@ describe('historicalConvert()', () => {
 						},
 					],
 				},
-				ts: 1681985385063,
 			},
 		])
 
@@ -98,7 +96,6 @@ describe('historicalConvert()', () => {
 					},
 				],
 			},
-			ts: 1681985385063,
 		})
 
 		expect(onError).not.toHaveBeenCalled()
@@ -120,7 +117,6 @@ describe('historicalConvert()', () => {
 						},
 					],
 				},
-				ts: 1681985385063,
 			},
 		])
 
@@ -173,7 +169,6 @@ describe('historicalConvert()', () => {
 					},
 				],
 			},
-			ts: 1681985385063,
 		})
 
 		expect(onError).not.toHaveBeenCalled()
@@ -205,7 +200,6 @@ describe('historicalConvert()', () => {
 						},
 					],
 				},
-				ts: 1681985385063,
 			},
 		])
 
@@ -248,7 +242,6 @@ describe('historicalConvert()', () => {
 						},
 					],
 				},
-				ts: 1681985385063,
 			}),
 		).toMatchObject([])
 
@@ -274,7 +267,6 @@ describe('historicalConvert()', () => {
 						},
 					],
 				},
-				ts: 1681985385063,
 			},
 			'PCA20035+solar',
 			`Not a historical data request.`,
@@ -318,7 +310,6 @@ describe('historicalConvert()', () => {
 						},
 					],
 				},
-				ts: 1681985385063,
 			}),
 		).toMatchObject([])
 
@@ -344,7 +335,6 @@ describe('historicalConvert()', () => {
 						},
 					],
 				},
-				ts: 1681985385063,
 			},
 			'PCA20035+solar',
 			`Not a historical data request.`,
@@ -400,7 +390,6 @@ describe('historicalConvert()', () => {
 						},
 					],
 				},
-				ts: 1681985385063,
 			}),
 		).toMatchObject([])
 		expect(errorLog).toHaveBeenCalledWith(
@@ -425,7 +414,6 @@ describe('historicalConvert()', () => {
 						},
 					],
 				},
-				ts: 1681985385063,
 			},
 			'Thingy:91',
 			`No expressions defined.`,

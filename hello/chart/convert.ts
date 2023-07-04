@@ -7,7 +7,6 @@ import { HistoricalDataRequest } from './HistoricalDataRequest.js'
 export type HistoricalResponse = {
 	['@context']: URL
 	['@id']: string
-	ts: number
 	[key: string]: any
 }
 
@@ -98,7 +97,6 @@ export const historicalConvert =
 					...validRequest,
 					'@context': context,
 					'@id': validRequest['@id'],
-					ts: validRequest.ts,
 				})
 				continue
 			}
@@ -112,7 +110,6 @@ export const historicalConvert =
 				...transformed,
 				['@context']: context,
 				['@id']: validRequest['@id'],
-				ts: validRequest.ts,
 			})
 		}
 
