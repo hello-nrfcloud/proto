@@ -1,6 +1,7 @@
 import { Type } from '@sinclair/typebox'
 import { fulfilledWith } from '../nrfCloud/types/generated/GROUND_FIX_C2D.js'
 import { Context } from './Context.js'
+import { isoDateRegExp } from './isoDateRegExp.js'
 import { Model } from './proto.js'
 
 export const ts = Type.Integer({
@@ -192,6 +193,23 @@ export const Reported = Type.Object({
 			networkInfo: Type.Optional(NetworkInfoShadow),
 		}),
 	),
+	lastUpdate: Type.Object(
+		{
+			device: Type.Object({
+				networkInfo: Type.Object({
+					networkMode: Type.Optional(ts),
+					mccmnc: Type.Optional(ts),
+					eest: Type.Optional(ts),
+				}),
+				deviceInfo: Type.Object({
+					appVersion: Type.Optional(ts),
+				}),
+			}),
+		},
+		{
+			description: 'Contains update timestamps of some properties of interest',
+		},
+	),
 })
 
 export const Gain = Type.Object({
@@ -238,10 +256,11 @@ export const RSRP = Type.Object({
 export const AirPressure = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('airPressure'),
 	ts,
-	kPa: Type.Number({
-		description: 'Atmospheric pressure reading from external sensor in kPa',
+	mbar: Type.Number({
+		description:
+			'Atmospheric pressure reading from external sensor in millibar',
 		minimum: 0,
-		examples: [102.31],
+		examples: [1023.1],
 	}),
 })
 
@@ -330,7 +349,28 @@ export const DeviceIdentity = Type.Object({
 		description: 'the device model',
 		examples: ['PCA20035', 'PCA20035+solar'],
 	}),
+	lastSeen: Type.Optional(
+		Type.RegEx(isoDateRegExp, {
+			description:
+				'Time formatted as ISO 8601 string when the device last sent in a message.',
+		}),
+	),
 })
+
+export const Button = Type.Object(
+	{
+		'@context': Thingy91WithSolarShieldContext('button'),
+		ts,
+		id: Type.Integer({
+			minimum: 1,
+			examples: [1],
+			description: 'The button ID',
+		}),
+	},
+	{
+		description: 'A button has been pressed.',
+	},
+)
 
 /**
  * Defines the messages sent by the hello.nrfcloud.com backend.
@@ -348,4 +388,5 @@ export const HelloMessage = Type.Union([
 	AirHumidity,
 	Location,
 	DeviceIdentity,
+	Button,
 ])

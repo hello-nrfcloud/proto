@@ -59,7 +59,11 @@ export const proto =
 							},
 							airPressure: {
 								filter: jsonata(`appId = 'AIR_PRESS'`),
-								transform: jsonata(`{ 'kPa': $number(data) }`),
+								transform: jsonata(`{ 'mbar': $number(data) * 10 }`),
+							},
+							button: {
+								filter: jsonata(`appId = 'BUTTON'`),
+								transform: jsonata(`{ 'id': $number(data) }`),
 							},
 							location: {
 								filter: jsonata(
@@ -84,7 +88,19 @@ export const proto =
 										'simInfo': reported.device.simInfo,
 										'networkInfo': reported.device.networkInfo
 									},
-									'connected': reported.connection.status = 'connected'
+									'connected': reported.connection.status = 'connected',
+									'lastUpdate': {
+										'device': {
+											'networkInfo': {
+												'networkMode': metadata.reported.device.networkInfo.networkMode.timestamp * 1000,
+												'mccmnc': metadata.reported.device.networkInfo.mccmnc.timestamp * 1000,
+												'eest': metadata.reported.device.networkInfo.eest.timestamp * 1000
+											},
+											'deviceInfo': {
+												'appVersion': metadata.reported.device.deviceInfo.appVersion.timestamp * 1000
+											}
+										}
+									}
 								}`),
 							},
 						})
