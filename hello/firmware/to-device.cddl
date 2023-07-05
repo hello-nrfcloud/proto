@@ -1,0 +1,11 @@
+to-device-message = [
+	+ (led-message)
+]
+
+message-type-led = 1
+
+led-message = [
+	message-type : message-type-led,
+	timestamp : uint .size 4, ; UNIX timestamp
+	led-enable : bool, ; Whether to turn on the led or not
+]
