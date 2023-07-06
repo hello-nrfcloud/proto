@@ -1,5 +1,4 @@
 import { Type } from '@sinclair/typebox'
-import { GainData, LocationData, VoltageData } from './HistoricalData.js'
 import { ChartType } from './Type.js'
 
 const Aggregate = Type.Union([
@@ -19,7 +18,6 @@ const GainRequest = Type.Object({
 			aggregate: Aggregate,
 		}),
 	),
-	data: Type.Record(Type.String(), Type.Array(GainData)),
 })
 
 const VoltageRequest = Type.Object({
@@ -31,7 +29,6 @@ const VoltageRequest = Type.Object({
 			aggregate: Aggregate,
 		}),
 	),
-	data: Type.Record(Type.String(), Type.Array(VoltageData)),
 })
 
 const LocationRequest = Type.Object({
@@ -42,7 +39,6 @@ const LocationRequest = Type.Object({
 		acc: Type.Object({ attribute: Type.Literal('acc') }),
 		ts: Type.Object({ attribute: Type.Literal('ts') }),
 	}),
-	data: Type.Array(LocationData),
 })
 
 const CommonRequest = Type.Object({
@@ -50,7 +46,7 @@ const CommonRequest = Type.Object({
 		'https://github.com/hello-nrfcloud/proto/historical-data-request',
 	),
 	'@id': Type.String(),
-	type: Type.KeyOf(ChartType),
+	type: ChartType,
 })
 
 /**
