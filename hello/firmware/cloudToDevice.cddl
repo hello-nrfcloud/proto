@@ -1,4 +1,4 @@
-to-device-message = [
+cloudToDevice-message = [
 	+ (led-message)
 ]
 

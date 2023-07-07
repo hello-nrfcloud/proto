@@ -1,4 +1,4 @@
-from-device-message = [
+deviceToCloud-message = [
 	+ (gnss-message /
 	   button-message /
 	   temperature-message /

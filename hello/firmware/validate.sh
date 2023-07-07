@@ -1,19 +1,27 @@
 #!/bin/bash
 
 set -e
-mkdir -p from-device-cbor-validate
-for file in from-device-json/*.json; do
+
+TEMPDIR=`mktemp -d -t hello-validate-XXXXXXXXXX`
+
+D2C_DIR="${TEMPDIR}/deviceToCloud"
+mkdir $D2C_DIR
+for file in deviceToCloud/*.json; do
   filename=$(basename "$file" .json)
   echo "converting $filename"
-  zcbor convert -c from-device.cddl -i $file -o from-device-cbor-validate/$filename.cbor --input-as json --output-as cbor -t from-device-message
+  zcbor convert -c deviceToCloud.cddl -i $file -o $D2C_DIR/$filename.cbor --input-as json --output-as cbor -t deviceToCloud-message
   echo "comparing $filename"
-  cmp from-device-cbor/$filename.cbor from-device-cbor-validate/$filename.cbor
+  cmp deviceToCloud/$filename.cbor $D2C_DIR/$filename.cbor
 done
-mkdir -p to-device-cbor-validate
-for file in to-device-json/*.json; do
+
+C2D_DIR="${TEMPDIR}/cloudToDevice"
+mkdir -p $C2D_DIR
+for file in cloudToDevice/*.json; do
   filename=$(basename "$file" .json)
   echo "converting $filename"
-  zcbor convert -c to-device.cddl -i $file -o to-device-cbor-validate/$filename.cbor --input-as json --output-as cbor -t to-device-message
+  zcbor convert -c cloudToDevice.cddl -i $file -o $C2D_DIR/$filename.cbor --input-as json --output-as cbor -t cloudToDevice-message
   echo "comparing $filename"
-  cmp to-device-cbor/$filename.cbor to-device-cbor-validate/$filename.cbor
+  cmp cloudToDevice/$filename.cbor $C2D_DIR/$filename.cbor
 done
+
+rm -r $TEMPDIR
