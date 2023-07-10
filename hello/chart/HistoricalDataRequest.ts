@@ -20,12 +20,12 @@ const GainRequest = Type.Object({
 	),
 })
 
-const VoltageRequest = Type.Object({
-	message: Type.Literal('voltage'),
+const BatteryRequest = Type.Object({
+	message: Type.Literal('battery'),
 	attributes: Type.Record(
 		Type.String(),
 		Type.Object({
-			attribute: Type.Literal('v'),
+			attribute: Type.Literal('%'),
 			aggregate: Aggregate,
 		}),
 	),
@@ -54,6 +54,6 @@ const CommonRequest = Type.Object({
  */
 export const HistoricalDataRequest = Type.Union([
 	Type.Composite([CommonRequest, GainRequest]),
-	Type.Composite([CommonRequest, VoltageRequest]),
+	Type.Composite([CommonRequest, BatteryRequest]),
 	Type.Composite([CommonRequest, LocationRequest]),
 ])

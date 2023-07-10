@@ -1,7 +1,7 @@
 import { Type } from '@sinclair/typebox'
-import { GainData, LocationData, VoltageData } from './HistoricalData.js'
+import { BatteryData, GainData, LocationData } from './HistoricalData.js'
 
-const VoltageResponse = Type.Record(Type.String(), Type.Array(VoltageData))
+const BatteryResponse = Type.Record(Type.String(), Type.Array(BatteryData))
 
 const GainResponse = Type.Record(Type.String(), Type.Array(GainData))
 
@@ -13,5 +13,5 @@ const LocationResponse = Type.Array(LocationData)
 export const HistoricalDataResponse = Type.Object({
 	'@context': Type.String(),
 	'@id': Type.String(),
-	attributes: Type.Union([GainResponse, VoltageResponse, LocationResponse]),
+	attributes: Type.Union([GainResponse, BatteryResponse, LocationResponse]),
 })

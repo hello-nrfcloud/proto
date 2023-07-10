@@ -1,11 +1,10 @@
 import { Type } from '@sinclair/typebox'
 import { ts } from '../HelloMessage.js'
 
-export const VoltageData = Type.Object({
-	v: Type.Number({
-		minimum: 0,
-		examples: [3.1234],
-		description: 'Battery voltage as measure by the solar shield',
+export const BatteryData = Type.Object({
+	'%': Type.RegEx(/^(0|[1-9][0-9]?|100)$/, {
+		examples: ['94'],
+		description: 'Battery capacity in percent encoded as string',
 	}),
 	ts,
 })
