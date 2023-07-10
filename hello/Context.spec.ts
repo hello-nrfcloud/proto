@@ -15,4 +15,12 @@ describe('Context', () => {
 				`https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/${transformerId}`,
 			),
 		))
+	it('should generate a problemDetail context URL', () =>
+		expect(Context.problemDetail).toMatchObject(
+			new URL(`https://github.com/hello-nrfcloud/proto/ProblemDetail`),
+		))
+	it('should generate a error context URL', () =>
+		expect(Context.error('NotFound')).toMatchObject(
+			new URL(`https://github.com/hello-nrfcloud/proto/error/NotFound`),
+		))
 })
