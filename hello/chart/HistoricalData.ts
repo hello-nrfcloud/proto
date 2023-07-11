@@ -1,22 +1,9 @@
 import { Type } from '@sinclair/typebox'
-import { ts } from '../HelloMessage.js'
+import { Battery, Gain, ts } from '../HelloMessage.js'
 
-export const BatteryData = Type.Object({
-	'%': Type.RegEx(/^(0|[1-9][0-9]?|100)$/, {
-		examples: ['94'],
-		description: 'Battery capacity in percent encoded as string',
-	}),
-	ts,
-})
+export const BatteryData = Type.Omit(Battery, ['@context'])
 
-export const GainData = Type.Object({
-	mA: Type.Number({
-		minimum: 0,
-		examples: [3.123],
-		description: 'Gain from solar shield in mA',
-	}),
-	ts,
-})
+export const GainData = Type.Omit(Gain, ['@context'])
 
 export const LocationData = Type.Object({
 	lat: Type.Number({

@@ -2,11 +2,26 @@ import { Type } from '@sinclair/typebox'
 import { ChartType } from './Type.js'
 
 const Aggregate = Type.Union([
-	Type.Literal('avg'),
-	Type.Literal('min'),
-	Type.Literal('max'),
-	Type.Literal('sum'),
-	Type.Literal('count'),
+	Type.Literal('avg', {
+		description:
+			'Avergate function used in Timestream, https://docs.aws.amazon.com/timestream/latest/developerguide/aggregate-functions.html',
+	}),
+	Type.Literal('min', {
+		description:
+			'Minimum function used in Timestream, https://docs.aws.amazon.com/timestream/latest/developerguide/aggregate-functions.html',
+	}),
+	Type.Literal('max', {
+		description:
+			'Maximum function used in Timestream, https://docs.aws.amazon.com/timestream/latest/developerguide/aggregate-functions.html',
+	}),
+	Type.Literal('sum', {
+		description:
+			'Summation function used in Timestream, https://docs.aws.amazon.com/timestream/latest/developerguide/aggregate-functions.html',
+	}),
+	Type.Literal('count', {
+		description:
+			'Count function used in Timestream, https://docs.aws.amazon.com/timestream/latest/developerguide/aggregate-functions.html',
+	}),
 ])
 
 const GainRequest = Type.Object({

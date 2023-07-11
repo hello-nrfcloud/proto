@@ -1,0 +1,10 @@
+{
+  "@context": "https://github.com/hello-nrfcloud/proto/historical-data-request",
+  "@id": "637dcb54-9336-471f-8d27-437a2ca436e2",
+  "type": "lastDay",
+  "message": "battery",
+  "attributes": {
+    "minBat": { "attribute": "%", "aggregate": "min" },
+    "maxBat": { "attribute": "%", "aggregate": "max" }
+  }
+}

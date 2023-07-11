@@ -10,8 +10,8 @@ import { HttpStatusCode, StatusCode } from './StatusCode.js'
 export const ProblemDetail = Type.Object({
 	'@context': Type.Literal(Context.problemDetail.toString()),
 	'@id': Type.Optional(Type.String()),
-	type: Type.String(),
-	status: StatusCode,
+	type: Type.Optional(Type.String()),
+	status: Type.Optional(StatusCode),
 	title: Type.String(),
 	detail: Type.Optional(Type.String()),
 })

@@ -3,7 +3,8 @@ const baseURL = `https://github.com/hello-nrfcloud/proto`
 export const Context = {
 	deviceIdentity: new URL(`${baseURL}/deviceIdentity`),
 	problemDetail: new URL(`${baseURL}/ProblemDetail`),
-	error: (type: string): URL => new URL(`${baseURL}/error/${type}`),
+	error: (type: string): URL =>
+		new URL(`https://hello.nrfcloud.com/errors/${type}`),
 	model: (
 		model: string,
 	): {

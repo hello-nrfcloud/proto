@@ -1,0 +1,20 @@
+{
+  "@context": "https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/historical-data",
+  "@id": "322f777a-0eab-4b1e-a1d2-5432badd926e",
+  "attributes": {
+    "avgMA": [
+      {
+        "mA": 3.40141,
+        "ts": 1689079500000
+      },
+      {
+        "mA": 3.74543,
+        "ts": 1689079440000
+      },
+      {
+        "mA": 3.4148300000000003,
+        "ts": 1689079380000
+      }
+    ]
+  }
+}
