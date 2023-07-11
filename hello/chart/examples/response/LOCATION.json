@@ -1,5 +1,5 @@
 {
-  "@context": "https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/historical-data",
+  "@context": "https://github.com/hello-nrfcloud/proto/historical-data-response",
   "@id": "70102998-a9cb-4279-841f-5f2d4c0b8059",
   "attributes": [
     {
