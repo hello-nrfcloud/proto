@@ -25,4 +25,16 @@ describe('Context', () => {
 		expect(Context.error('NotFound')).toMatchObject(
 			new URL(`https://hello.nrfcloud.com/errors/NotFound`),
 		))
+	it('should generate a historical data request context URL', () =>
+		expect(Context.historicalDataRequest).toMatchObject(
+			new URL(
+				`https://github.com/hello-nrfcloud/proto/historical-data-request`,
+			),
+		))
+	it('should generate a historical data response context URL', () =>
+		expect(Context.historicalDataResponse).toMatchObject(
+			new URL(
+				`https://github.com/hello-nrfcloud/proto/historical-data-response`,
+			),
+		))
 })
