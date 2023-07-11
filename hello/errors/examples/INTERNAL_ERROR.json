@@ -1,0 +1,6 @@
+{
+  "@context": "https://github.com/hello-nrfcloud/proto/ProblemDetail",
+  "type": "https://hello.nrfcloud.com/errors/InternalError",
+  "title": "An internal error occurred.",
+  "status": 500
+}
