@@ -1,0 +1,80 @@
+deviceToCloud-message = [
+	+ (gnss-message /
+	   button-message /
+	   temperature-message /
+	   humidity-message /
+	   air-pressure-message /
+	   air-quality-message /
+	   rsrp-message /
+	   battery-message /
+	   solar-gain-message)
+]
+
+message-type-gnss = 1
+message-type-button = 2
+message-type-temperature = 3
+message-type-humidity = 4
+message-type-air-pressure = 5
+message-type-air-quality = 6
+message-type-rsrp = 7
+message-type-battery = 8
+message-type-solar-gain = 9
+
+rsrp-message = [
+	message-type : message-type-rsrp,
+	timestamp : uint .size 4, ; UNIX timestamp
+	rsrp : int .size 2, ; RSRP in dBm
+]
+
+gnss-message = [
+	message-type : message-type-gnss,
+	timestamp : uint .size 4, ; UNIX timestamp
+	latitude : float32, ; Latitude in degrees
+	longitude : float32, ; Longitude in degrees
+	accuracy : float32, ; Accuracy in (2D 1-sigma) in meters
+	? speed : ( gnss-speed : 1 .size 1, value : float32), ; Horizontal speed in meters per second
+	? heading : ( gnss-heading : 2 .size 1, value : float32), ; Heading of movement in degrees
+	? altitude : ( gnss-altitude : 3 .size 1, value : float32), ; Altitude above WGS-84 ellipsoid in meters
+]
+
+button-message = [
+	message-type : message-type-button,
+	timestamp : uint .size 4, ; UNIX timestamp
+	button-id : uint .size 1, ; ID of button pressed
+]
+
+battery-message = [
+	message-type : message-type-battery,
+	timestamp : uint .size 4, ; UNIX timestamp
+	battery-percentage : 0..100 .size 1, ; Battery level in %
+]
+
+temperature-message = [
+	message-type : message-type-temperature,
+	timestamp : uint .size 4, ; UNIX timestamp
+	temperature : float32, ; Temperature in degrees Celsius
+]
+
+humidity-message = [
+	message-type : message-type-humidity,
+	timestamp : uint .size 4, ; UNIX timestamp
+	humidity : 0..100 .size 1, ; Relative humidity in %
+]
+
+air-pressure-message = [
+	message-type : message-type-air-pressure,
+	timestamp : uint .size 4, ; UNIX timestamp
+	air-pressure : uint .size 4, ; Air pressure in Pa
+]
+
+air-quality-message = [
+	message-type : message-type-air-quality,
+	timestamp : uint .size 4, ; UNIX timestamp
+	air-quality : 0..500 .size 2, ; Air quality in IAQ
+]
+
+solar-gain-message = [
+	message-type : message-type-solar-gain,
+	timestamp : uint .size 4, ; UNIX timestamp
+	solar-gain : float32, ; Solar gain in mA
+]
