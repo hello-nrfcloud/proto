@@ -16,7 +16,7 @@ import deviceWithEnergyEstimate from './solarThingy/DEVICE-networkInfo-with-eest
 import GROUND_FIX_REQUEST2 from './solarThingy/GROUND_FIX.json' assert { type: 'json' }
 import GROUND_FIX_with_timeDiff from './solarThingy/GROUND_FIX_with_timeDiff.json' assert { type: 'json' }
 import solar from './solarThingy/SOLAR.json' assert { type: 'json' }
-import { validPassthrough } from './validPassthrough.js'
+import { validator } from './validator.js'
 
 describe('hello.nrfcloud.com messages', () => {
 	it.each([
@@ -36,9 +36,9 @@ describe('hello.nrfcloud.com messages', () => {
 	])(
 		'should validate the device identity message %j',
 		(deviceIdentityMessage) =>
-			expect(validPassthrough(deviceIdentityMessage)).toMatchObject(
-				deviceIdentityMessage,
-			),
+			expect(validator(deviceIdentityMessage)).toMatchObject({
+				value: deviceIdentityMessage,
+			}),
 	)
 	describe('PCA20035+solar: Thingy:91 with solar shield messages', () => {
 		it.each([
@@ -259,9 +259,10 @@ describe('hello.nrfcloud.com messages', () => {
 				expect(onError).not.toHaveBeenCalled()
 				expect(res).toMatchObject([transformed])
 				// Test the validation
-				const maybeValid = validPassthrough(res[0])
-				expect(maybeValid).not.toBeNull()
-				expect(maybeValid).toMatchObject(transformed)
+				const maybeValid = validator(res[0])
+				expect('value' in maybeValid && maybeValid.value).toMatchObject(
+					transformed,
+				)
 			},
 		)
 	})

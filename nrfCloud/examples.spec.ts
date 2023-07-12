@@ -1,6 +1,7 @@
-import type {
-	NRFCloudMessage,
-	ipShadow,
+import {
+	validator,
+	type NRFCloudMessage,
+	type ipShadow,
 } from '@hello.nrfcloud.com/proto/nrfCloud'
 import AIR_PRESS from '../nrfCloud/examples/deviceToCloud/AIR_PRESS.json' assert { type: 'json' }
 import AIR_QUAL from '../nrfCloud/examples/deviceToCloud/AIR_QUAL.json' assert { type: 'json' }
@@ -13,7 +14,6 @@ import RSRP from '../nrfCloud/examples/deviceToCloud/RSRP.json' assert { type: '
 import TEMP from '../nrfCloud/examples/deviceToCloud/TEMP.json' assert { type: 'json' }
 import shadowNoNetworkInfo from '../nrfCloud/examples/shadow-no-networkInfo.json' assert { type: 'json' }
 import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
-import { validPassthrough } from './validPassthrough.js'
 
 describe('nRF Cloud example messages', () => {
 	it.each([
@@ -31,10 +31,7 @@ describe('nRF Cloud example messages', () => {
 		// Devices will send initial shadow without network info
 		shadowNoNetworkInfo.state,
 	])('should validate message %j', (example) => {
-		const result = validPassthrough(
-			example as NRFCloudMessage | ipShadow,
-			(_, error) => console.error(JSON.stringify(error)),
-		)
-		expect(result).not.toBeNull()
+		const result = validator(example as NRFCloudMessage | ipShadow)
+		expect('value' in result && result.value).not.toBeNull()
 	})
 })

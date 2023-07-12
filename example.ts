@@ -1,4 +1,4 @@
-import { proto, validPassthrough } from '@hello.nrfcloud.com/proto/hello'
+import { proto, validator } from '@hello.nrfcloud.com/proto/hello'
 import assert from 'node:assert'
 
 // Convert nRF Cloud message to hello.nrfcloud.com format
@@ -22,7 +22,5 @@ assert.equal(
 )
 
 // Validate hello.nrfcloud.com format
-const maybeValid = validPassthrough(convertedMessage, (v, errors) => {
-	console.error(errors)
-})
-assert.equal(maybeValid, convertedMessage)
+const maybeValid = validator(convertedMessage)
+assert.equal('value' in maybeValid && maybeValid.value, convertedMessage)
