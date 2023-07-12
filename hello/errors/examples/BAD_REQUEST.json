@@ -1,0 +1,7 @@
+{
+  "@context": "https://github.com/hello-nrfcloud/proto/ProblemDetail",
+  "@id": "55480460-6b90-4e81-a875-a1b09f72c877",
+  "type": "https://hello.nrfcloud.com/errors/BadRequest",
+  "title": "Validation error",
+  "status": 400
+}
