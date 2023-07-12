@@ -17,34 +17,37 @@ import GROUND_FIX_REQUEST2 from './solarThingy/GROUND_FIX.json' assert { type: '
 import GROUND_FIX_with_timeDiff from './solarThingy/GROUND_FIX_with_timeDiff.json' assert { type: 'json' }
 import solar from './solarThingy/SOLAR.json' assert { type: 'json' }
 import { validator } from './validator.js'
+import { describe, test as it, mock } from 'node:test'
+import assert from 'node:assert/strict'
+import { check, objectMatching, aNumber } from 'tsmatchers'
 
-describe('hello.nrfcloud.com messages', () => {
-	it.each([
-		[
-			{
-				'@context': 'https://github.com/hello-nrfcloud/proto/deviceIdentity',
-				id: 'nrf-352656108602296',
-				model: 'PCA20035+solar',
-			},
-			{
-				'@context': 'https://github.com/hello-nrfcloud/proto/deviceIdentity',
-				id: 'nrf-352656108602296',
-				model: 'PCA20035+solar',
-				lastSeen: new Date().toISOString(),
-			},
-		],
-	])(
-		'should validate the device identity message %j',
-		(deviceIdentityMessage) =>
-			expect(validator(deviceIdentityMessage)).toMatchObject({
+void describe('hello.nrfcloud.com messages', () => {
+	for (const deviceIdentityMessage of [
+		{
+			'@context': 'https://github.com/hello-nrfcloud/proto/deviceIdentity',
+			id: 'nrf-352656108602296',
+			model: 'PCA20035+solar',
+		},
+		{
+			'@context': 'https://github.com/hello-nrfcloud/proto/deviceIdentity',
+			id: 'nrf-352656108602296',
+			model: 'PCA20035+solar',
+			lastSeen: new Date().toISOString(),
+		},
+	]) {
+		void it(`should validate the device identity message ${JSON.stringify(
+			deviceIdentityMessage,
+		)}`, () =>
+			assert.deepEqual(validator(deviceIdentityMessage), {
 				value: deviceIdentityMessage,
-			}),
-	)
-	describe('PCA20035+solar: Thingy:91 with solar shield messages', () => {
-		it.each([
+			}))
+	}
+
+	void describe('PCA20035+solar: Thingy:91 with solar shield messages', () => {
+		for (const [message, transformed] of [
 			[
 				shadow.state,
-				{
+				objectMatching({
 					'@context': new URL(
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/reported',
 					).toString(),
@@ -101,11 +104,11 @@ describe('hello.nrfcloud.com messages', () => {
 							},
 						},
 					},
-				},
+				}),
 			],
 			[
 				shadowNoNetworkInfo.state,
-				{
+				objectMatching({
 					'@context': new URL(
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/reported',
 					).toString(),
@@ -126,31 +129,31 @@ describe('hello.nrfcloud.com messages', () => {
 							imsi: '234500070442919',
 						},
 					},
-				},
+				}),
 			],
 			[
 				solar,
-				{
+				objectMatching({
 					'@context': new URL(
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/gain',
 					).toString(),
 					ts: solar.ts,
 					mA: 3.123456,
-				},
+				}),
 			],
 			[
 				battery,
-				{
+				objectMatching({
 					'@context': new URL(
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/battery',
 					).toString(),
 					ts: battery.ts,
 					'%': 94,
-				},
+				}),
 			],
 			[
 				GROUND_FIX_RESPONSE,
-				{
+				objectMatching({
 					'@context': new URL(
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/location',
 					).toString(),
@@ -158,11 +161,12 @@ describe('hello.nrfcloud.com messages', () => {
 					lng: 18.00908089,
 					acc: 883.66,
 					src: 'MCELL',
-				},
+					ts: aNumber,
+				}),
 			],
 			[
 				deviceWithEnergyEstimate,
-				{
+				objectMatching({
 					'@context': new URL(
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/networkInfo',
 					).toString(),
@@ -175,41 +179,41 @@ describe('hello.nrfcloud.com messages', () => {
 					cellID: 21679616,
 					ipAddress: '100.74.127.55',
 					eest: 7,
-				},
+				}),
 			],
 			[
 				RSRP,
-				{
+				objectMatching({
 					ts: RSRP.ts,
 					'@context': new URL(
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/rsrp',
 					).toString(),
 					rsrp: -96,
-				},
+				}),
 			],
 			[
 				AIR_PRESS,
-				{
+				objectMatching({
 					ts: AIR_PRESS.ts,
 					'@context': new URL(
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/airPressure',
 					).toString(),
 					mbar: 1023.1,
-				},
+				}),
 			],
 			[
 				AIR_QUAL,
-				{
+				objectMatching({
 					ts: AIR_QUAL.ts,
 					'@context': new URL(
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/airQuality',
 					).toString(),
 					IAQ: 177,
-				},
+				}),
 			],
 			[
 				DEVICE,
-				{
+				objectMatching({
 					ts: DEVICE.ts,
 					'@context': new URL(
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/deviceInfo',
@@ -219,63 +223,69 @@ describe('hello.nrfcloud.com messages', () => {
 					modemFirmware: 'mfw_nrf9160_1.3.3',
 					board: 'thingy91_nrf9160',
 					appVersion: '0.0.0-development',
-				},
+				}),
 			],
 			[
 				TEMP,
-				{
+				objectMatching({
 					ts: TEMP.ts,
 					'@context': new URL(
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/airTemperature',
 					).toString(),
 					c: 25.73,
-				},
+				}),
 			],
 			[
 				HUMID,
-				{
+				objectMatching({
 					ts: HUMID.ts,
 					'@context': new URL(
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/airHumidity',
 					).toString(),
 					p: 23.16,
-				},
+				}),
 			],
 			[
 				BUTTON,
-				{
+				objectMatching({
 					ts: BUTTON.ts,
 					'@context': new URL(
 						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/button',
 					).toString(),
 					id: 1,
-				},
+				}),
 			],
-		])(
-			'should convert %j to %j and validate it',
-			async (message, transformed) => {
-				const onError = jest.fn().mockName('error callback')
+		] as [
+			message: Record<string, any>,
+			transformed: ReturnType<typeof objectMatching>,
+		][]) {
+			void it(`should convert ${JSON.stringify(message)} to ${JSON.stringify(
+				transformed,
+			)} and validate it`, async () => {
+				const onError = mock.fn()
 				const res = await proto({ onError })('PCA20035+solar', message)
-				expect(onError).not.toHaveBeenCalled()
-				expect(res).toMatchObject([transformed])
+				assert.equal(onError.mock.calls.length, 0)
+				check(res[0]).is(transformed)
 				// Test the validation
 				const maybeValid = validator(res[0])
-				expect('value' in maybeValid && maybeValid.value).toMatchObject(
-					transformed,
-				)
-			},
-		)
+				check(maybeValid).is(objectMatching({ value: transformed }))
+			})
+		}
 	})
-	describe('there are messages that are known, but currently not handled', () => {
-		it.each([
-			[GROUND_FIX_REQUEST],
-			[GROUND_FIX_REQUEST2],
-			[GROUND_FIX_with_timeDiff],
-		])('should handle not convert %j', async (message) => {
-			const onError = jest.fn().mockName('error callback')
-			const res = await proto({ onError })('PCA20035+solar', message)
-			expect(onError).not.toHaveBeenCalled()
-			expect(res).toHaveLength(0)
-		})
+	void describe('there are messages that are known, but currently not handled', () => {
+		for (const message of [
+			GROUND_FIX_REQUEST,
+			GROUND_FIX_REQUEST2,
+			GROUND_FIX_with_timeDiff,
+		]) {
+			void it(`should handle not convert ${JSON.stringify(
+				message,
+			)}`, async () => {
+				const onError = mock.fn()
+				const res = await proto({ onError })('PCA20035+solar', message)
+				assert.equal(onError.mock.calls.length, 0)
+				assert.equal(res.length, 0)
+			})
+		}
 	})
 })

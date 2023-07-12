@@ -1,8 +1,10 @@
 import { isoDateRegExp } from './isoDateRegExp.js'
+import { describe, test as it } from 'node:test'
+import assert from 'node:assert/strict'
 
-describe('isoDateRegExp', () => {
-	it('should match a date string', () => {
+void describe('isoDateRegExp', () => {
+	void it('should match a date string', () => {
 		const isoTs = new Date().toISOString()
-		expect(isoDateRegExp.test(isoTs)).toEqual(true)
+		assert.equal(isoDateRegExp.test(isoTs), true)
 	})
 })

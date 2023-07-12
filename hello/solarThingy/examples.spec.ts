@@ -6,13 +6,15 @@ import {
 import BATTERY from './BATTERY.json' assert { type: 'json' }
 import DEVICE_eest from './DEVICE-networkInfo-with-eest.json' assert { type: 'json' }
 import SOLAR from './SOLAR.json' assert { type: 'json' }
+import { describe, test as it } from 'node:test'
+import assert from 'node:assert/strict'
 
-describe('Solar Thingy example messages', () => {
-	it.each([DEVICE_eest, SOLAR, BATTERY])(
-		'should validate message %j',
-		(example) => {
+void describe('Solar Thingy example messages', () => {
+	for (const example of [DEVICE_eest, SOLAR, BATTERY]) {
+		void it(`should validate message ${JSON.stringify(example)}`, () => {
 			const result = validator(example as NRFCloudMessage | ipShadow)
-			expect('value' in result && result.value).not.toBeNull()
-		},
-	)
+			assert.equal('value' in result, true)
+			assert.notEqual('value' in result && result.value, null)
+		})
+	}
 })

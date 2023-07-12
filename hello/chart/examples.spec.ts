@@ -8,26 +8,27 @@ import BATTERY_response from './examples/response/BATTERY.json' assert { type: '
 import GAIN_response from './examples/response/GAIN.json' assert { type: 'json' }
 import LOCATION_response from './examples/response/LOCATION.json' assert { type: 'json' }
 
-describe('Historical data request example messages', () => {
+import { describe, test as it } from 'node:test'
+import assert from 'node:assert/strict'
+
+void describe('Historical data request example messages', () => {
 	const validator = validateWithTypeBox(HistoricalDataRequest)
 
-	it.each([GAIN_request, BATTERY_request, LOCATION_request])(
-		'should validate message %j',
-		(example) => {
+	for (const example of [GAIN_request, BATTERY_request, LOCATION_request]) {
+		void it(`should validate message ${JSON.stringify(example)}`, () => {
 			const result = validator(example)
-			expect(result).not.toHaveProperty('errors')
-		},
-	)
+			assert.equal('errors' in result, false)
+		})
+	}
 })
 
-describe('Historical data response example messages', () => {
+void describe('Historical data response example messages', () => {
 	const validator = validateWithTypeBox(HistoricalDataResponse)
 
-	it.each([GAIN_response, BATTERY_response, LOCATION_response])(
-		'should validate message %j',
-		(example) => {
+	for (const example of [GAIN_response, BATTERY_response, LOCATION_response]) {
+		void it(`should validate message ${JSON.stringify(example)}`, () => {
 			const result = validator(example)
-			expect(result).not.toHaveProperty('errors')
-		},
-	)
+			assert.equal('errors' in result, false)
+		})
+	}
 })

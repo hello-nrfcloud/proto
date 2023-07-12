@@ -1,4 +1,6 @@
 import { validateWithJSONSchema } from './validateWithJSONSchema.js'
+import { describe, test as it } from 'node:test'
+import assert from 'node:assert/strict'
 
 const typedInputSchema = {
 	type: 'object',
@@ -11,17 +13,17 @@ const typedInputSchema = {
 	additionalProperties: false,
 }
 
-describe('validateWithJSONSchema', () => {
-	describe('it should validate', () => {
+void describe('validateWithJSONSchema', () => {
+	void describe('it should validate', () => {
 		const v = validateWithJSONSchema(typedInputSchema)
-		it('valid input', () => {
+		void it('valid input', () => {
 			const isValid = v({ cell: 42 })
-			expect('value' in isValid).toEqual(true)
-			expect((isValid as any).value.cell).toEqual(42)
+			assert.equal('value' in isValid, true)
+			assert.equal((isValid as any).value.cell, 42)
 		})
-		it('invalid input', () => {
+		void it('invalid input', () => {
 			const isInvalid = v({ cell: -42 })
-			expect('errors' in isInvalid).toEqual(true)
+			assert.equal('errors' in isInvalid, true)
 		})
 	})
 })

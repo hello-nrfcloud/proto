@@ -1,10 +1,13 @@
 import jsonata from 'jsonata'
 import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
 import { convert } from './convert.js'
+import { describe, test as it, mock } from 'node:test'
+import assert from 'node:assert/strict'
+import { check, objectMatching, anObject } from 'tsmatchers'
 
-describe('convert()', () => {
-	it('should convert the nRF Cloud message format to the hello.nrfcloud.com message format', async () => {
-		const getTransformExpressions = jest.fn(async () =>
+void describe('convert()', () => {
+	void it('should convert the nRF Cloud message format to the hello.nrfcloud.com message format', async () => {
+		const getTransformExpressions = mock.fn(async () =>
 			Promise.resolve({
 				battery: {
 					filter: jsonata(`appId = 'BATTERY'`),
@@ -13,7 +16,7 @@ describe('convert()', () => {
 			}),
 		)
 
-		expect(
+		assert.deepEqual(
 			await convert({
 				getTransformExpressions,
 			})('PCA20035+solar')({
@@ -22,21 +25,25 @@ describe('convert()', () => {
 				ts: 1681985385063,
 				data: '94',
 			}),
-		).toMatchObject([
-			{
-				['@context']: new URL(
-					'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/battery',
-				),
-				ts: 1681985385063,
-				'%': 94,
-			},
-		])
 
-		expect(getTransformExpressions).toHaveBeenCalledWith('PCA20035+solar')
+			[
+				{
+					['@context']: new URL(
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/battery',
+					),
+					ts: 1681985385063,
+					'%': 94,
+				},
+			],
+		)
+
+		assert.deepEqual(getTransformExpressions.mock.calls[0]?.arguments, [
+			'PCA20035+solar',
+		])
 	})
 
-	it('should convert the shadow', async () => {
-		const getTransformExpressions = jest.fn(async () =>
+	void it('should convert the shadow', async () => {
+		const getTransformExpressions = mock.fn(async () =>
 			Promise.resolve({
 				reported: {
 					filter: jsonata(`true`),
@@ -44,15 +51,15 @@ describe('convert()', () => {
 				},
 			}),
 		)
-		const onError = jest.fn().mockName('error callback')
+		const onError = mock.fn()
 
 		const res = await convert({
 			getTransformExpressions,
 			onError,
 		})('PCA20035+solar')(shadow.state)
 
-		expect(onError).not.toHaveBeenCalled()
-		expect(res).toMatchObject([
+		assert.equal(onError.mock.calls.length, 0)
+		assert.deepEqual(res, [
 			{
 				['@context']: new URL(
 					'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/reported',
@@ -62,11 +69,13 @@ describe('convert()', () => {
 			},
 		])
 
-		expect(getTransformExpressions).toHaveBeenCalledWith('PCA20035+solar')
+		assert.deepEqual(getTransformExpressions.mock.calls[0]?.arguments, [
+			'PCA20035+solar',
+		])
 	})
 
-	it('should pass messages as is if no transformer defined', async () => {
-		const getTransformExpressions = jest.fn(async () =>
+	void it('should pass messages as is if no transformer defined', async () => {
+		const getTransformExpressions = mock.fn(async () =>
 			Promise.resolve({
 				battery: {
 					filter: jsonata(`appId = 'BATTERY'`),
@@ -74,7 +83,7 @@ describe('convert()', () => {
 			}),
 		)
 
-		expect(
+		assert.deepEqual(
 			await convert({
 				getTransformExpressions,
 			})('PCA20035+solar')({
@@ -83,24 +92,28 @@ describe('convert()', () => {
 				ts: 1681985385063,
 				data: '94',
 			}),
-		).toMatchObject([
-			{
-				['@context']: new URL(
-					'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/battery',
-				),
-				ts: 1681985385063,
-				appId: 'BATTERY',
-				messageType: 'DATA',
-				data: '94',
-			},
-		])
 
-		expect(getTransformExpressions).toHaveBeenCalledWith('PCA20035+solar')
+			[
+				{
+					['@context']: new URL(
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/battery',
+					),
+					ts: 1681985385063,
+					appId: 'BATTERY',
+					messageType: 'DATA',
+					data: '94',
+				},
+			],
+		)
+
+		assert.deepEqual(getTransformExpressions.mock.calls[0]?.arguments, [
+			'PCA20035+solar',
+		])
 	})
 
-	it('should not process any messages if there are no converters', async () => {
-		const errorLog = jest.fn()
-		expect(
+	void it('should not process any messages if there are no converters', async () => {
+		const errorLog = mock.fn()
+		assert.deepEqual(
 			await convert({
 				getTransformExpressions: async () => Promise.resolve({}),
 				onError: errorLog,
@@ -110,8 +123,9 @@ describe('convert()', () => {
 				ts: 1681985384511,
 				data: '102.31',
 			}),
-		).toMatchObject([])
-		expect(errorLog).toHaveBeenCalledWith(
+			[],
+		)
+		assert.deepEqual(errorLog.mock.calls[0]?.arguments, [
 			{
 				appId: 'AIR_PRESS',
 				messageType: 'DATA',
@@ -121,27 +135,27 @@ describe('convert()', () => {
 			'Thingy:91',
 			`No expressions defined.`,
 			[],
-		)
+		])
 	})
 
-	it('should not process unknown messages', async () => {
-		const errorLog = jest.fn()
-		expect(
+	void it('should not process unknown messages', async () => {
+		const errorLog = mock.fn()
+		assert.deepEqual(
 			await convert({
 				getTransformExpressions: async () => Promise.resolve({}),
 				onError: errorLog,
 			})('Thingy:91')({
 				foo: 'bar',
 			}),
-		).toMatchObject([])
-
-		expect(errorLog).toHaveBeenCalledWith(
-			{
-				foo: 'bar',
-			},
-			'Thingy:91',
-			`Not a nRF Cloud Message.`,
-			expect.anything(),
+			[],
 		)
+		check(errorLog.mock.calls[0]?.arguments[0]).is(
+			objectMatching({
+				foo: 'bar',
+			}),
+		)
+		check(errorLog.mock.calls[0]?.arguments[1]).is('Thingy:91')
+		check(errorLog.mock.calls[0]?.arguments[2]).is(`Not a nRF Cloud Message.`)
+		check(errorLog.mock.calls[0]?.arguments[3]).is(anObject)
 	})
 })

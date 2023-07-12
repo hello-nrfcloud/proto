@@ -1,38 +1,44 @@
 import { randomUUID } from 'node:crypto'
 import { Context } from './Context.js'
+import { describe, test as it } from 'node:test'
+import assert from 'node:assert/strict'
 
 const transformerId = randomUUID()
-describe('Context', () => {
-	it('should generate a deviceIdentity context URL', () =>
-		expect(Context.deviceIdentity).toMatchObject(
+void describe('Context', () => {
+	void it('should generate a deviceIdentity context URL', () =>
+		assert.deepEqual(
+			Context.deviceIdentity,
 			new URL(`https://github.com/hello-nrfcloud/proto/deviceIdentity`),
 		))
-	it('should generate a transformed context URL', () =>
-		expect(
+	void it('should generate a transformed context URL', () =>
+		assert.deepEqual(
 			Context.model('PCA20035+solar').transformed(transformerId),
-		).toMatchObject(
 			new URL(
 				`https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/${transformerId}`,
 			),
 		))
-	it('should generate a problemDetail context URL', () =>
-		expect(Context.problemDetail).toMatchObject(
+	void it('should generate a problemDetail context URL', () =>
+		assert.deepEqual(
+			Context.problemDetail,
 			new URL(
 				`https://github.com/hello-nrfcloud/proto/blob/saga/hello/errors/ProblemDetail.ts`,
 			),
 		))
-	it('should generate a error context URL', () =>
-		expect(Context.error('NotFound')).toMatchObject(
+	void it('should generate a error context URL', () =>
+		assert.deepEqual(
+			Context.error('NotFound'),
 			new URL(`https://hello.nrfcloud.com/errors/NotFound`),
 		))
-	it('should generate a historical data request context URL', () =>
-		expect(Context.historicalDataRequest).toMatchObject(
+	void it('should generate a historical data request context URL', () =>
+		assert.deepEqual(
+			Context.historicalDataRequest,
 			new URL(
 				`https://github.com/hello-nrfcloud/proto/historical-data-request`,
 			),
 		))
-	it('should generate a historical data response context URL', () =>
-		expect(Context.historicalDataResponse).toMatchObject(
+	void it('should generate a historical data response context URL', () =>
+		assert.deepEqual(
+			Context.historicalDataResponse,
 			new URL(
 				`https://github.com/hello-nrfcloud/proto/historical-data-response`,
 			),

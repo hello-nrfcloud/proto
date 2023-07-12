@@ -14,9 +14,11 @@ import RSRP from '../nrfCloud/examples/deviceToCloud/RSRP.json' assert { type: '
 import TEMP from '../nrfCloud/examples/deviceToCloud/TEMP.json' assert { type: 'json' }
 import shadowNoNetworkInfo from '../nrfCloud/examples/shadow-no-networkInfo.json' assert { type: 'json' }
 import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
+import { describe, test as it } from 'node:test'
+import assert from 'node:assert/strict'
 
-describe('nRF Cloud example messages', () => {
-	it.each([
+void describe('nRF Cloud example messages', () => {
+	for (const example of [
 		DEVICE_info,
 		GROUND_FIX,
 		HUMID,
@@ -30,8 +32,11 @@ describe('nRF Cloud example messages', () => {
 		shadow.state,
 		// Devices will send initial shadow without network info
 		shadowNoNetworkInfo.state,
-	])('should validate message %j', (example) => {
-		const result = validator(example as NRFCloudMessage | ipShadow)
-		expect('value' in result && result.value).not.toBeNull()
-	})
+	]) {
+		void it(`should validate message ${JSON.stringify(example)}`, () => {
+			const result = validator(example as NRFCloudMessage | ipShadow)
+			assert.equal('value' in result, true)
+			assert.notEqual('value' in result && result.value, null)
+		})
+	}
 })
