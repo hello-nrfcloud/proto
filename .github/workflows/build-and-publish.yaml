@@ -20,7 +20,9 @@ jobs:
           path: proto
 
       - name: Install ZCBOR
-        run: sudo apt update && sudo apt install python3-pip -y && pip3 install zcbor==0.7.0
+        run:
+          sudo apt update && sudo apt install python3-pip -y && pip3 install
+          zcbor==0.7.0
 
       - name: Validate CDDL and convert JSON
         working-directory: proto/hello/firmware
