@@ -1,6 +1,16 @@
 import { Type } from '@sinclair/typebox'
 import { ChartType } from './Type.js'
 import { Context } from '../Context.js'
+import { Thingy91WithSolarShieldMessages } from '../index.js'
+
+type Thingy91SolarMessagesTypes = keyof typeof Thingy91WithSolarShieldMessages
+
+const gainKey: Thingy91SolarMessagesTypes = 'gain'
+const batteryKey: Thingy91SolarMessagesTypes = 'battery'
+const locationKey: Thingy91SolarMessagesTypes = 'location'
+export const gainMessage = Type.Literal(gainKey)
+export const batteryMessage = Type.Literal(batteryKey)
+export const locationMessage = Type.Literal(locationKey)
 
 const Aggregate = Type.Union([
 	Type.Literal('avg', {
@@ -26,7 +36,7 @@ const Aggregate = Type.Union([
 ])
 
 const GainRequest = Type.Object({
-	message: Type.Literal('gain'),
+	message: gainMessage,
 	attributes: Type.Record(
 		Type.String(),
 		Type.Object({
@@ -37,7 +47,7 @@ const GainRequest = Type.Object({
 })
 
 const BatteryRequest = Type.Object({
-	message: Type.Literal('battery'),
+	message: batteryMessage,
 	attributes: Type.Record(
 		Type.String(),
 		Type.Object({
@@ -48,7 +58,7 @@ const BatteryRequest = Type.Object({
 })
 
 const LocationRequest = Type.Object({
-	message: Type.Literal('location'),
+	message: locationMessage,
 	attributes: Type.Object({
 		lat: Type.Object({ attribute: Type.Literal('lat') }),
 		lng: Type.Object({ attribute: Type.Literal('lng') }),
@@ -70,4 +80,10 @@ export const HistoricalDataRequest = Type.Union([
 	Type.Composite([CommonRequest, GainRequest]),
 	Type.Composite([CommonRequest, BatteryRequest]),
 	Type.Composite([CommonRequest, LocationRequest]),
+])
+
+export const HistoricalDataRequestMessageType = Type.Union([
+	gainMessage,
+	batteryMessage,
+	locationMessage,
 ])

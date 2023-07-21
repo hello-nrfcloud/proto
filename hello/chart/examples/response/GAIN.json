@@ -1,6 +1,8 @@
 {
   "@context": "https://github.com/hello-nrfcloud/proto/historical-data-response",
   "@id": "322f777a-0eab-4b1e-a1d2-5432badd926e",
+  "type": "lastHour",
+  "message": "gain",
   "attributes": {
     "avgMA": [
       {

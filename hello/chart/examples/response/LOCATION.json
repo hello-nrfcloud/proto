@@ -1,6 +1,8 @@
 {
   "@context": "https://github.com/hello-nrfcloud/proto/historical-data-response",
   "@id": "70102998-a9cb-4279-841f-5f2d4c0b8059",
+  "type": "lastMonth",
+  "message": "location",
   "attributes": [
     {
       "lat": 63.42061758,

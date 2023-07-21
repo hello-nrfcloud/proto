@@ -1,6 +1,8 @@
 import { Type } from '@sinclair/typebox'
 import { BatteryData, GainData, LocationData } from './HistoricalData.js'
 import { Context } from '../Context.js'
+import { ChartType } from './Type.js'
+import { HistoricalDataRequestMessageType } from './HistoricalDataRequest.js'
 
 const BatteryResponse = Type.Record(Type.String(), Type.Array(BatteryData))
 
@@ -15,4 +17,6 @@ export const HistoricalDataResponse = Type.Object({
 	'@context': Type.Literal(Context.historicalDataResponse.toString()),
 	'@id': Type.String(),
 	attributes: Type.Union([GainResponse, BatteryResponse, LocationResponse]),
+	type: ChartType,
+	message: HistoricalDataRequestMessageType,
 })

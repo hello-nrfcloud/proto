@@ -19,6 +19,16 @@ export type errorFn = (
 ) => unknown
 
 /**
+ * Provides a filter to select messages that should be considered, and an optional transform expression to be applied to the message.
+ */
+export type MessageProcessor = { filter: evaluateFn; transform?: evaluateFn }
+
+/**
+ * A map that defines messages for a device
+ */
+export type MessageDefinition = Record<string, MessageProcessor>
+
+/**
  * Converts incoming messages from nRF Cloud to the messages relevant for hello.nrfcloud.com using JSONata
  *
  * Conversion are applied per model, where model is for example a Thingy:91, a 9160DK, a Thingy:91 with a solar shield.
@@ -43,9 +53,7 @@ export const convert =
 		 *
 		 * It is injected here so it these expression can later come from a database.
 		 */
-		getTransformExpressions: (
-			model: string,
-		) => Promise<Record<string, { filter: evaluateFn; transform?: evaluateFn }>>
+		getTransformExpressions: (model: string) => Promise<MessageDefinition>
 		onError?: errorFn
 	}) =>
 	(model: string) =>
