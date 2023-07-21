@@ -4,11 +4,14 @@ import { Context } from '../Context.js'
 import { ChartType } from './Type.js'
 import { HistoricalDataRequestMessageType } from './HistoricalDataRequest.js'
 
-const BatteryResponse = Type.Record(Type.String(), Type.Array(BatteryData))
+export const BatteryResponse = Type.Record(
+	Type.String(),
+	Type.Array(BatteryData),
+)
 
-const GainResponse = Type.Record(Type.String(), Type.Array(GainData))
+export const GainResponse = Type.Record(Type.String(), Type.Array(GainData))
 
-const LocationResponse = Type.Array(LocationData)
+export const LocationResponse = Type.Array(LocationData)
 
 /**
  * Defines the historical data response
