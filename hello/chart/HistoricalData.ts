@@ -1,5 +1,7 @@
 import { Type } from '@sinclair/typebox'
-import { Battery, Gain, Location } from '../HelloMessage.js'
+import { Gain } from '../Gain.js'
+import { Location } from '../Location.js'
+import { Battery } from '../Battery.js'
 
 export const BatteryData = Type.Pick(Battery, ['%', 'ts'])
 

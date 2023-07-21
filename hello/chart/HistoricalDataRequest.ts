@@ -1,5 +1,6 @@
 import { Type } from '@sinclair/typebox'
 import { ChartType } from './Type.js'
+import { Context } from '../Context.js'
 
 const Aggregate = Type.Union([
 	Type.Literal('avg', {
@@ -57,9 +58,7 @@ const LocationRequest = Type.Object({
 })
 
 const CommonRequest = Type.Object({
-	'@context': Type.Literal(
-		'https://github.com/hello-nrfcloud/proto/historical-data-request',
-	),
+	'@context': Type.Literal(Context.historicalDataRequest.toString()),
 	'@id': Type.String(),
 	type: ChartType,
 })

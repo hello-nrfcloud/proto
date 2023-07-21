@@ -1,5 +1,6 @@
 import { Type } from '@sinclair/typebox'
 import { BatteryData, GainData, LocationData } from './HistoricalData.js'
+import { Context } from '../Context.js'
 
 const BatteryResponse = Type.Record(Type.String(), Type.Array(BatteryData))
 
@@ -11,9 +12,7 @@ const LocationResponse = Type.Array(LocationData)
  * Defines the historical data response
  */
 export const HistoricalDataResponse = Type.Object({
-	'@context': Type.Literal(
-		'https://github.com/hello-nrfcloud/proto/historical-data-response',
-	),
+	'@context': Type.Literal(Context.historicalDataResponse.toString()),
 	'@id': Type.String(),
 	attributes: Type.Union([GainResponse, BatteryResponse, LocationResponse]),
 })

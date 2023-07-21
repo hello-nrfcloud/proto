@@ -278,9 +278,7 @@ void describe('hello.nrfcloud.com messages', () => {
 			GROUND_FIX_REQUEST2,
 			GROUND_FIX_with_timeDiff,
 		]) {
-			void it(`should handle not convert ${JSON.stringify(
-				message,
-			)}`, async () => {
+			void it(`should not handle ${JSON.stringify(message)}`, async () => {
 				const onError = mock.fn()
 				const res = await proto({ onError })('PCA20035+solar', message)
 				assert.equal(onError.mock.calls.length, 0)

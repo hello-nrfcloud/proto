@@ -1,21 +1,12 @@
 import { Type } from '@sinclair/typebox'
-import { fulfilledWith } from '../nrfCloud/types/generated/GROUND_FIX_C2D.js'
 import { Context } from './Context.js'
 import { isoDateRegExp } from './isoDateRegExp.js'
-import { Model } from './proto.js'
-
-export const ts = Type.Integer({
-	description: `Timestamp as Unix epoch with millisecond precision (UTC)`,
-	minimum: 1234567890123,
-	examples: [1584533788029],
-})
-
-const Thingy91WithSolarShieldContext = (transformerId: string) =>
-	Type.Literal(
-		Context.model(Model.Thingy91WithSolarShield)
-			.transformed(transformerId)
-			.toString(),
-	)
+import { HistoricalDataResponse } from './chart/HistoricalDataResponse.js'
+import { Battery } from './Battery.js'
+import { Gain } from './Gain.js'
+import { Location } from './Location.js'
+import { ts } from './ts.js'
+import { Thingy91WithSolarShieldContext } from './Thingy91WithSolarShieldContext.js'
 
 /**
  * The %CONEVAL AT command returns amongst other data the energy estimate: Relative estimated energy consumption of data transmission compared to nominal consumption. A higher value means smaller energy consumption. 5: Difficulties in setting up connections. Maximum number of repetitions might be needed for data.
@@ -212,27 +203,6 @@ export const Reported = Type.Object({
 	),
 })
 
-export const Gain = Type.Object({
-	'@context': Thingy91WithSolarShieldContext('gain'),
-	ts,
-	mA: Type.Number({
-		minimum: 0,
-		examples: [3.123],
-		description: 'Gain from solar shield in mA',
-	}),
-})
-
-export const Battery = Type.Object({
-	'@context': Thingy91WithSolarShieldContext('battery'),
-	ts,
-	'%': Type.Integer({
-		minimum: 0,
-		maximum: 100,
-		examples: [94],
-		description: 'Battery capacity in percent',
-	}),
-})
-
 export const NetworkInfo = Type.Intersect([
 	Type.Object({
 		'@context': Thingy91WithSolarShieldContext('networkInfo'),
@@ -311,32 +281,6 @@ export const AirHumidity = Type.Object({
 	}),
 })
 
-export const LocationSource = fulfilledWith
-export const Location = Type.Object({
-	'@context': Thingy91WithSolarShieldContext('location'),
-	ts,
-	lat: Type.Number({
-		minimum: -90,
-		maximum: 90,
-		examples: [45.524098],
-		description: 'Latitude',
-	}),
-	lng: Type.Number({
-		minimum: -180,
-		maximum: 180,
-		examples: [-122.688408],
-		description: 'Longitude',
-	}),
-	acc: Type.Number({
-		examples: [300],
-		description: 'HPE (horizontal positioning error) in meters',
-	}),
-	src: Type.Enum(LocationSource, {
-		description:
-			'How the request was fulfilled. WIFI is prioritized by the cloud. Falls back to SCELL/MCELL.',
-	}),
-})
-
 export const DeviceIdentity = Type.Object({
 	'@context': Type.Literal(Context.deviceIdentity.toString()),
 	id: Type.String({
@@ -389,4 +333,5 @@ export const HelloMessage = Type.Union([
 	Location,
 	DeviceIdentity,
 	Button,
+	HistoricalDataResponse,
 ])
