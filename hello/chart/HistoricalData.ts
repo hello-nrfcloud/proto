@@ -1,7 +1,7 @@
 import { Type } from '@sinclair/typebox'
 import { Gain } from '../Gain.js'
 import { Location } from '../Location.js'
-import { ts } from 'hello/ts.js'
+import { ts } from '../ts.js'
 
 export const BatteryData = Type.Object({
 	ts,
