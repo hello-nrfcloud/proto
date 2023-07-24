@@ -6,8 +6,7 @@ export const Gain = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('gain'),
 	ts,
 	mA: Type.Number({
-		minimum: 0,
-		examples: [3.123],
+		examples: [3.123, -0.0032],
 		description: 'Gain from solar shield in mA',
 	}),
 })
