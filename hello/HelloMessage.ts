@@ -7,6 +7,8 @@ import { Gain } from './Gain.js'
 import { Location } from './Location.js'
 import { ts } from './ts.js'
 import { Thingy91WithSolarShieldContext } from './Thingy91WithSolarShieldContext.js'
+import { DeviceConfigured } from './ConfigureDevice.js'
+import { deviceId } from './deviceId.js'
 
 /**
  * The %CONEVAL AT command returns amongst other data the energy estimate: Relative estimated energy consumption of data transmission compared to nominal consumption. A higher value means smaller energy consumption. 5: Difficulties in setting up connections. Maximum number of repetitions might be needed for data.
@@ -283,11 +285,7 @@ export const AirHumidity = Type.Object({
 
 export const DeviceIdentity = Type.Object({
 	'@context': Type.Literal(Context.deviceIdentity.toString()),
-	id: Type.String({
-		minLength: 1,
-		description: 'the device ID',
-		examples: ['nrf-352656108602296'],
-	}),
+	id: deviceId,
 	model: Type.String({
 		minLength: 1,
 		description: 'the device model',
@@ -334,4 +332,5 @@ export const HelloMessage = Type.Union([
 	DeviceIdentity,
 	Button,
 	HistoricalDataResponse,
+	DeviceConfigured,
 ])

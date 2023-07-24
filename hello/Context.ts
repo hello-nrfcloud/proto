@@ -4,6 +4,8 @@ export const Context = {
 	deviceIdentity: new URL(`${baseURL}/deviceIdentity`),
 	historicalDataRequest: new URL(`${baseURL}/historical-data-request`),
 	historicalDataResponse: new URL(`${baseURL}/historical-data-response`),
+	configureDevice: new URL(`${baseURL}/configure-device`),
+	deviceConfigured: new URL(`${baseURL}/device-configured`),
 	problemDetail: new URL(`${baseURL}/ProblemDetail`),
 	error: (type: string): URL =>
 		new URL(`https://hello.nrfcloud.com/errors/${type}`),

@@ -69,7 +69,7 @@ const LocationRequest = Type.Object({
 
 const CommonRequest = Type.Object({
 	'@context': Type.Literal(Context.historicalDataRequest.toString()),
-	'@id': Type.String(),
+	'@id': Type.Optional(Type.String()),
 	type: ChartType,
 })
 

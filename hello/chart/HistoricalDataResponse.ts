@@ -18,7 +18,7 @@ export const LocationResponse = Type.Array(LocationData)
  */
 export const HistoricalDataResponse = Type.Object({
 	'@context': Type.Literal(Context.historicalDataResponse.toString()),
-	'@id': Type.String(),
+	'@id': Type.Optional(Type.String()),
 	attributes: Type.Union([GainResponse, BatteryResponse, LocationResponse]),
 	type: ChartType,
 	message: HistoricalDataRequestMessageType,
