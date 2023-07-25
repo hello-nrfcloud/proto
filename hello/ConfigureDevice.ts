@@ -23,6 +23,10 @@ const ConfigurationRequest = Type.Object(
 export const ConfigureDevice = Type.Composite([
 	Type.Object({
 		'@context': Type.Literal(Context.configureDevice.toString()),
+		shadowVersion: Type.Integer({
+			minimum: 1,
+			description: `The current shadow version`,
+		}),
 	}),
 	ConfigurationRequest,
 ])
@@ -30,6 +34,10 @@ export const ConfigureDevice = Type.Composite([
 export const DeviceConfigured = Type.Composite([
 	Type.Object({
 		'@context': Type.Literal(Context.deviceConfigured.toString()),
+		shadowVersion: Type.Integer({
+			minimum: 1,
+			description: `The updated shadow version`,
+		}),
 	}),
 	ConfigurationRequest,
 ])

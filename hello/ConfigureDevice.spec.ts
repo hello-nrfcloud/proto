@@ -13,6 +13,7 @@ void describe('ConfigureDevice', () => {
 			'@context': Context.configureDevice.toString(),
 			'@id': id,
 			id: 'oob-352656108602296',
+			shadowVersion: 8835,
 			configuration: {
 				gnss: true,
 			},
@@ -27,6 +28,7 @@ void describe('ConfigureDevice', () => {
 			'@context': Context.deviceConfigured.toString(),
 			'@id': id,
 			id: 'oob-352656108602296',
+			shadowVersion: 8836,
 			configuration: {
 				gnss: true,
 			},
