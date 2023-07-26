@@ -1,14 +1,15 @@
 import { Type } from '@sinclair/typebox'
-import { Context } from './Context.js'
-import { isoDateRegExp } from './isoDateRegExp.js'
-import { HistoricalDataResponse } from './chart/HistoricalDataResponse.js'
+import { HistoricalDataResponse } from '../../chart/HistoricalDataResponse.js'
 import { Battery } from './Battery.js'
 import { Gain } from './Gain.js'
-import { Location } from './Location.js'
-import { ts } from './ts.js'
-import { Thingy91WithSolarShieldContext } from './Thingy91WithSolarShieldContext.js'
-import { DeviceConfigured } from './ConfigureDevice.js'
-import { deviceId } from './deviceId.js'
+import { Location } from '../../Location.js'
+import { ts } from '../../ts.js'
+import { Thingy91WithSolarShieldContext } from './context.js'
+import { DeviceConfigured } from '../../ConfigureDevice.js'
+import { deviceId } from '../../deviceId.js'
+import { validateWithTypeBox } from '../../../validator/validateWithTypeBox.js'
+import { accuracy, lat, lng } from '../../SingleCellGeoLocation.js'
+import { DeviceIdentity } from '../../DeviceIdentity.js'
 
 /**
  * The %CONEVAL AT command returns amongst other data the energy estimate: Relative estimated energy consumption of data transmission compared to nominal consumption. A higher value means smaller energy consumption. 5: Difficulties in setting up connections. Maximum number of repetitions might be needed for data.
@@ -283,22 +284,6 @@ export const AirHumidity = Type.Object({
 	}),
 })
 
-export const DeviceIdentity = Type.Object({
-	'@context': Type.Literal(Context.deviceIdentity.toString()),
-	id: deviceId,
-	model: Type.String({
-		minLength: 1,
-		description: 'the device model',
-		examples: ['PCA20035', 'PCA20035+solar'],
-	}),
-	lastSeen: Type.Optional(
-		Type.RegEx(isoDateRegExp, {
-			description:
-				'Time formatted as ISO 8601 string when the device last sent in a message.',
-		}),
-	),
-})
-
 export const Button = Type.Object(
 	{
 		'@context': Thingy91WithSolarShieldContext('button'),
@@ -314,10 +299,19 @@ export const Button = Type.Object(
 	},
 )
 
+export const SingleCellGeoLocation = Type.Object({
+	'@context': Thingy91WithSolarShieldContext('single-cell-geo-location'),
+	ts,
+	id: deviceId,
+	lat,
+	lng,
+	accuracy,
+})
+
 /**
- * Defines the messages sent by the hello.nrfcloud.com backend.
+ * Defines the messages transformed for the Thingy:91 with solar shield sent by the hello.nrfcloud.com backend.
  */
-export const HelloMessage = Type.Union([
+export const Thingy91WithSolarShieldMessage = Type.Union([
 	Reported,
 	Gain,
 	Battery,
@@ -333,4 +327,7 @@ export const HelloMessage = Type.Union([
 	Button,
 	HistoricalDataResponse,
 	DeviceConfigured,
+	SingleCellGeoLocation,
 ])
+
+export const validator = validateWithTypeBox(Thingy91WithSolarShieldMessage)

@@ -2,8 +2,9 @@ import type { ErrorObject } from 'ajv'
 import jsonata from 'jsonata'
 import { getShadowUpdateTime } from '../nrfCloud/getShadowUpdateTime.js'
 import type { ipShadow } from '../nrfCloud/types/types.js'
-import { validator } from '../nrfCloud/validator.js'
+import { validator as validateNrfCloudMessage } from '../nrfCloud/validator.js'
 import { Context } from './Context.js'
+import { incomingMessageValidator as validateBackendMessage } from './incomingMessageValidator.js'
 
 export type ConvertedMessage = {
 	['@context']: URL
@@ -58,10 +59,44 @@ export const convert =
 	}) =>
 	(model: string) =>
 	async (message: unknown): Promise<ConvertedMessage[]> => {
-		// Validate incoming message
-		const isValid = validator(message)
-		if ('errors' in isValid) {
-			onError?.(message, model, `Not a nRF Cloud Message.`, isValid.errors)
+		let validMessage: Record<string, any> | undefined = undefined
+
+		// Validate as backend message
+		const maybeIsValidBackendMessage =
+			typeof message === 'object' && message !== null && '@context' in message
+				? validateBackendMessage(message)
+				: undefined
+		if (
+			maybeIsValidBackendMessage !== undefined &&
+			'value' in maybeIsValidBackendMessage
+		) {
+			validMessage = maybeIsValidBackendMessage.value
+		}
+		console.log(maybeIsValidBackendMessage)
+
+		// Validate as nRF Cloud message
+		const maybeIsValidNrfCloudMessage =
+			validMessage === undefined ? validateNrfCloudMessage(message) : undefined
+		if (
+			maybeIsValidNrfCloudMessage !== undefined &&
+			'value' in maybeIsValidNrfCloudMessage
+		) {
+			validMessage = maybeIsValidNrfCloudMessage.value
+		}
+
+		if (validMessage === undefined) {
+			const errors: ErrorObject[] = []
+			if (
+				maybeIsValidBackendMessage !== undefined &&
+				'errors' in maybeIsValidBackendMessage
+			)
+				errors.push(...maybeIsValidBackendMessage.errors)
+			if (
+				maybeIsValidNrfCloudMessage !== undefined &&
+				'errors' in maybeIsValidNrfCloudMessage
+			)
+				errors.push(...maybeIsValidNrfCloudMessage.errors)
+			onError?.(message, model, `Not a valid message.`, errors)
 			return []
 		}
 
@@ -80,17 +115,16 @@ export const convert =
 			return []
 		}
 
-		const nrfCloudMessage = isValid.value
 		// Some nRF Cloud message formats do not specify a timestamp (e.g. Wi-Fi site survey)
 		let ts =
-			'ts' in nrfCloudMessage && nrfCloudMessage.ts !== undefined
-				? nrfCloudMessage.ts
+			'ts' in validMessage && validMessage.ts !== undefined
+				? validMessage.ts
 				: Date.now()
 
-		if ('metadata' in nrfCloudMessage) {
+		if ('metadata' in validMessage) {
 			ts =
 				getShadowUpdateTime(
-					(nrfCloudMessage as unknown as ipShadow).metadata ?? {},
+					(validMessage as unknown as ipShadow).metadata ?? {},
 				) * 1000
 		}
 
@@ -99,7 +133,7 @@ export const convert =
 			await Promise.all(
 				compiledModelExpressions.map(
 					async ({ filter, transform, transformerId }) => ({
-						matched: await filter.evaluate(nrfCloudMessage),
+						matched: await filter.evaluate(validMessage),
 						transform,
 						transformerId,
 					}),
@@ -112,13 +146,13 @@ export const convert =
 			const context = Context.model(model).transformed(transformerId)
 			if (transform === undefined) {
 				converted.push({
-					...nrfCloudMessage,
+					...validMessage,
 					['@context']: context,
 					ts,
 				})
 				continue
 			}
-			const transformed = await transform.evaluate(nrfCloudMessage)
+			const transformed = await transform.evaluate(validMessage)
 			if (typeof transformed !== 'object') {
 				continue
 			}

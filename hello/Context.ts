@@ -4,6 +4,7 @@ export const Context = {
 	deviceIdentity: new URL(`${baseURL}/deviceIdentity`),
 	historicalDataRequest: new URL(`${baseURL}/historical-data-request`),
 	historicalDataResponse: new URL(`${baseURL}/historical-data-response`),
+	singleCellGeoLocation: new URL(`${baseURL}/single-cell-geo-location`),
 	configureDevice: new URL(`${baseURL}/configure-device`),
 	deviceConfigured: new URL(`${baseURL}/device-configured`),
 	problemDetail: new URL(`${baseURL}/ProblemDetail`),

@@ -155,7 +155,7 @@ void describe('convert()', () => {
 			}),
 		)
 		check(errorLog.mock.calls[0]?.arguments[1]).is('Thingy:91')
-		check(errorLog.mock.calls[0]?.arguments[2]).is(`Not a nRF Cloud Message.`)
+		check(errorLog.mock.calls[0]?.arguments[2]).is(`Not a valid message.`)
 		check(errorLog.mock.calls[0]?.arguments[3]).is(anObject)
 	})
 })

@@ -1,6 +1,6 @@
 import { Type, type TLiteral } from '@sinclair/typebox'
-import { Context } from './Context.js'
-import { Model } from './proto.js'
+import { Context } from '../../Context.js'
+import { Model } from '../Model.js'
 
 export const Thingy91WithSolarShieldContext = (
 	transformerId: string,

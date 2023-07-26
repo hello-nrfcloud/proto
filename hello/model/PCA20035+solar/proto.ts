@@ -1,11 +1,9 @@
 import type { Static } from '@sinclair/typebox'
 import jsonata from 'jsonata'
-import type { HelloMessage } from './HelloMessage.js'
-import { convert, type errorFn } from './convert.js'
-
-export enum Model {
-	Thingy91WithSolarShield = 'PCA20035+solar',
-}
+import type { Thingy91WithSolarShieldMessage } from './message.js'
+import { convert, type errorFn } from '../../convert.js'
+import { Context } from '../../Context.js'
+import { Model } from '../Model.js'
 
 export const Thingy91WithSolarShieldMessages = {
 	gain: {
@@ -86,6 +84,10 @@ export const Thingy91WithSolarShieldMessages = {
 			}
 		}`),
 	},
+	['single-cell-geo-location']: {
+		filter: jsonata(`\`@context\` = "${Context.singleCellGeoLocation}"`),
+		transform: jsonata(`$`),
+	},
 } as const
 
 /**
@@ -96,7 +98,7 @@ export const proto =
 	async (
 		model: string,
 		message: unknown,
-	): Promise<Static<typeof HelloMessage>[]> => {
+	): Promise<Static<typeof Thingy91WithSolarShieldMessage>[]> => {
 		const converted = await convert({
 			getTransformExpressions: async (model: string) => {
 				switch (model) {
@@ -112,5 +114,5 @@ export const proto =
 		return converted.map(({ ['@context']: context, ...rest }) => ({
 			'@context': context.toString(),
 			...rest,
-		})) as Static<typeof HelloMessage>[]
+		})) as Static<typeof Thingy91WithSolarShieldMessage>[]
 	}

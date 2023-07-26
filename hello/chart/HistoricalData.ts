@@ -1,5 +1,5 @@
 import { Type } from '@sinclair/typebox'
-import { Gain } from '../Gain.js'
+import { Gain } from '../model/PCA20035+solar/Gain.js'
 import { Location } from '../Location.js'
 import { ts } from '../ts.js'
 

@@ -1,48 +1,27 @@
-import GROUND_FIX_RESPONSE from '../nrfCloud/examples/cloudToDevice/GROUND_FIX.json' assert { type: 'json' }
-import AIR_PRESS from '../nrfCloud/examples/deviceToCloud/AIR_PRESS.json' assert { type: 'json' }
-import AIR_QUAL from '../nrfCloud/examples/deviceToCloud/AIR_QUAL.json' assert { type: 'json' }
-import BUTTON from '../nrfCloud/examples/deviceToCloud/BUTTON.json' assert { type: 'json' }
-import DEVICE from '../nrfCloud/examples/deviceToCloud/DEVICE-deviceInfo.json' assert { type: 'json' }
-import GROUND_FIX_REQUEST from '../nrfCloud/examples/deviceToCloud/GROUND_FIX.json' assert { type: 'json' }
-import HUMID from '../nrfCloud/examples/deviceToCloud/HUMID.json' assert { type: 'json' }
-import RSRP from '../nrfCloud/examples/deviceToCloud/RSRP.json' assert { type: 'json' }
-import TEMP from '../nrfCloud/examples/deviceToCloud/TEMP.json' assert { type: 'json' }
-import shadowNoNetworkInfo from '../nrfCloud/examples/shadow-no-networkInfo.json' assert { type: 'json' }
-import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
-import { getShadowUpdateTime } from '../nrfCloud/getShadowUpdateTime.js'
+import GROUND_FIX_RESPONSE from '../../../nrfCloud/examples/cloudToDevice/GROUND_FIX.json' assert { type: 'json' }
+import AIR_PRESS from '../../../nrfCloud/examples/deviceToCloud/AIR_PRESS.json' assert { type: 'json' }
+import AIR_QUAL from '../../../nrfCloud/examples/deviceToCloud/AIR_QUAL.json' assert { type: 'json' }
+import BUTTON from '../../../nrfCloud/examples/deviceToCloud/BUTTON.json' assert { type: 'json' }
+import DEVICE from '../../../nrfCloud/examples/deviceToCloud/DEVICE-deviceInfo.json' assert { type: 'json' }
+import GROUND_FIX_REQUEST from '../../../nrfCloud/examples/deviceToCloud/GROUND_FIX.json' assert { type: 'json' }
+import HUMID from '../../../nrfCloud/examples/deviceToCloud/HUMID.json' assert { type: 'json' }
+import RSRP from '../../../nrfCloud/examples/deviceToCloud/RSRP.json' assert { type: 'json' }
+import TEMP from '../../../nrfCloud/examples/deviceToCloud/TEMP.json' assert { type: 'json' }
+import shadowNoNetworkInfo from '../../../nrfCloud/examples/shadow-no-networkInfo.json' assert { type: 'json' }
+import shadow from '../../../nrfCloud/examples/shadow.json' assert { type: 'json' }
+import { getShadowUpdateTime } from '../../../nrfCloud/getShadowUpdateTime.js'
 import { proto } from './proto.js'
-import battery from './solarThingy/BATTERY.json' assert { type: 'json' }
-import deviceWithEnergyEstimate from './solarThingy/DEVICE-networkInfo-with-eest.json' assert { type: 'json' }
-import GROUND_FIX_REQUEST2 from './solarThingy/GROUND_FIX.json' assert { type: 'json' }
-import GROUND_FIX_with_timeDiff from './solarThingy/GROUND_FIX_with_timeDiff.json' assert { type: 'json' }
-import solar from './solarThingy/SOLAR.json' assert { type: 'json' }
-import { validator } from './validator.js'
+import battery from './examples/BATTERY.json' assert { type: 'json' }
+import deviceWithEnergyEstimate from './examples/DEVICE-networkInfo-with-eest.json' assert { type: 'json' }
+import GROUND_FIX_REQUEST2 from './examples/GROUND_FIX.json' assert { type: 'json' }
+import GROUND_FIX_with_timeDiff from './examples/GROUND_FIX_with_timeDiff.json' assert { type: 'json' }
+import solar from './examples/SOLAR.json' assert { type: 'json' }
 import { describe, test as it, mock } from 'node:test'
 import assert from 'node:assert/strict'
 import { check, objectMatching, aNumber } from 'tsmatchers'
+import { validator } from './message.js'
 
 void describe('hello.nrfcloud.com messages', () => {
-	for (const deviceIdentityMessage of [
-		{
-			'@context': 'https://github.com/hello-nrfcloud/proto/deviceIdentity',
-			id: 'nrf-352656108602296',
-			model: 'PCA20035+solar',
-		},
-		{
-			'@context': 'https://github.com/hello-nrfcloud/proto/deviceIdentity',
-			id: 'nrf-352656108602296',
-			model: 'PCA20035+solar',
-			lastSeen: new Date().toISOString(),
-		},
-	]) {
-		void it(`should validate the device identity message ${JSON.stringify(
-			deviceIdentityMessage,
-		)}`, () =>
-			assert.deepEqual(validator(deviceIdentityMessage), {
-				value: deviceIdentityMessage,
-			}))
-	}
-
 	void describe('PCA20035+solar: Thingy:91 with solar shield messages', () => {
 		for (const [message, transformed] of [
 			[
@@ -255,6 +234,27 @@ void describe('hello.nrfcloud.com messages', () => {
 					id: 1,
 				}),
 			],
+			[
+				{
+					'@context':
+						'https://github.com/hello-nrfcloud/proto/single-cell-geo-location',
+					id: 'nrf-352656108602296',
+					lat: 63.41999531,
+					lng: 10.42999506,
+					accuracy: 2420,
+					ts: 1690378551538,
+				},
+				{
+					'@context': new URL(
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/single-cell-geo-location',
+					).toString(),
+					id: 'nrf-352656108602296',
+					lat: 63.41999531,
+					lng: 10.42999506,
+					accuracy: 2420,
+					ts: 1690378551538,
+				},
+			],
 		] as [
 			message: Record<string, any>,
 			transformed: ReturnType<typeof objectMatching>,
@@ -264,6 +264,7 @@ void describe('hello.nrfcloud.com messages', () => {
 			)} and validate it`, async () => {
 				const onError = mock.fn()
 				const res = await proto({ onError })('PCA20035+solar', message)
+				console.log(onError.mock.calls[0])
 				assert.equal(onError.mock.calls.length, 0)
 				check(res[0]).is(transformed)
 				// Test the validation

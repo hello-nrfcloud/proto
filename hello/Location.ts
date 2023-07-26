@@ -1,6 +1,6 @@
 import { Type } from '@sinclair/typebox'
 import { fulfilledWith } from '../nrfCloud/types/generated/GROUND_FIX_C2D.js'
-import { Thingy91WithSolarShieldContext } from './Thingy91WithSolarShieldContext.js'
+import { Thingy91WithSolarShieldContext } from './model/PCA20035+solar/context.js'
 import { ts } from './ts.js'
 
 export const LocationSource = fulfilledWith

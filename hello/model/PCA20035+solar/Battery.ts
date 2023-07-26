@@ -1,6 +1,6 @@
 import { Type } from '@sinclair/typebox'
-import { Thingy91WithSolarShieldContext } from './Thingy91WithSolarShieldContext.js'
-import { ts } from './ts.js'
+import { Thingy91WithSolarShieldContext } from './context.js'
+import { ts } from '../../ts.js'
 
 export const Battery = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('battery'),
