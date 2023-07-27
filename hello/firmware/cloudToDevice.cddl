@@ -1,11 +1,20 @@
 cloudToDevice-message = [
-	+ (led-message)
+	+ (led-message / config-message)
 ]
 
 message-type-led = 1
+message-type-config-message = 2
+
+; The timestamp in the messages can be used by the device for deduplication, or discarding outdated messages
 
 led-message = [
 	message-type : message-type-led,
 	timestamp : uint .size 4, ; UNIX timestamp
 	led-enable : bool, ; Whether to turn on the led or not
+]
+
+config-message = [
+	message-type : message-type-config-message,
+	timestamp : uint .size 4, ; UNIX timestamp
+	? gnss-enable : bool, ; Whether to enable the GNSS receiver, or not
 ]
