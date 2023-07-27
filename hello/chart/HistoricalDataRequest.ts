@@ -1,7 +1,7 @@
 import { Type } from '@sinclair/typebox'
 import { ChartType } from './Type.js'
 import { Context } from '../Context.js'
-import { Thingy91WithSolarShieldMessages } from '../index.js'
+import type { Thingy91WithSolarShieldMessages } from '../model/PCA20035+solar/proto.js'
 
 type Thingy91SolarMessagesTypes = keyof typeof Thingy91WithSolarShieldMessages
 

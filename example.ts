@@ -1,4 +1,7 @@
-import { proto, validator } from '@hello.nrfcloud.com/proto/hello'
+import {
+	proto,
+	validator,
+} from '@hello.nrfcloud.com/proto/hello/model/PCA20035+solar'
 import assert from 'node:assert'
 
 // Convert nRF Cloud message to hello.nrfcloud.com format

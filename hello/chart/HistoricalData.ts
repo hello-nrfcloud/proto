@@ -1,6 +1,6 @@
 import { Type } from '@sinclair/typebox'
 import { Gain } from '../model/PCA20035+solar/Gain.js'
-import { Location } from '../Location.js'
+import { Location } from '../model/PCA20035+solar/Location.js'
 import { ts } from '../ts.js'
 
 export const BatteryData = Type.Object({

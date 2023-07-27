@@ -22,6 +22,10 @@
       "@hello.nrfcloud.com/proto": ["index.d.ts"],
       "@hello.nrfcloud.com/proto/fingerprint": ["fingerprint/index.d.ts"],
       "@hello.nrfcloud.com/proto/hello": ["hello/index.d.ts"],
+      "@hello.nrfcloud.com/proto/hello/chart": ["hello/chart/index.d.ts"],
+      "@hello.nrfcloud.com/proto/hello/model/PCA20035+solar": [
+        "hello/model/PCA20035+solar/index.d.ts"
+      ],
       "@hello.nrfcloud.com/proto/nrfCloud": ["nrfCloud/index.d.ts"]
     }
   },
