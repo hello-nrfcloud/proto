@@ -1,7 +1,6 @@
 export * from './Context.js'
 export * from './convert.js'
 export * from './errors/ProblemDetail.js'
-export * from './Location.js'
 export * from './ConfigureDevice.js'
 export * from './SingleCellGeoLocation.js'
 export * from './incomingMessageValidator.js'
