@@ -6,62 +6,95 @@ import { Context } from '../../Context.js'
 import { Model } from '../Model.js'
 
 export const Thingy91WithSolarShieldMessages = {
-	gain: {
-		filter: jsonata(`appId = 'SOLAR'`),
-		transform: jsonata(`{ 'mA': $number(data) }`),
-	},
-	battery: {
-		filter: jsonata(`appId = 'BATTERY'`),
-		transform: jsonata(`{ '%': $number(data) }`),
-	},
-	networkInfo: {
-		filter: jsonata(`appId = 'DEVICE' and $exists(data.networkInfo)`),
-		transform: jsonata(`data.networkInfo`),
-	},
-	deviceInfo: {
-		filter: jsonata(`appId = 'DEVICE' and $exists(data.deviceInfo)`),
-		transform: jsonata(`data.deviceInfo`),
-	},
-	rsrp: {
-		filter: jsonata(`appId = 'RSRP'`),
-		transform: jsonata(`{ 'rsrp': $number(data) }`),
-	},
-	airHumidity: {
-		filter: jsonata(`appId = 'HUMID'`),
-		transform: jsonata(`{ 'p': $number(data) }`),
-	},
-	airTemperature: {
-		filter: jsonata(`appId = 'TEMP'`),
-		transform: jsonata(`{ 'c': $number(data) }`),
-	},
-	airQuality: {
-		filter: jsonata(`appId = 'AIR_QUAL'`),
-		transform: jsonata(`{ 'IAQ': $number(data) }`),
-	},
-	airPressure: {
-		filter: jsonata(`appId = 'AIR_PRESS'`),
-		transform: jsonata(`{ 'mbar': $number(data) * 10 }`),
-	},
-	button: {
-		filter: jsonata(`appId = 'BUTTON'`),
-		transform: jsonata(`{ 'id': $number(data) }`),
-	},
-	location: {
-		filter: jsonata(
-			`appId = 'GROUND_FIX' and $exists(data.lat) and $exists(data.lon) and $exists(data.uncertainty) and $exists(data.fulfilledWith)`,
-		),
-		transform: jsonata(`{
+	gain: [
+		{
+			filter: jsonata(`appId = 'SOLAR'`),
+			transform: jsonata(`{ 'mA': $number(data) }`),
+		},
+	],
+	battery: [
+		{
+			filter: jsonata(`appId = 'BATTERY'`),
+			transform: jsonata(`{ '%': $number(data) }`),
+		},
+	],
+	networkInfo: [
+		{
+			filter: jsonata(`appId = 'DEVICE' and $exists(data.networkInfo)`),
+			transform: jsonata(`data.networkInfo`),
+		},
+	],
+	deviceInfo: [
+		{
+			filter: jsonata(`appId = 'DEVICE' and $exists(data.deviceInfo)`),
+			transform: jsonata(`data.deviceInfo`),
+		},
+	],
+	rsrp: [
+		{
+			filter: jsonata(`appId = 'RSRP'`),
+			transform: jsonata(`{ 'rsrp': $number(data) }`),
+		},
+	],
+	airHumidity: [
+		{
+			filter: jsonata(`appId = 'HUMID'`),
+			transform: jsonata(`{ 'p': $number(data) }`),
+		},
+	],
+	airTemperature: [
+		{
+			filter: jsonata(`appId = 'TEMP'`),
+			transform: jsonata(`{ 'c': $number(data) }`),
+		},
+	],
+	airQuality: [
+		{
+			filter: jsonata(`appId = 'AIR_QUAL'`),
+			transform: jsonata(`{ 'IAQ': $number(data) }`),
+		},
+	],
+	airPressure: [
+		{
+			filter: jsonata(`appId = 'AIR_PRESS'`),
+			transform: jsonata(`{ 'mbar': $number(data) * 10 }`),
+		},
+	],
+	button: [
+		{
+			filter: jsonata(`appId = 'BUTTON'`),
+			transform: jsonata(`{ 'id': $number(data) }`),
+		},
+	],
+	location: [
+		{
+			filter: jsonata(
+				`appId = 'GROUND_FIX' and $exists(data.lat) and $exists(data.lon) and $exists(data.uncertainty) and $exists(data.fulfilledWith)`,
+			),
+			transform: jsonata(`{
 			"lat": data.lat,
 			"lng": data.lon,
 			"acc": data.uncertainty,
 			"src": data.fulfilledWith
 		}`),
-	},
-	reported: {
-		filter: jsonata(
-			`$exists(version) and $exists(reported) and $exists(metadata)`,
-		),
-		transform: jsonata(`{
+		},
+		{
+			filter: jsonata(`\`@context\` = "${Context.singleCellGeoLocation}"`),
+			transform: jsonata(`{
+			"lat": lat,
+			"lng": lng,
+			"acc": accuracy,
+			"ts": ts,
+			"src": "SCELL"
+		}`),
+		},
+	],
+	reported: [
+		{
+			filter: jsonata(
+				`$exists(version) and $exists(reported) and $exists(metadata)`,
+			),
+			transform: jsonata(`{
 			'version': version,
 			'config': reported.config,
 			'device': {
@@ -83,11 +116,8 @@ export const Thingy91WithSolarShieldMessages = {
 				}
 			}
 		}`),
-	},
-	['single-cell-geo-location']: {
-		filter: jsonata(`\`@context\` = "${Context.singleCellGeoLocation}"`),
-		transform: jsonata(`$`),
-	},
+		},
+	],
 } as const
 
 /**

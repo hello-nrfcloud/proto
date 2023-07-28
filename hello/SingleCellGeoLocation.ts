@@ -1,6 +1,5 @@
 import { Type } from '@sinclair/typebox'
 import { Context } from './Context.js'
-import { deviceId } from './deviceId.js'
 import { ts } from './ts.js'
 
 export const lat = Type.Number({
@@ -15,7 +14,7 @@ export const lng = Type.Number({
 })
 export const accuracy = Type.Number({
 	minimum: 0,
-	description: 'Accuracy in meters',
+	description: 'HPE (horizontal positioning error) in meters',
 })
 
 /**
@@ -24,7 +23,6 @@ export const accuracy = Type.Number({
 export const SingleCellGeoLocation = Type.Object(
 	{
 		'@context': Type.Literal(Context.singleCellGeoLocation.toString()),
-		id: deviceId,
 		lat,
 		lng,
 		accuracy,

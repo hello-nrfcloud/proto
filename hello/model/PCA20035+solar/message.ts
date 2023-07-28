@@ -6,9 +6,7 @@ import { Location } from './Location.js'
 import { ts } from '../../ts.js'
 import { Thingy91WithSolarShieldContext } from './context.js'
 import { DeviceConfigured } from '../../ConfigureDevice.js'
-import { deviceId } from '../../deviceId.js'
 import { validateWithTypeBox } from '../../../validator/validateWithTypeBox.js'
-import { accuracy, lat, lng } from '../../SingleCellGeoLocation.js'
 import { DeviceIdentity } from '../../DeviceIdentity.js'
 
 /**
@@ -299,15 +297,6 @@ export const Button = Type.Object(
 	},
 )
 
-export const SingleCellGeoLocation = Type.Object({
-	'@context': Thingy91WithSolarShieldContext('single-cell-geo-location'),
-	ts,
-	id: deviceId,
-	lat,
-	lng,
-	accuracy,
-})
-
 /**
  * Defines the messages transformed for the Thingy:91 with solar shield sent by the hello.nrfcloud.com backend.
  */
@@ -327,7 +316,6 @@ export const Thingy91WithSolarShieldMessage = Type.Union([
 	Button,
 	HistoricalDataResponse,
 	DeviceConfigured,
-	SingleCellGeoLocation,
 ])
 
 export const validator = validateWithTypeBox(Thingy91WithSolarShieldMessage)

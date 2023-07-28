@@ -23,11 +23,12 @@ export type errorFn = (
  * Provides a filter to select messages that should be considered, and an optional transform expression to be applied to the message.
  */
 export type MessageProcessor = { filter: evaluateFn; transform?: evaluateFn }
+export type MessageProcessors = MessageProcessor[]
 
 /**
  * A map that defines messages for a device
  */
-export type MessageDefinition = Record<string, MessageProcessor>
+export type MessageDefinition = Record<string, MessageProcessors>
 
 /**
  * Converts incoming messages from nRF Cloud to the messages relevant for hello.nrfcloud.com using JSONata
@@ -72,7 +73,6 @@ export const convert =
 		) {
 			validMessage = maybeIsValidBackendMessage.value
 		}
-		console.log(maybeIsValidBackendMessage)
 
 		// Validate as nRF Cloud message
 		const maybeIsValidNrfCloudMessage =
@@ -103,11 +103,15 @@ export const convert =
 		// Find converter definitions for model
 		const compiledModelExpressions = Object.entries(
 			(await getTransformExpressions(model)) ?? {},
-		).map(([transformerId, { filter, transform }]) => ({
-			transformerId,
-			filter,
-			transform,
-		}))
+		)
+			.map(([transformerId, processors]) =>
+				processors.map(({ filter, transform }) => ({
+					transformerId,
+					filter,
+					transform,
+				})),
+			)
+			.flat()
 
 		// Nothing to process
 		if (compiledModelExpressions.length === 0) {
@@ -152,6 +156,8 @@ export const convert =
 				})
 				continue
 			}
+
+			console.log({ validMessage: JSON.stringify(validMessage) })
 			const transformed = await transform.evaluate(validMessage)
 			if (typeof transformed !== 'object') {
 				continue

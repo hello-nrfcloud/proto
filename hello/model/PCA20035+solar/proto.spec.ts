@@ -238,7 +238,6 @@ void describe('hello.nrfcloud.com messages', () => {
 				{
 					'@context':
 						'https://github.com/hello-nrfcloud/proto/single-cell-geo-location',
-					id: 'nrf-352656108602296',
 					lat: 63.41999531,
 					lng: 10.42999506,
 					accuracy: 2420,
@@ -246,12 +245,12 @@ void describe('hello.nrfcloud.com messages', () => {
 				},
 				{
 					'@context': new URL(
-						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/single-cell-geo-location',
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/location',
 					).toString(),
-					id: 'nrf-352656108602296',
 					lat: 63.41999531,
 					lng: 10.42999506,
-					accuracy: 2420,
+					acc: 2420,
+					src: 'SCELL',
 					ts: 1690378551538,
 				},
 			],

@@ -4,15 +4,20 @@ import { convert } from './convert.js'
 import { describe, test as it, mock } from 'node:test'
 import assert from 'node:assert/strict'
 import { check, objectMatching, anObject } from 'tsmatchers'
+import { Context } from './Context.js'
+import type { SingleCellGeoLocation } from './SingleCellGeoLocation'
+import type { Static } from '@sinclair/typebox'
 
 void describe('convert()', () => {
 	void it('should convert the nRF Cloud message format to the hello.nrfcloud.com message format', async () => {
 		const getTransformExpressions = mock.fn(async () =>
 			Promise.resolve({
-				battery: {
-					filter: jsonata(`appId = 'BATTERY'`),
-					transform: jsonata(`{ '%': $number(data) }`),
-				},
+				battery: [
+					{
+						filter: jsonata(`appId = 'BATTERY'`),
+						transform: jsonata(`{ '%': $number(data) }`),
+					},
+				],
 			}),
 		)
 
@@ -45,10 +50,12 @@ void describe('convert()', () => {
 	void it('should convert the shadow', async () => {
 		const getTransformExpressions = mock.fn(async () =>
 			Promise.resolve({
-				reported: {
-					filter: jsonata(`true`),
-					transform: jsonata(`{'version': version}`),
-				},
+				reported: [
+					{
+						filter: jsonata(`true`),
+						transform: jsonata(`{'version': version}`),
+					},
+				],
 			}),
 		)
 		const onError = mock.fn()
@@ -77,9 +84,11 @@ void describe('convert()', () => {
 	void it('should pass messages as is if no transformer defined', async () => {
 		const getTransformExpressions = mock.fn(async () =>
 			Promise.resolve({
-				battery: {
-					filter: jsonata(`appId = 'BATTERY'`),
-				},
+				battery: [
+					{
+						filter: jsonata(`appId = 'BATTERY'`),
+					},
+				],
 			}),
 		)
 
@@ -157,5 +166,69 @@ void describe('convert()', () => {
 		check(errorLog.mock.calls[0]?.arguments[1]).is('Thingy:91')
 		check(errorLog.mock.calls[0]?.arguments[2]).is(`Not a valid message.`)
 		check(errorLog.mock.calls[0]?.arguments[3]).is(anObject)
+	})
+
+	void it('should convert multiple incoming messages to the same result', async () => {
+		const getTransformExpressions = mock.fn(async () =>
+			Promise.resolve({
+				location: [
+					{
+						filter: jsonata(
+							`appId = 'GROUND_FIX' and $exists(data.lat) and $exists(data.lon) and $exists(data.uncertainty) and $exists(data.fulfilledWith)`,
+						),
+						transform: jsonata(`{
+						"lat": data.lat,
+						"lng": data.lon,
+						"acc": data.uncertainty,
+						"src": data.fulfilledWith
+					}`),
+					},
+					{
+						filter: jsonata(
+							`\`@context\` = "${Context.singleCellGeoLocation}"`,
+						),
+						transform: jsonata(`{
+						'lat': lat,
+						'lng': lng,
+						'acc': accuracy,
+						'ts': ts,
+						'src': 'SCELL'
+					}`),
+					},
+				],
+			}),
+		)
+
+		const incomingSingleCell: Static<typeof SingleCellGeoLocation> = {
+			'@context':
+				'https://github.com/hello-nrfcloud/proto/single-cell-geo-location',
+			lat: 63.41999531,
+			lng: 10.42999506,
+			accuracy: 2420,
+			ts: 1690378551538,
+		}
+
+		assert.deepEqual(
+			await convert({
+				getTransformExpressions,
+			})('PCA20035+solar')(incomingSingleCell),
+
+			[
+				{
+					'@context': new URL(
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/location',
+					),
+					lat: 63.41999531,
+					lng: 10.42999506,
+					acc: 2420,
+					src: 'SCELL',
+					ts: 1690378551538,
+				},
+			],
+		)
+
+		assert.deepEqual(getTransformExpressions.mock.calls[0]?.arguments, [
+			'PCA20035+solar',
+		])
 	})
 })
