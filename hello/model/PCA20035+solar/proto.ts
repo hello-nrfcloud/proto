@@ -88,6 +88,21 @@ export const Thingy91WithSolarShieldMessages = {
 			"src": "SCELL"
 		}`),
 		},
+		{
+			filter: jsonata(
+				`appId = 'GNSS' and $exists(data.lat) and $exists(data.lng) and $exists(data.acc)`,
+			),
+			transform: jsonata(`{
+			"lat": data.lat,
+			"lng": data.lng,
+			"acc": data.acc,
+			"alt": data.alt,
+			"spd": data.spd,
+			"hdg": data.hdg,
+			"ts": ts,
+			"src": "GNSS"
+		}`),
+		},
 	],
 	reported: [
 		{

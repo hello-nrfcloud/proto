@@ -1,10 +1,14 @@
 import { Type } from '@sinclair/typebox'
-import { fulfilledWith } from '../../../nrfCloud/types/generated/GROUND_FIX_C2D.js'
 import { Thingy91WithSolarShieldContext } from './context.js'
 import { ts } from '../../ts.js'
 import { accuracy, lat, lng } from '../../../hello/SingleCellGeoLocation.js'
 
-export const LocationSource = fulfilledWith
+export enum LocationSource {
+	MCELL = 'MCELL',
+	SCELL = 'SCELL',
+	WIFI = 'WIFI',
+	GNSS = 'GNSS',
+}
 export const Location = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('location'),
 	ts,

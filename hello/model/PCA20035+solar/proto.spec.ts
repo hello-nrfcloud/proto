@@ -5,6 +5,7 @@ import BUTTON from '../../../nrfCloud/examples/deviceToCloud/BUTTON.json' assert
 import DEVICE from '../../../nrfCloud/examples/deviceToCloud/DEVICE-deviceInfo.json' assert { type: 'json' }
 import GROUND_FIX_REQUEST from '../../../nrfCloud/examples/deviceToCloud/GROUND_FIX.json' assert { type: 'json' }
 import HUMID from '../../../nrfCloud/examples/deviceToCloud/HUMID.json' assert { type: 'json' }
+import GNSS from '../../../nrfCloud/examples/deviceToCloud/GNSS.json' assert { type: 'json' }
 import RSRP from '../../../nrfCloud/examples/deviceToCloud/RSRP.json' assert { type: 'json' }
 import TEMP from '../../../nrfCloud/examples/deviceToCloud/TEMP.json' assert { type: 'json' }
 import shadowNoNetworkInfo from '../../../nrfCloud/examples/shadow-no-networkInfo.json' assert { type: 'json' }
@@ -233,6 +234,22 @@ void describe('hello.nrfcloud.com messages', () => {
 					).toString(),
 					id: 1,
 				}),
+			],
+			[
+				GNSS,
+				{
+					'@context': new URL(
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/location',
+					).toString(),
+					lng: 10.437692463102255,
+					lat: 63.43308707524497,
+					acc: 4.703136444091797,
+					alt: 138.33331298828125,
+					spd: 0.02938256226480007,
+					hdg: 185.11207580566406,
+					src: 'GNSS',
+					ts: GNSS.ts,
+				},
 			],
 			[
 				{
