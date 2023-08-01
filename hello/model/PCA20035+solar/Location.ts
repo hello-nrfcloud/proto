@@ -19,4 +19,13 @@ export const Location = Type.Object({
 		description:
 			'How the request was fulfilled. WIFI is prioritized by the cloud. Falls back to SCELL/MCELL.',
 	}),
+	alt: Type.Optional(Type.Number({ description: 'Altitude in meters' })),
+	spd: Type.Optional(Type.Number({ description: 'Movement speed in m/s' })),
+	hdg: Type.Optional(
+		Type.Number({
+			minimum: 0,
+			maximum: 360,
+			description: 'Heading on degree, where 0 degree is north.',
+		}),
+	),
 })
