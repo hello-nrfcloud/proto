@@ -7,7 +7,9 @@ deviceToCloud-message = [
 	   air-quality-message /
 	   rsrp-message /
 	   battery-message /
-	   solar-gain-message)
+	   solar-gain-message /
+	   movement-event-message /
+	   movement-state-message)
 ]
 
 message-type-gnss = 1
@@ -19,6 +21,9 @@ message-type-air-quality = 6
 message-type-rsrp = 7
 message-type-battery = 8
 message-type-solar-gain = 9
+message-type-movement-event = 10
+message-type-movement-state = 11
+
 
 rsrp-message = [
 	message-type : message-type-rsrp,
@@ -77,4 +82,36 @@ solar-gain-message = [
 	message-type : message-type-solar-gain,
 	timestamp : uint .size 4, ; UNIX timestamp
 	solar-gain : float32, ; Solar gain in mA
+]
+
+movement-event-shake = 0
+movement-event-tap = 1
+movement-event-doubletap = 2
+movement-event-turn90 = 3
+movement-event-turn180 = 4
+movement-event-falling = 5
+movement-event-impact = 6
+
+movement-event-message = [
+	message-type : message-type-movement-event,
+	timestamp : uint .size 4, ; UNIX timestamp
+	movement-event : (movement-event-shake /
+			  movement-event-tap /
+			  movement-event-doubletap /
+			  movement-event-turn90 /
+			  movement-event-turn180 /
+			  movement-event-falling /
+			  movement-event-impact),
+]
+
+movement-state-normal = 0
+movement-state-tilted = 1
+movement-state-upsidedown = 2
+
+movement-state-message = [
+	message-type : message-type-movement-state,
+	timestamp : uint .size 4, ; UNIX timestamp
+	movement-state: (movement-state-normal /
+			 movement-state-tilted /
+			 movement-state-upsidedown)
 ]
