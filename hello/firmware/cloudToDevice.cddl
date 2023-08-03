@@ -10,7 +10,9 @@ message-type-config-message = 2
 led-message = [
 	message-type : message-type-led,
 	timestamp : uint .size 4, ; UNIX timestamp
-	led-enable : bool, ; Whether to turn on the led or not
+	led-red : uint .size 1,
+	led-green : uint .size 1,
+	led-blue : uint .size 1,
 ]
 
 config-message = [
