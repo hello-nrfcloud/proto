@@ -130,7 +130,7 @@
     "nrfcloud-application-protocols/schemas"
   ],
   "dependencies": {
-    "@sinclair/typebox": "0.30.2",
+    "@sinclair/typebox": "0.30.3",
     "ajv": "8.12.0",
     "jsonata": "2.0.3"
   }
