@@ -11,6 +11,7 @@ const locationKey: Thingy91SolarMessagesTypes = 'location'
 export const gainMessage = Type.Literal(gainKey)
 export const batteryMessage = Type.Literal(batteryKey)
 export const locationMessage = Type.Literal(locationKey)
+export const locationTrailMessage = Type.Literal('locationTrail')
 
 const Aggregate = Type.Union([
 	Type.Literal('avg', {
@@ -67,6 +68,17 @@ const LocationRequest = Type.Object({
 	}),
 })
 
+const LocationTrailRequest = Type.Object({
+	message: locationTrailMessage,
+	attributes: Type.Object({
+		lat: Type.Object({ attribute: Type.Literal('lat') }),
+		lng: Type.Object({ attribute: Type.Literal('lng') }),
+		count: Type.Object({ attribute: Type.Literal('count') }),
+		radiusKm: Type.Object({ attribute: Type.Literal('radiusKm') }),
+		ts: Type.Object({ attribute: Type.Literal('ts') }),
+	}),
+})
+
 const CommonRequest = Type.Object({
 	'@context': Type.Literal(Context.historicalDataRequest.toString()),
 	'@id': Type.Optional(Type.String()),
@@ -80,10 +92,12 @@ export const HistoricalDataRequest = Type.Union([
 	Type.Composite([CommonRequest, GainRequest]),
 	Type.Composite([CommonRequest, BatteryRequest]),
 	Type.Composite([CommonRequest, LocationRequest]),
+	Type.Composite([CommonRequest, LocationTrailRequest]),
 ])
 
 export const HistoricalDataRequestMessageType = Type.Union([
 	gainMessage,
 	batteryMessage,
 	locationMessage,
+	locationTrailMessage,
 ])

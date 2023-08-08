@@ -1,0 +1,36 @@
+{
+  "@context": "https://github.com/hello-nrfcloud/proto/historical-data-response",
+  "@id": "f435de34-3a54-437a-95a3-3104dd577cb4",
+  "type": "lastDay",
+  "message": "locationTrail",
+  "attributes": [
+    {
+      "lat": 63.42198706744704,
+      "lng": 10.437808861037931,
+      "ts": 1691504675946,
+      "count": 4,
+      "radiusKm": 0.2937028058347316
+    },
+    {
+      "lat": 63.43076160883743,
+      "lng": 10.487144544169565,
+      "ts": 1691504679946,
+      "count": 1,
+      "radiusKm": 0
+    },
+    {
+      "lat": 63.42215444775618,
+      "lng": 10.535387671151794,
+      "ts": 1691504680946,
+      "count": 1,
+      "radiusKm": 0
+    },
+    {
+      "lat": 63.42254450323275,
+      "lng": 10.630926224360818,
+      "ts": 1691504681946,
+      "count": 1,
+      "radiusKm": 0
+    }
+  ]
+}
