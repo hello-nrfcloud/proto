@@ -6,7 +6,7 @@ import {
 	LocationTrailData,
 } from './HistoricalData.js'
 import { Context } from '../Context.js'
-import { ChartType } from './Type.js'
+import { TimeSpan } from './TimeSpan.js'
 import { HistoricalDataRequestMessageType } from './HistoricalDataRequest.js'
 
 export const BatteryResponse = Type.Record(
@@ -31,6 +31,6 @@ export const HistoricalDataResponse = Type.Object({
 		LocationResponse,
 		LocationTrailResponse,
 	]),
-	type: ChartType,
+	type: TimeSpan,
 	message: HistoricalDataRequestMessageType,
 })

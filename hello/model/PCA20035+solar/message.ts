@@ -1,5 +1,5 @@
 import { Type } from '@sinclair/typebox'
-import { HistoricalDataResponse } from '../../chart/HistoricalDataResponse.js'
+import { HistoricalDataResponse } from '../../history/HistoricalDataResponse.js'
 import { Battery } from './Battery.js'
 import { Gain } from './Gain.js'
 import { Location } from './Location.js'

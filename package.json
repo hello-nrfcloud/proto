@@ -19,20 +19,20 @@
       "node": "./dist/hello/export.js",
       "types": "./hello/index.d.ts"
     },
-    "./hello/chart": {
-      "import": "./dist/hello//chart/export.js",
-      "node": "./dist/hello//chart/export.js",
-      "types": "./hello/index./chart/d.ts"
+    "./hello/history": {
+      "import": "./dist/hello/history/export.js",
+      "node": "./dist/hello/history/export.js",
+      "types": "./hello/history/index.d.ts"
     },
     "./hello/model/PCA20035+solar": {
       "import": "./dist/hello/model/PCA20035+solar/export.js",
       "node": "./dist/hello/model/PCA20035+solar/export.js",
-      "types": "./hello/index.model/PCA20035+solar/d.ts"
+      "types": "./hello/model/PCA20035+solar/index.d.ts"
     },
     "./nrfCloud": {
       "import": "./dist/nrfCloud/export.js",
       "node": "./dist/nrfCloud/export.js",
-      "types": "./hello/index.d.ts"
+      "types": "./hello/nrfCloud/index.d.ts"
     }
   },
   "repository": {

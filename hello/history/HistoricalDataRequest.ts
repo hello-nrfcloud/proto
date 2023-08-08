@@ -1,5 +1,5 @@
 import { Type } from '@sinclair/typebox'
-import { ChartType } from './Type.js'
+import { TimeSpan } from './TimeSpan.js'
 import { Context } from '../Context.js'
 import type { Thingy91WithSolarShieldMessages } from '../model/PCA20035+solar/proto.js'
 
@@ -82,7 +82,7 @@ const LocationTrailRequest = Type.Object({
 const CommonRequest = Type.Object({
 	'@context': Type.Literal(Context.historicalDataRequest.toString()),
 	'@id': Type.Optional(Type.String()),
-	type: ChartType,
+	type: TimeSpan,
 })
 
 /**
