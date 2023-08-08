@@ -70,6 +70,11 @@ const LocationRequest = Type.Object({
 
 const LocationTrailRequest = Type.Object({
 	message: locationTrailMessage,
+	minDistanceKm: Type.Number({
+		minimum: 0,
+		description:
+			'The minimum distance in KM for a location to not be folded into the current position.',
+	}),
 	attributes: Type.Object({
 		lat: Type.Object({ attribute: Type.Literal('lat') }),
 		lng: Type.Object({ attribute: Type.Literal('lng') }),

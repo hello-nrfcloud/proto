@@ -3,6 +3,7 @@
   "@id": "f435de34-3a54-437a-95a3-3104dd577cb4",
   "type": "lastDay",
   "message": "locationTrail",
+  "minDistanceKm": 0.75,
   "attributes": {
     "lat": { "attribute": "lat" },
     "lng": { "attribute": "lng" },
