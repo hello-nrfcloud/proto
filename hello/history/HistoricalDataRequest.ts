@@ -5,15 +5,15 @@ import type { Thingy91WithSolarShieldMessages } from '../model/PCA20035+solar/pr
 
 type Thingy91SolarMessagesTypes = keyof typeof Thingy91WithSolarShieldMessages
 
-const gainKey: Thingy91SolarMessagesTypes = 'gain'
-const batteryKey: Thingy91SolarMessagesTypes = 'battery'
-const locationKey: Thingy91SolarMessagesTypes = 'location'
+export const gainKey: Thingy91SolarMessagesTypes = 'gain'
+export const batteryKey: Thingy91SolarMessagesTypes = 'battery'
+export const locationKey: Thingy91SolarMessagesTypes = 'location'
 export const gainMessage = Type.Literal(gainKey)
 export const batteryMessage = Type.Literal(batteryKey)
 export const locationMessage = Type.Literal(locationKey)
 export const locationTrailMessage = Type.Literal('locationTrail')
 
-const Aggregate = Type.Union([
+export const Aggregate = Type.Union([
 	Type.Literal('avg', {
 		description:
 			'avg(x) function used in Timestream, https://docs.aws.amazon.com/timestream/latest/developerguide/aggregate-functions.html',
@@ -36,7 +36,7 @@ const Aggregate = Type.Union([
 	}),
 ])
 
-const GainRequest = Type.Object({
+export const GainRequest = Type.Object({
 	message: gainMessage,
 	attributes: Type.Record(
 		Type.String(),
@@ -47,7 +47,7 @@ const GainRequest = Type.Object({
 	),
 })
 
-const BatteryRequest = Type.Object({
+export const BatteryRequest = Type.Object({
 	message: batteryMessage,
 	attributes: Type.Record(
 		Type.String(),
@@ -58,7 +58,7 @@ const BatteryRequest = Type.Object({
 	),
 })
 
-const LocationRequest = Type.Object({
+export const LocationRequest = Type.Object({
 	message: locationMessage,
 	attributes: Type.Object({
 		lat: Type.Object({ attribute: Type.Literal('lat') }),
@@ -68,7 +68,7 @@ const LocationRequest = Type.Object({
 	}),
 })
 
-const LocationTrailRequest = Type.Object({
+export const LocationTrailRequest = Type.Object({
 	message: locationTrailMessage,
 	minDistanceKm: Type.Number({
 		minimum: 0,
@@ -84,7 +84,7 @@ const LocationTrailRequest = Type.Object({
 	}),
 })
 
-const CommonRequest = Type.Object({
+export const CommonRequest = Type.Object({
 	'@context': Type.Literal(Context.historicalDataRequest.toString()),
 	'@id': Type.Optional(Type.String()),
 	type: TimeSpan,
