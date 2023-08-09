@@ -88,6 +88,34 @@ export const CommonRequest = Type.Object({
 	'@context': Type.Literal(Context.historicalDataRequest.toString()),
 	'@id': Type.Optional(Type.String()),
 	type: TimeSpan,
+	filter: Type.Optional(
+		Type.Record(
+			Type.String({
+				minLength: 1,
+				description: 'The name of the attribute to apply the filter on',
+			}),
+			Type.Partial(
+				Type.Record(
+					Type.Union(
+						[
+							'<', // Less than
+							'>', // Greater than
+							'<=', // Less than or equal to
+							'>=', // Greater than or equal to
+							'=', // Equal
+							'<>', // Not equal
+							'!=', // Not equal
+						].map((s) => Type.Literal(s)),
+						{
+							description:
+								'See https://docs.aws.amazon.com/timestream/latest/developerguide/comparison-operators.html',
+						},
+					),
+					Type.Union([Type.String(), Type.Boolean(), Type.Number()]),
+				),
+			),
+		),
+	),
 })
 
 /**
