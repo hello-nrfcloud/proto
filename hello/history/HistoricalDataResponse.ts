@@ -17,6 +17,7 @@ import {
 export const CommonResponse = Type.Object({
 	'@context': Type.Literal(Context.historicalDataResponse.toString()),
 	'@id': Type.Optional(Type.String()),
+	message: Type.String({ minLength: 1 }),
 	type: TimeSpan,
 })
 

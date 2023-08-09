@@ -40,6 +40,7 @@ export const CommonRequest = Type.Object({
 	'@context': Type.Literal(Context.historicalDataRequest.toString()),
 	'@id': Type.Optional(Type.String()),
 	type: TimeSpan,
+	message: Type.String({ minLength: 1 }),
 	filter: Type.Optional(
 		Type.Record(
 			Type.String({
