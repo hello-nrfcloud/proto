@@ -71,8 +71,21 @@ export const CommonRequest = Type.Object({
 	),
 })
 
-export const GainRequest = Type.Composite([
+export const CommonAggregatedRequest = Type.Composite([
 	CommonRequest,
+	Type.Object({
+		attributes: Type.Record(
+			Type.String(),
+			Type.Object({
+				attribute: Type.String({ minLength: 1 }),
+				aggregate: Aggregate,
+			}),
+		),
+	}),
+])
+
+export const GainRequest = Type.Composite([
+	CommonAggregatedRequest,
 	Type.Object({
 		message: gainMessage,
 		attributes: Type.Record(
@@ -86,7 +99,7 @@ export const GainRequest = Type.Composite([
 ])
 
 export const BatteryRequest = Type.Composite([
-	CommonRequest,
+	CommonAggregatedRequest,
 	Type.Object({
 		message: batteryMessage,
 		attributes: Type.Record(
