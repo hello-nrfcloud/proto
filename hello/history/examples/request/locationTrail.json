@@ -4,13 +4,6 @@
   "type": "lastDay",
   "message": "locationTrail",
   "minDistanceKm": 0.75,
-  "attributes": {
-    "lat": { "attribute": "lat" },
-    "lng": { "attribute": "lng" },
-    "count": { "attribute": "count" },
-    "radiusKm": { "attribute": "radiusKm" },
-    "ts": { "attribute": "ts" }
-  },
   "filter": {
     "src": {
       "=": "GNSS"

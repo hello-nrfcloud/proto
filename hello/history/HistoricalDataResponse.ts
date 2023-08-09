@@ -7,30 +7,47 @@ import {
 } from './HistoricalData.js'
 import { Context } from '../Context.js'
 import { TimeSpan } from './TimeSpan.js'
-import { HistoricalDataRequestMessageType } from './HistoricalDataRequest.js'
+import {
+	batteryMessage,
+	gainMessage,
+	locationMessage,
+	locationTrailMessage,
+} from './HistoricalDataRequest.js'
 
-export const BatteryResponse = Type.Record(
-	Type.String(),
-	Type.Array(BatteryData),
-)
-
-export const GainResponse = Type.Record(Type.String(), Type.Array(GainData))
-
-export const LocationResponse = Type.Array(LocationData)
-export const LocationTrailResponse = Type.Array(LocationTrailData)
-
-/**
- * Defines the historical data response
- */
-export const HistoricalDataResponse = Type.Object({
+export const CommonResponse = Type.Object({
 	'@context': Type.Literal(Context.historicalDataResponse.toString()),
 	'@id': Type.Optional(Type.String()),
-	attributes: Type.Union([
-		GainResponse,
-		BatteryResponse,
-		LocationResponse,
-		LocationTrailResponse,
-	]),
 	type: TimeSpan,
-	message: HistoricalDataRequestMessageType,
 })
+
+export const BatteryResponse = Type.Composite([
+	CommonResponse,
+	Type.Object({
+		message: batteryMessage,
+		attributes: Type.Record(Type.String(), Type.Array(BatteryData)),
+	}),
+])
+
+export const GainResponse = Type.Composite([
+	CommonResponse,
+	Type.Object({
+		message: gainMessage,
+		attributes: Type.Record(Type.String(), Type.Array(GainData)),
+	}),
+])
+
+export const LocationResponse = Type.Composite([
+	CommonResponse,
+	Type.Object({
+		message: locationMessage,
+		attributes: Type.Array(LocationData),
+	}),
+])
+
+export const LocationTrailResponse = Type.Composite([
+	CommonResponse,
+	Type.Object({
+		attributes: Type.Array(LocationTrailData),
+		message: locationTrailMessage,
+	}),
+])

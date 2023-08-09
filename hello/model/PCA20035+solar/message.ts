@@ -1,5 +1,4 @@
 import { Type } from '@sinclair/typebox'
-import { HistoricalDataResponse } from '../../history/HistoricalDataResponse.js'
 import { Battery } from './Battery.js'
 import { Gain } from './Gain.js'
 import { Location } from './Location.js'
@@ -314,7 +313,6 @@ export const Thingy91WithSolarShieldMessage = Type.Union([
 	Location,
 	DeviceIdentity,
 	Button,
-	HistoricalDataResponse,
 	DeviceConfigured,
 ])
 

@@ -36,54 +36,6 @@ export const Aggregate = Type.Union([
 	}),
 ])
 
-export const GainRequest = Type.Object({
-	message: gainMessage,
-	attributes: Type.Record(
-		Type.String(),
-		Type.Object({
-			attribute: Type.Literal('mA'),
-			aggregate: Aggregate,
-		}),
-	),
-})
-
-export const BatteryRequest = Type.Object({
-	message: batteryMessage,
-	attributes: Type.Record(
-		Type.String(),
-		Type.Object({
-			attribute: Type.Literal('%'),
-			aggregate: Aggregate,
-		}),
-	),
-})
-
-export const LocationRequest = Type.Object({
-	message: locationMessage,
-	attributes: Type.Object({
-		lat: Type.Object({ attribute: Type.Literal('lat') }),
-		lng: Type.Object({ attribute: Type.Literal('lng') }),
-		acc: Type.Object({ attribute: Type.Literal('acc') }),
-		ts: Type.Object({ attribute: Type.Literal('ts') }),
-	}),
-})
-
-export const LocationTrailRequest = Type.Object({
-	message: locationTrailMessage,
-	minDistanceKm: Type.Number({
-		minimum: 0,
-		description:
-			'The minimum distance in KM for a location to not be folded into the current position.',
-	}),
-	attributes: Type.Object({
-		lat: Type.Object({ attribute: Type.Literal('lat') }),
-		lng: Type.Object({ attribute: Type.Literal('lng') }),
-		count: Type.Object({ attribute: Type.Literal('count') }),
-		radiusKm: Type.Object({ attribute: Type.Literal('radiusKm') }),
-		ts: Type.Object({ attribute: Type.Literal('ts') }),
-	}),
-})
-
 export const CommonRequest = Type.Object({
 	'@context': Type.Literal(Context.historicalDataRequest.toString()),
 	'@id': Type.Optional(Type.String()),
@@ -118,19 +70,55 @@ export const CommonRequest = Type.Object({
 	),
 })
 
-/**
- * Defines the historical data request
- */
-export const HistoricalDataRequest = Type.Union([
-	Type.Composite([CommonRequest, GainRequest]),
-	Type.Composite([CommonRequest, BatteryRequest]),
-	Type.Composite([CommonRequest, LocationRequest]),
-	Type.Composite([CommonRequest, LocationTrailRequest]),
+export const GainRequest = Type.Composite([
+	CommonRequest,
+	Type.Object({
+		message: gainMessage,
+		attributes: Type.Record(
+			Type.String(),
+			Type.Object({
+				attribute: Type.Literal('mA'),
+				aggregate: Aggregate,
+			}),
+		),
+	}),
 ])
 
-export const HistoricalDataRequestMessageType = Type.Union([
-	gainMessage,
-	batteryMessage,
-	locationMessage,
-	locationTrailMessage,
+export const BatteryRequest = Type.Composite([
+	CommonRequest,
+	Type.Object({
+		message: batteryMessage,
+		attributes: Type.Record(
+			Type.String(),
+			Type.Object({
+				attribute: Type.Literal('%'),
+				aggregate: Aggregate,
+			}),
+		),
+	}),
+])
+
+export const LocationRequest = Type.Composite([
+	CommonRequest,
+	Type.Object({
+		message: locationMessage,
+		attributes: Type.Object({
+			lat: Type.Object({ attribute: Type.Literal('lat') }),
+			lng: Type.Object({ attribute: Type.Literal('lng') }),
+			acc: Type.Object({ attribute: Type.Literal('acc') }),
+			ts: Type.Object({ attribute: Type.Literal('ts') }),
+		}),
+	}),
+])
+
+export const LocationTrailRequest = Type.Composite([
+	CommonRequest,
+	Type.Object({
+		message: locationTrailMessage,
+		minDistanceKm: Type.Number({
+			minimum: 0,
+			description:
+				'The minimum distance in KM for a location to not be folded into the current position.',
+		}),
+	}),
 ])
