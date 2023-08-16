@@ -98,6 +98,92 @@ export const NetworkInfoShadow = Type.Intersect([
 	}),
 ])
 
+export const Configuration = Type.Object(
+	{
+		activeMode: Type.Optional(
+			Type.Boolean({
+				description: 'Whether to enable the active mode.',
+				examples: [false],
+			}),
+		),
+		locationTimeout: Type.Optional(
+			Type.Integer({
+				description:
+					'Location search timeout (in seconds): Timeout for location search (GNSS fix, cellular, and WiFi positioning).',
+				minimum: 1,
+				maximum: 2147483647,
+				examples: [60],
+			}),
+		),
+		activeWaitTime: Type.Optional(
+			Type.Integer({
+				description:
+					'In active mode: Wait this amount of seconds until sending the next update. The actual interval will be this time plus the time it takes to get a GNSS fix.',
+				minimum: 1,
+				maximum: 2147483647,
+				examples: [60],
+			}),
+		),
+		movementResolution: Type.Optional(
+			Type.Integer({
+				description:
+					'Movement resolution (in seconds): After detecting movement in passive mode send an update and wait this amount of time until movement again can trigger the next update.',
+				minimum: 1,
+				maximum: 2147483647,
+				examples: [300],
+			}),
+		),
+		movementTimeout: Type.Optional(
+			Type.Integer({
+				description:
+					'Movement timeout (in seconds): Send update at least this often in passive mode.',
+				minimum: 1,
+				maximum: 2147483647,
+				examples: [3600],
+			}),
+		),
+		accThreshAct: Type.Optional(
+			Type.Number({
+				description:
+					'Accelerometer activity threshold (in m/s²): Minimal absolute value for an accelerometer reading to be considered movement.',
+				minimum: 0,
+				maximum: 78.4532,
+				examples: [10.5],
+			}),
+		),
+		accThreshInact: Type.Optional(
+			Type.Number({
+				description:
+					'Accelerometer inactivity threshold (in m/s²): Maximum absolute value for an accelerometer reading to be considered stillness. Must be smaller than the accelerometer activity threshold.',
+				minimum: 0,
+				maximum: 78.4532,
+				examples: [5.2],
+			}),
+		),
+		accTimeoutInact: Type.Optional(
+			Type.Number({
+				description:
+					'Accelerometer inactivity timeout (in s): Hysteresis timeout for stillness detection. Must be smaller than the movement resolution.',
+				minimum: 0.08,
+				maximum: 5242.88,
+				examples: [1.7],
+			}),
+		),
+		nod: Type.Optional(
+			Type.Array(Type.String({ minLength: 1 }), {
+				description:
+					'List of modules which should be disabled when sampling data.',
+				type: 'array',
+				minItems: 0,
+				examples: [['gnss'], ['ncell'], ['gnss', 'ncell']],
+			}),
+		),
+	},
+	{
+		description: 'Configures the device',
+	},
+)
+
 export const Reported = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('reported'),
 	ts,
@@ -107,75 +193,7 @@ export const Reported = Type.Object({
 		description: 'The version of the shadow document',
 		examples: [8835],
 	}),
-	config: Type.Optional(
-		Type.Object(
-			{
-				activeMode: Type.Boolean({
-					description: 'Whether to enable the active mode.',
-					examples: [false],
-				}),
-				locationTimeout: Type.Integer({
-					description:
-						'Location search timeout (in seconds): Timeout for location search (GNSS fix, cellular, and WiFi positioning).',
-					minimum: 1,
-					maximum: 2147483647,
-					examples: [60],
-				}),
-				activeWaitTime: Type.Integer({
-					description:
-						'In active mode: Wait this amount of seconds until sending the next update. The actual interval will be this time plus the time it takes to get a GNSS fix.',
-					minimum: 1,
-					maximum: 2147483647,
-					examples: [60],
-				}),
-				movementResolution: Type.Integer({
-					description:
-						'Movement resolution (in seconds): After detecting movement in passive mode send an update and wait this amount of time until movement again can trigger the next update.',
-					minimum: 1,
-					maximum: 2147483647,
-					examples: [300],
-				}),
-				movementTimeout: Type.Integer({
-					description:
-						'Movement timeout (in seconds): Send update at least this often in passive mode.',
-					minimum: 1,
-					maximum: 2147483647,
-					examples: [3600],
-				}),
-				accThreshAct: Type.Number({
-					description:
-						'Accelerometer activity threshold (in m/s²): Minimal absolute value for an accelerometer reading to be considered movement.',
-					minimum: 0,
-					maximum: 78.4532,
-					examples: [10.5],
-				}),
-				accThreshInact: Type.Number({
-					description:
-						'Accelerometer inactivity threshold (in m/s²): Maximum absolute value for an accelerometer reading to be considered stillness. Must be smaller than the accelerometer activity threshold.',
-					minimum: 0,
-					maximum: 78.4532,
-					examples: [5.2],
-				}),
-				accTimeoutInact: Type.Number({
-					description:
-						'Accelerometer inactivity timeout (in s): Hysteresis timeout for stillness detection. Must be smaller than the movement resolution.',
-					minimum: 0.08,
-					maximum: 5242.88,
-					examples: [1.7],
-				}),
-				nod: Type.Array(Type.String({ minLength: 1 }), {
-					description:
-						'List of modules which should be disabled when sampling data.',
-					type: 'array',
-					minItems: 0,
-					examples: [['gnss'], ['ncell'], ['gnss', 'ncell']],
-				}),
-			},
-			{
-				description: 'Configures the device',
-			},
-		),
-	),
+	config: Type.Optional(Configuration),
 	device: Type.Optional(
 		Type.Object({
 			deviceInfo: DeviceInfoShadow,
