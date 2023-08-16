@@ -7,18 +7,31 @@ import { randomUUID } from 'node:crypto'
 import type { Static } from '@sinclair/typebox'
 
 void describe('ConfigureDevice', () => {
-	void it('show validate a device configuration request', () => {
-		const id = randomUUID()
-		const message: Static<typeof ConfigureDevice> = {
-			'@context': Context.configureDevice.toString(),
-			'@id': id,
-			id: 'oob-352656108602296',
-			configuration: {
+	void describe('validate device configuration requests', () => {
+		for (const configuration of [
+			{
 				gnss: true,
 			},
+			{
+				updateIntervalSeconds: 120,
+			},
+			{
+				updateIntervalSeconds: 600,
+				gnss: false,
+			},
+		] as Static<typeof ConfigureDevice>['configuration'][]) {
+			void it('', () => {
+				const id = randomUUID()
+				const message: Static<typeof ConfigureDevice> = {
+					'@context': Context.configureDevice.toString(),
+					'@id': id,
+					id: 'oob-352656108602296',
+					configuration,
+				}
+				const maybeValid = validateWithTypeBox(ConfigureDevice)(message)
+				assert.deepEqual('value' in maybeValid && maybeValid.value, message)
+			})
 		}
-		const maybeValid = validateWithTypeBox(ConfigureDevice)(message)
-		assert.deepEqual('value' in maybeValid && maybeValid.value, message)
 	})
 
 	void it('show validate a device configuration result', () => {

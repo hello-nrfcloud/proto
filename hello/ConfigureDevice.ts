@@ -13,6 +13,13 @@ const ConfigurationRequest = Type.Object(
 						'true: turn on GNSS location, false: turn off GNSS location',
 				}),
 			),
+			updateIntervalSeconds: Type.Optional(
+				Type.Integer({
+					minimum: 60,
+					description:
+						'Update interval in seconds: how often the device should send data to the cloud.',
+				}),
+			),
 		}),
 	},
 	{
