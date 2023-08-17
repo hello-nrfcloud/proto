@@ -10,7 +10,7 @@ export const BATTERY = {
 			appId: Type.Literal('BATTERY'),
 			messageType,
 			ts,
-			data: Type.RegEx(/^(0|[1-9][0-9]?|100)$/, {
+			data: Type.RegExp(/^(0|[1-9][0-9]?|100)$/, {
 				examples: ['94'],
 				description: 'Battery capacity in percent encoded as string',
 			}),

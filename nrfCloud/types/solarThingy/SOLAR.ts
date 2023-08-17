@@ -10,7 +10,7 @@ export const SOLAR = {
 			appId: Type.Literal('SOLAR'),
 			messageType,
 			ts,
-			data: Type.RegEx(/^-?[0-9]+\.[0-9]+$/, {
+			data: Type.RegExp(/^-?[0-9]+\.[0-9]+$/, {
 				examples: ['0.000000'],
 				description: 'Gain in mA encoded as string',
 			}),

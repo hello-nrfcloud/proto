@@ -13,7 +13,7 @@ export const DeviceIdentity = Type.Object(
 			examples: ['PCA20035', 'PCA20035+solar'],
 		}),
 		lastSeen: Type.Optional(
-			Type.RegEx(isoDateRegExp, {
+			Type.RegExp(isoDateRegExp, {
 				description:
 					'Time formatted as ISO 8601 string when the device last sent in a message.',
 			}),
