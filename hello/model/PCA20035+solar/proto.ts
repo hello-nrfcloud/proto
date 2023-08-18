@@ -133,6 +133,17 @@ export const Thingy91WithSolarShieldMessages = {
 		}`),
 		},
 	],
+	desiredConfiguration: [
+		{
+			filter: jsonata(
+				`$exists(version) and $exists(desired.config) and $exists(metadata)`,
+			),
+			transform: jsonata(`{
+			'version': version,
+			'config': desired.config
+		}`),
+		},
+	],
 } as const
 
 /**

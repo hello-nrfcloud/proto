@@ -221,6 +221,17 @@ export const Reported = Type.Object({
 	),
 })
 
+export const DesiredConfiguration = Type.Object({
+	'@context': Thingy91WithSolarShieldContext('desiredConfiguration'),
+	version: Type.Integer({
+		minimum: 0,
+		description: 'The version of the shadow document',
+		examples: [8835],
+	}),
+	config: Type.Optional(Configuration),
+	ts,
+})
+
 export const NetworkInfo = Type.Intersect([
 	Type.Object({
 		'@context': Thingy91WithSolarShieldContext('networkInfo'),
@@ -319,6 +330,7 @@ export const Button = Type.Object(
  */
 export const Thingy91WithSolarShieldMessage = Type.Union([
 	Reported,
+	DesiredConfiguration,
 	Gain,
 	Battery,
 	NetworkInfo,

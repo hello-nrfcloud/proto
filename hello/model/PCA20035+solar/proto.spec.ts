@@ -1,26 +1,27 @@
+import assert from 'node:assert/strict'
+import { describe, test as it, mock } from 'node:test'
+import { aNumber, arrayContaining, check, objectMatching } from 'tsmatchers'
 import GROUND_FIX_RESPONSE from '../../../nrfCloud/examples/cloudToDevice/GROUND_FIX.json' assert { type: 'json' }
 import AIR_PRESS from '../../../nrfCloud/examples/deviceToCloud/AIR_PRESS.json' assert { type: 'json' }
 import AIR_QUAL from '../../../nrfCloud/examples/deviceToCloud/AIR_QUAL.json' assert { type: 'json' }
 import BUTTON from '../../../nrfCloud/examples/deviceToCloud/BUTTON.json' assert { type: 'json' }
 import DEVICE from '../../../nrfCloud/examples/deviceToCloud/DEVICE-deviceInfo.json' assert { type: 'json' }
+import GNSS from '../../../nrfCloud/examples/deviceToCloud/GNSS.json' assert { type: 'json' }
 import GROUND_FIX_REQUEST from '../../../nrfCloud/examples/deviceToCloud/GROUND_FIX.json' assert { type: 'json' }
 import HUMID from '../../../nrfCloud/examples/deviceToCloud/HUMID.json' assert { type: 'json' }
-import GNSS from '../../../nrfCloud/examples/deviceToCloud/GNSS.json' assert { type: 'json' }
 import RSRP from '../../../nrfCloud/examples/deviceToCloud/RSRP.json' assert { type: 'json' }
 import TEMP from '../../../nrfCloud/examples/deviceToCloud/TEMP.json' assert { type: 'json' }
 import shadowNoNetworkInfo from '../../../nrfCloud/examples/shadow-no-networkInfo.json' assert { type: 'json' }
 import shadow from '../../../nrfCloud/examples/shadow.json' assert { type: 'json' }
 import { getShadowUpdateTime } from '../../../nrfCloud/getShadowUpdateTime.js'
-import { proto } from './proto.js'
 import battery from './examples/BATTERY.json' assert { type: 'json' }
 import deviceWithEnergyEstimate from './examples/DEVICE-networkInfo-with-eest.json' assert { type: 'json' }
 import GROUND_FIX_REQUEST2 from './examples/GROUND_FIX.json' assert { type: 'json' }
 import GROUND_FIX_with_timeDiff from './examples/GROUND_FIX_with_timeDiff.json' assert { type: 'json' }
 import solar from './examples/SOLAR.json' assert { type: 'json' }
-import { describe, test as it, mock } from 'node:test'
-import assert from 'node:assert/strict'
-import { check, objectMatching, aNumber } from 'tsmatchers'
+import desiredConfig from './examples/desiredConfig.json' assert { type: 'json' }
 import { validator } from './message.js'
+import { proto } from './proto.js'
 
 void describe('hello.nrfcloud.com messages', () => {
 	void describe('PCA20035+solar: Thingy:91 with solar shield messages', () => {
@@ -271,6 +272,27 @@ void describe('hello.nrfcloud.com messages', () => {
 					ts: 1690378551538,
 				},
 			],
+			[
+				{
+					...shadow.state,
+					desired: {
+						...shadow.state.desired,
+						config: desiredConfig.state.desired.config,
+					},
+					version: desiredConfig.state.version,
+				},
+				objectMatching({
+					'@context': new URL(
+						'https://github.com/hello-nrfcloud/proto/transformed/PCA20035%2Bsolar/desiredConfiguration',
+					).toString(),
+					version: 73697,
+					config: {
+						nod: [],
+						activeWaitTime: 120,
+					},
+					ts: getShadowUpdateTime(shadow.state.metadata) * 1000,
+				}),
+			],
 		] as [
 			message: Record<string, any>,
 			transformed: ReturnType<typeof objectMatching>,
@@ -280,12 +302,15 @@ void describe('hello.nrfcloud.com messages', () => {
 			)} and validate it`, async () => {
 				const onError = mock.fn()
 				const res = await proto({ onError })('PCA20035+solar', message)
+				console.log(res)
 				console.log(onError.mock.calls[0])
 				assert.equal(onError.mock.calls.length, 0)
-				check(res[0]).is(transformed)
+				check(res).is(arrayContaining(transformed))
 				// Test the validation
-				const maybeValid = validator(res[0])
-				check(maybeValid).is(objectMatching({ value: transformed }))
+				const maybeValids = res.map(validator)
+				check(maybeValids).is(
+					arrayContaining(objectMatching({ value: transformed })),
+				)
 			})
 		}
 	})
