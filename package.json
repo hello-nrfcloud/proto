@@ -79,7 +79,7 @@
     "lint-staged": "15.1.0",
     "prettier": "3.1.0",
     "prettier-plugin-organize-imports": "3.2.4",
-    "tsmatchers": "5.0.0",
+    "tsmatchers": "5.0.2",
     "tsx": "4.1.2",
     "typescript": "5.2.2"
   },
@@ -135,7 +135,7 @@
     "nrfcloud-application-protocols/schemas"
   ],
   "dependencies": {
-    "@sinclair/typebox": "0.31.24",
+    "@sinclair/typebox": "0.31.25",
     "ajv": "8.12.0",
     "jsonata": "2.0.3"
   }

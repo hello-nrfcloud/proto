@@ -3,7 +3,7 @@ import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
 import { convert } from './convert.js'
 import { describe, test as it, mock } from 'node:test'
 import assert from 'node:assert/strict'
-import { check, objectMatching, anObject } from 'tsmatchers'
+import { check, objectMatching, anArray } from 'tsmatchers'
 import { Context } from './Context.js'
 import type { SingleCellGeoLocation } from './SingleCellGeoLocation'
 import type { Static } from '@sinclair/typebox'
@@ -165,7 +165,7 @@ void describe('convert()', () => {
 		)
 		check(errorLog.mock.calls[0]?.arguments[1]).is('Thingy:91')
 		check(errorLog.mock.calls[0]?.arguments[2]).is(`Not a valid message.`)
-		check(errorLog.mock.calls[0]?.arguments[3]).is(anObject)
+		check(errorLog.mock.calls[0]?.arguments[3]).is(anArray)
 	})
 
 	void it('should convert multiple incoming messages to the same result', async () => {
