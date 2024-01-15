@@ -1,20 +1,22 @@
 import type { Static, TSchema } from '@sinclair/typebox'
-import Ajv, { type ErrorObject } from 'ajv'
+import { TypeCompiler, type ValueError } from '@sinclair/typebox/compiler'
 
+/**
+ * Validate the value against the given TypeBox schema
+ */
 export const validateWithTypeBox = <T extends TSchema>(
 	schema: T,
 ): ((value: unknown) =>
 	| { value: Static<typeof schema> }
 	| {
-			errors: ErrorObject[]
+			errors: ValueError[]
 	  }) => {
-	const ajv = new Ajv()
-	const v = ajv.compile(schema)
+	const C = TypeCompiler.Compile(schema)
 	return (value: unknown) => {
-		const valid = v(value)
-		if (valid !== true) {
+		const firstError = C.Errors(value).First()
+		if (firstError !== undefined) {
 			return {
-				errors: v.errors as ErrorObject[],
+				errors: [...C.Errors(value)],
 			}
 		}
 		return { value: value as Static<typeof schema> }
