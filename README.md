@@ -33,16 +33,16 @@ Install the dependencies:
 npm ci
 ```
 
-## Run tests
-
-```bash
-npm test
-```
-
 ## Update generated code
 
 ```bash
 npx tsx generate/types/schema-to-type.ts
 npx tsx generate/schema/NRFCloudMessage.schema.ts
 npx prettier --write .
+```
+
+## Run tests
+
+```bash
+npm test
 ```

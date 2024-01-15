@@ -2,13 +2,19 @@ import Ajv, { type AnySchema, type ErrorObject, type SchemaObject } from 'ajv'
 
 export const validateWithJSONSchema = <T extends Record<string, any>>(
 	schema: SchemaObject,
-	schemas?:
-		| AnySchema[]
-		| {
-				[Key in string]?: AnySchema
-		  },
+	schemas?: AnySchema[],
 ): ((value: unknown) => { value: T } | { errors: ErrorObject[] }) => {
-	const ajv = new Ajv({ schemas })
+	const ajv = new Ajv()
+	for (const schema of schemas ?? []) {
+		try {
+			ajv.addSchema(schema)
+		} catch (err) {
+			console.error(`Invalid schema:`)
+			console.error(JSON.stringify(schema, null, 2))
+			throw err
+		}
+	}
+
 	const v = ajv.compile(schema)
 	return (value: unknown) => {
 		const valid = v(value)

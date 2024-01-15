@@ -1,6 +1,6 @@
 import { Type } from '@sinclair/typebox'
 import { Context } from './Context.js'
-import { isoDateRegExp } from './isoDateRegExp.js'
+import { IsoDateType } from './IsoDateType.js'
 import { deviceId } from './deviceId.js'
 
 export const DeviceIdentity = Type.Object(
@@ -13,10 +13,9 @@ export const DeviceIdentity = Type.Object(
 			examples: ['PCA20035', 'PCA20035+solar'],
 		}),
 		lastSeen: Type.Optional(
-			Type.RegExp(isoDateRegExp, {
-				description:
-					'Time formatted as ISO 8601 string when the device last sent in a message.',
-			}),
+			IsoDateType(
+				'Time formatted as ISO 8601 string when the device last sent in a message.',
+			),
 		),
 	},
 	{
