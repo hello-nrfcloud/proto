@@ -31,13 +31,16 @@ export const Model = Type.Union(
 	},
 )
 
+export const PublicDevice = Type.Object(
+	{
+		id: PublicDeviceId,
+		model: Model,
+		state: Type.Optional(Type.Array(LwM2MObjectInstance)),
+	},
+	{ title: 'Public device', description: 'A device that is publicly visible.' },
+)
+
 export const Devices = Type.Object({
 	'@context': Type.Literal(Context.map.devices.toString()),
-	devices: Type.Array(
-		Type.Object({
-			id: PublicDeviceId,
-			model: Model,
-			state: Type.Optional(Type.Array(LwM2MObjectInstance)),
-		}),
-	),
+	devices: Type.Array(PublicDevice),
 })
