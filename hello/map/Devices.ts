@@ -33,6 +33,7 @@ export const Model = Type.Union(
 
 export const PublicDevice = Type.Object(
 	{
+		'@context': Type.Literal(Context.map.device.toString()),
 		id: PublicDeviceId,
 		model: Model,
 		state: Type.Optional(Type.Array(LwM2MObjectInstance)),

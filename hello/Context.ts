@@ -24,6 +24,7 @@ export const Context = {
 	}),
 	// Sharing
 	map: {
+		device: new URL(`${baseURL}/map/device`),
 		devices: new URL(`${baseURL}/map/devices`),
 		shareDevice: {
 			request: new URL(`${baseURL}/map/share-device-request`),
