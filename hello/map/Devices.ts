@@ -16,6 +16,12 @@ export const LwM2MObjectInstance = Type.Object({
 				"The Object Version of an Object is composed of 2 digits separated by a dot '.'.\nSee https://www.openmobilealliance.org/release/LightweightM2M/V1_1_1-20190617-A/OMA-TS-LightweightM2M_Core-V1_1_1-20190617-A.pdf Section 7.2.2",
 		}),
 	),
+	ObjectInstanceID: Type.Optional(
+		Type.Integer({
+			minimum: 0,
+			default: 0,
+		}),
+	),
 	Resources: Type.Record(
 		Type.Integer({ minimum: 0 }),
 		Type.Union([Type.String(), Type.Number(), Type.Boolean()]),
