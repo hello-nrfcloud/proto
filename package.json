@@ -1,110 +1,42 @@
 {
-  "name": "@hello.nrfcloud.com/proto",
+  "name": "@nordicsemiconductor/asset-tracker-cloud-code-style",
   "version": "0.0.0-development",
-  "description": "Documents the communication protocol between the hello.nrfcloud.com backend and the web application",
-  "type": "module",
-  "types": "./index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./export.js",
-      "node": "./export.js"
-    },
-    "./fingerprint": {
-      "import": "./dist/fingerprint/export.js",
-      "node": "./dist/fingerprint/export.js",
-      "types": "./fingerprint/index.d.ts"
-    },
-    "./hello": {
-      "import": "./dist/hello/export.js",
-      "node": "./dist/hello/export.js",
-      "types": "./hello/index.d.ts"
-    },
-    "./hello/history": {
-      "import": "./dist/hello/history/export.js",
-      "node": "./dist/hello/history/export.js",
-      "types": "./hello/history/index.d.ts"
-    },
-    "./hello/model/PCA20035+solar": {
-      "import": "./dist/hello/model/PCA20035+solar/export.js",
-      "node": "./dist/hello/model/PCA20035+solar/export.js",
-      "types": "./hello/model/PCA20035+solar/index.d.ts"
-    },
-    "./nrfCloud": {
-      "import": "./dist/nrfCloud/export.js",
-      "node": "./dist/nrfCloud/export.js",
-      "types": "./hello/nrfCloud/index.d.ts"
-    },
-    "./hello/map": {
-      "import": "./dist/hello/map/export.js",
-      "node": "./dist/hello/map/export.js",
-      "types": "./hello/map/index.d.ts"
-    }
-  },
+  "description": "Code style definitions for all nRF Asset Tracker projects.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hello-nrfcloud/proto.git"
+    "url": "git+https://github.com/NordicSemiconductor/asset-tracker-cloud-code-style-js.git"
   },
   "bugs": {
-    "url": "https://github.com/hello-nrfcloud/proto/issues"
+    "url": "https://github.com/NordicSemiconductor/asset-tracker-cloud-code-style-js/issues"
   },
-  "homepage": "https://hello.nrfcloud.com",
+  "homepage": "https://github.com/NordicSemiconductor/asset-tracker-cloud-code-style-js#readme",
   "keywords": [
-    "nordicsemiconductor",
-    "cellular-iot",
-    "hello-nrfcloud"
+    "nrf-asset-tracker",
+    "iot"
   ],
   "author": "Nordic Semiconductor ASA | nordicsemi.no",
   "license": "BSD-3-Clause",
-  "engines": {
-    "node": ">=20.0.0",
-    "npm": ">=9.0.0"
-  },
-  "scripts": {
-    "prepare": "husky install",
-    "test": "find ./ -type f -name \\*.spec.ts -not -path './nrfcloud-application-protocols/*' -not -path './node_modules/*' | xargs npx tsx --test --test-reporter spec",
-    "prepublishOnly": "./compile.sh"
-  },
-  "devDependencies": {
-    "@commitlint/config-conventional": "18.6.0",
-    "@nordicsemiconductor/asset-tracker-cloud-code-style": "13.1.12",
-    "@nordicsemiconductor/eslint-config-asset-tracker-cloud-typescript": "17.0.0",
-    "@swc/cli": "0.3.5",
-    "@swc/core": "1.3.107",
-    "@types/glob": "8.1.0",
-    "@types/node": "20.11.10",
-    "@typescript-eslint/eslint-plugin": "6.20.0",
-    "chalk": "5.3.0",
+  "dependencies": {
+    "@commitlint/cli": "18.6.0",
     "eslint": "8.56.0",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-prefer-arrow": "1.2.3",
-    "eslint-plugin-unicorn": "50.0.1",
-    "glob": "10.3.10",
-    "husky": "8.0.3",
     "lint-staged": "15.2.0",
+    "pinst": "3.0.0",
     "prettier": "3.2.4",
     "prettier-plugin-organize-imports": "3.2.4",
-    "tsmatchers": "5.0.2",
-    "tsx": "4.7.0",
     "typescript": "5.3.3"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "prettier --write",
-      "eslint --ext .js,.ts,.jsx,.tsx"
-    ],
-    "*.{md,json,yaml,yml,html}": [
-      "prettier --write"
+    "*.{yml,md,js,json}": [
+      "prettier --write --config .prettierrc.js"
     ]
   },
-  "prettier": "@nordicsemiconductor/asset-tracker-cloud-code-style/.prettierrc",
+  "engines": {
+    "node": ">=20",
+    "npm": ">=9"
+  },
   "release": {
     "branches": [
-      "saga",
-      {
-        "name": "!(saga|v[0-9].[0-9].x|*_*|*/*)",
-        "prerelease": true
-      }
+      "saga"
     ],
     "remoteTags": true,
     "plugins": [
@@ -125,24 +57,19 @@
   },
   "files": [
     "package-lock.json",
+    "index.js",
     "LICENSE",
     "README.md",
-    "example.ts",
-    "export.js",
-    "index.d.ts",
-    "dist",
-    "nrfCloud",
-    "hello",
-    "fingerprint",
-    "validator",
-    "schemas",
-    "generate",
-    "nrfcloud-application-protocols/schemas"
+    ".prettierrc.js",
+    "tsconfig.json",
+    "templates"
   ],
-  "dependencies": {
-    "@hello.nrfcloud.com/proto-lwm2m": "2.4.4",
-    "@sinclair/typebox": "0.32.13",
-    "ajv": "8.12.0",
-    "jsonata": "2.0.3"
+  "scripts": {
+    "prepare": "husky",
+    "test": "npm exec -- renovate-config-validator"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "18.6.0",
+    "husky": "9.0.7"
   }
 }
