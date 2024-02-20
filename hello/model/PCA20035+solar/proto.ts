@@ -79,7 +79,9 @@ export const Thingy91WithSolarShieldMessages = {
 		}`),
 		},
 		{
-			filter: jsonata(`\`@context\` = "${Context.singleCellGeoLocation}"`),
+			filter: jsonata(
+				`\`@context\` = "${Context.singleCellGeoLocation.toString()}"`,
+			),
 			transform: jsonata(`{
 			"lat": lat,
 			"lng": lng,

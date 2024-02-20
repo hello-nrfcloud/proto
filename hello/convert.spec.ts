@@ -185,7 +185,7 @@ void describe('convert()', () => {
 					},
 					{
 						filter: jsonata(
-							`\`@context\` = "${Context.singleCellGeoLocation}"`,
+							`\`@context\` = "${Context.singleCellGeoLocation.toString()}"`,
 						),
 						transform: jsonata(`{
 						'lat': lat,

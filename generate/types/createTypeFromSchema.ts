@@ -157,7 +157,7 @@ const createEnumType = (
 					let key = e
 					let value = e
 					if (typeof key === 'number') {
-						key = `n_${key}`
+						key = `n_${JSON.stringify(key)}`
 						value = value.toString()
 					}
 					return ts.factory.createEnumMember(
