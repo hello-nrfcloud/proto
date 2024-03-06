@@ -132,7 +132,7 @@
     "nrfcloud-application-protocols/schemas"
   ],
   "dependencies": {
-    "@hello.nrfcloud.com/proto-lwm2m": "2.7.3",
+    "@hello.nrfcloud.com/proto-lwm2m": "2.8.0",
     "@sinclair/typebox": "0.32.15",
     "ajv": "8.12.0",
     "jsonata": "2.0.4"
