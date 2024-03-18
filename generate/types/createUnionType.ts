@@ -1,5 +1,5 @@
 import ts from 'typescript'
-import type { generateExports } from './generateExports'
+import type { generateExports } from './generateExports.js'
 
 export const createUnionType = (
 	exports: Parameters<typeof generateExports>[0] = [],

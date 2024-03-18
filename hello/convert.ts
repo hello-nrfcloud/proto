@@ -5,7 +5,7 @@ import type { ipShadow } from '../nrfCloud/types/types.js'
 import { validator as validateNrfCloudMessage } from '../nrfCloud/validator.js'
 import { Context } from './Context.js'
 import { incomingMessageValidator as validateBackendMessage } from './incomingMessageValidator.js'
-import type { ValueError } from '@sinclair/typebox/build/require/errors/errors.js'
+import { type ValueError } from '@sinclair/typebox/compiler'
 
 export type ConvertedMessage = {
 	['@context']: URL

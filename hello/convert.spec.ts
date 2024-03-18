@@ -5,7 +5,7 @@ import { describe, test as it, mock } from 'node:test'
 import assert from 'node:assert/strict'
 import { check, objectMatching, anArray } from 'tsmatchers'
 import { Context } from './Context.js'
-import type { SingleCellGeoLocation } from './SingleCellGeoLocation'
+import type { SingleCellGeoLocation } from './SingleCellGeoLocation.js'
 import type { Static } from '@sinclair/typebox'
 
 void describe('convert()', () => {
