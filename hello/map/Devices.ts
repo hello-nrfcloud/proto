@@ -1,12 +1,12 @@
 import { Type } from '@sinclair/typebox'
 import { Context } from '../Context.js'
 import { PublicDeviceId } from './DeviceId.js'
-import { LwM2MObjectID, models } from '@hello.nrfcloud.com/proto-lwm2m'
+import { LwM2MObjectID, models } from '@hello.nrfcloud.com/proto-map'
 
 export const LwM2MObjectInstance = Type.Object({
 	ObjectID: Type.Enum(LwM2MObjectID, {
 		description:
-			'The LwM2M Object IDs defined in @hello.nrfcloud.com/proto-lwm2m',
+			'The LwM2M Object IDs defined in @hello.nrfcloud.com/proto-map',
 	}),
 	ObjectVersion: Type.Optional(
 		Type.String({
@@ -33,7 +33,7 @@ export const Model = Type.Union(
 	{
 		title: 'Model',
 		description:
-			'Must be one of the models defined in @hello.nrfcloud.com/proto-lwm2m',
+			'Must be one of the models defined in @hello.nrfcloud.com/proto-map',
 	},
 )
 

@@ -1,4 +1,6 @@
-import Ajv, { type AnySchema, type ErrorObject, type SchemaObject } from 'ajv'
+import { type AnySchema, type ErrorObject, type SchemaObject } from 'ajv'
+import ajv from 'ajv'
+const Ajv = ajv.default
 
 export const validateWithJSONSchema = <T extends Record<string, any>>(
 	schema: SchemaObject,

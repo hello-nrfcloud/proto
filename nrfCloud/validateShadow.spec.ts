@@ -1,7 +1,7 @@
 import { ipShadowMessage } from '../generate/schema/messages.js'
 import { validateWithJSONSchema } from '../validator/validateWithJSONSchema.js'
 import exampleShadow from './examples/shadow.json' assert { type: 'json' }
-import type { ipShadow } from './types/types'
+import type { ipShadow } from './types/types.js'
 import { describe, test as it } from 'node:test'
 import assert from 'node:assert/strict'
 
