@@ -3,9 +3,9 @@
   "version": "0.0.0-development",
   "description": "Documents the communication protocol between the hello.nrfcloud.com backend and the web application",
   "type": "module",
-  "types": "./index.d.ts",
   "exports": {
     ".": {
+      "types": "./index.d.ts",
       "import": "./export.js",
       "node": "./export.js"
     },
