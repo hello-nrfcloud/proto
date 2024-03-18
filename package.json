@@ -32,7 +32,7 @@
     "./nrfCloud": {
       "import": "./dist/nrfCloud/export.js",
       "node": "./dist/nrfCloud/export.js",
-      "types": "./hello/nrfCloud/index.d.ts"
+      "types": "./nrfCloud/index.d.ts"
     },
     "./hello/map": {
       "import": "./dist/hello/map/export.js",
