@@ -22,15 +22,4 @@ export const Context = {
 				)}/${encodeURIComponent(transformerId)}`,
 			),
 	}),
-	// Sharing
-	map: {
-		device: new URL(`${baseURL}/map/device`),
-		devices: new URL(`${baseURL}/map/devices`),
-		shareDevice: {
-			request: new URL(`${baseURL}/map/share-device-request`),
-			ownershipConfirmed: new URL(
-				`${baseURL}/map/share-device-ownership-confirmed`,
-			),
-		},
-	},
 }
