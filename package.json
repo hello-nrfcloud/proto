@@ -116,7 +116,6 @@
     "access": "public"
   },
   "files": [
-    "package-lock.json",
     "LICENSE",
     "README.md",
     "example.ts",
