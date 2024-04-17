@@ -132,7 +132,7 @@
     "nrfcloud-application-protocols/schemas"
   ],
   "dependencies": {
-    "@hello.nrfcloud.com/proto-map": "5.3.0",
+    "@hello.nrfcloud.com/proto-map": "5.3.1",
     "@sinclair/typebox": "0.32.20",
     "ajv": "8.12.0",
     "jsonata": "2.0.4"
