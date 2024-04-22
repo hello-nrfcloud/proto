@@ -1,10 +1,13 @@
 import type { Static } from '@sinclair/typebox'
 import jsonata from 'jsonata'
 import type { Thingy91WithSolarShieldMessage } from './message.js'
-import { convert, type errorFn } from '../../convert.js'
+import { convert, type errorFn } from '../convert.js'
 import { Context } from '../../Context.js'
 import { Model } from '../Model.js'
 
+/**
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
+ */
 export const Thingy91WithSolarShieldMessages = {
 	gain: [
 		{
@@ -150,6 +153,8 @@ export const Thingy91WithSolarShieldMessages = {
 
 /**
  * Defines converters for messages handled by hello.nrfcloud.com.
+ *
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
  */
 export const proto =
 	({ onError }: { onError?: errorFn } = {}) =>

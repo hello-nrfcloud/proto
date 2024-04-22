@@ -24,6 +24,10 @@
       "node": "./dist/hello/history/export.js",
       "types": "./hello/history/index.d.ts"
     },
+    "./hello/model": {
+      "default": "./dist/hello/model/export.js",
+      "types": "./hello/model/export.ts"
+    },
     "./hello/model/PCA20035+solar": {
       "import": "./dist/hello/model/PCA20035+solar/export.js",
       "node": "./dist/hello/model/PCA20035+solar/export.js",

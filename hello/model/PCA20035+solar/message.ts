@@ -12,6 +12,8 @@ import { DeviceIdentity } from '../../DeviceIdentity.js'
  * The %CONEVAL AT command returns amongst other data the energy estimate: Relative estimated energy consumption of data transmission compared to nominal consumption. A higher value means smaller energy consumption. 5: Difficulties in setting up connections. Maximum number of repetitions might be needed for data.
  *
  * @see https://infocenter.nordicsemi.com/topic/ref_at_commands/REF/at_commands/mob_termination_ctrl_status/coneval_set.html
+ *
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
  */
 export enum EnergyEstimate {
 	/**
@@ -38,6 +40,8 @@ export enum EnergyEstimate {
 
 /**
  * @see nrfcloud-application-protocols/schemas/deviceShadow/ipShadow/ipShadow.json
+ *
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
  */
 export const DeviceInfoShadow = Type.Object(
 	{
@@ -56,6 +60,8 @@ export const DeviceInfoShadow = Type.Object(
 
 /**
  * @see nrfcloud-application-protocols/schemas/deviceShadow/ipShadow/ipShadow.json
+ *
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
  */
 export const SimInfo = Type.Object(
 	{
@@ -71,6 +77,8 @@ export const SimInfo = Type.Object(
 
 /**
  * @see nrfcloud-application-protocols/schemas/deviceShadow/ipShadow/ipShadow.json
+ *
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
  */
 export const NetworkInfoShadow = Type.Intersect([
 	Type.Object(
@@ -98,6 +106,9 @@ export const NetworkInfoShadow = Type.Intersect([
 	}),
 ])
 
+/**
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
+ */
 export const Configuration = Type.Object(
 	{
 		activeMode: Type.Optional(
@@ -184,6 +195,9 @@ export const Configuration = Type.Object(
 	},
 )
 
+/**
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
+ */
 export const Reported = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('reported'),
 	ts,
@@ -221,6 +235,9 @@ export const Reported = Type.Object({
 	),
 })
 
+/**
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
+ */
 export const DesiredConfiguration = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('desiredConfiguration'),
 	version: Type.Integer({
@@ -232,6 +249,9 @@ export const DesiredConfiguration = Type.Object({
 	ts,
 })
 
+/**
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
+ */
 export const NetworkInfo = Type.Intersect([
 	Type.Object({
 		'@context': Thingy91WithSolarShieldContext('networkInfo'),
@@ -239,6 +259,10 @@ export const NetworkInfo = Type.Intersect([
 	}),
 	NetworkInfoShadow,
 ])
+
+/**
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
+ */
 export const RSRP = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('rsrp'),
 	ts,
@@ -252,6 +276,9 @@ export const RSRP = Type.Object({
 	}),
 })
 
+/**
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
+ */
 export const AirPressure = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('airPressure'),
 	ts,
@@ -263,6 +290,9 @@ export const AirPressure = Type.Object({
 	}),
 })
 
+/**
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
+ */
 export const AirQuality = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('airQuality'),
 	ts,
@@ -282,6 +312,9 @@ export const AirQuality = Type.Object({
 	}),
 })
 
+/**
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
+ */
 export const DeviceInfo = Type.Intersect([
 	Type.Object({
 		'@context': Thingy91WithSolarShieldContext('deviceInfo'),
@@ -290,6 +323,9 @@ export const DeviceInfo = Type.Intersect([
 	DeviceInfoShadow,
 ])
 
+/**
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
+ */
 export const AirTemperature = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('airTemperature'),
 	ts,
@@ -299,6 +335,9 @@ export const AirTemperature = Type.Object({
 	}),
 })
 
+/**
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
+ */
 export const AirHumidity = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('airHumidity'),
 	ts,
@@ -310,6 +349,9 @@ export const AirHumidity = Type.Object({
 	}),
 })
 
+/**
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
+ */
 export const Button = Type.Object(
 	{
 		'@context': Thingy91WithSolarShieldContext('button'),
@@ -327,6 +369,7 @@ export const Button = Type.Object(
 
 /**
  * Defines the messages transformed for the Thingy:91 with solar shield sent by the hello.nrfcloud.com backend.
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
  */
 export const Thingy91WithSolarShieldMessage = Type.Union([
 	Reported,

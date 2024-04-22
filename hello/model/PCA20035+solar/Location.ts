@@ -3,12 +3,19 @@ import { Thingy91WithSolarShieldContext } from './context.js'
 import { ts } from '../../ts.js'
 import { accuracy, lat, lng } from '../../../hello/SingleCellGeoLocation.js'
 
+/**
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
+ */
 export enum LocationSource {
 	MCELL = 'MCELL',
 	SCELL = 'SCELL',
 	WIFI = 'WIFI',
 	GNSS = 'GNSS',
 }
+
+/**
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
+ */
 export const Location = Type.Object({
 	'@context': Thingy91WithSolarShieldContext('location'),
 	ts,
