@@ -1,10 +1,10 @@
 import type { ErrorObject } from 'ajv'
 import jsonata from 'jsonata'
-import { getShadowUpdateTime } from '../nrfCloud/getShadowUpdateTime.js'
-import type { ipShadow } from '../nrfCloud/types/types.js'
-import { validator as validateNrfCloudMessage } from '../nrfCloud/validator.js'
-import { Context } from './Context.js'
-import { incomingMessageValidator as validateBackendMessage } from './incomingMessageValidator.js'
+import { getShadowUpdateTime } from '../../nrfCloud/getShadowUpdateTime.js'
+import type { ipShadow } from '../../nrfCloud/types/types.js'
+import { validator as validateNrfCloudMessage } from '../../nrfCloud/validator.js'
+import { Context } from '../Context.js'
+import { incomingMessageValidator as validateBackendMessage } from '../incomingMessageValidator.js'
 import { type ValueError } from '@sinclair/typebox/compiler'
 
 export type ConvertedMessage = {
@@ -43,6 +43,8 @@ export type MessageDefinition = Record<string, MessageProcessors>
  * If no filter expression is associated, the message will be used as is.
  *
  * @see https://jsonata.org/
+ *
+ * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
  */
 export const convert =
 	({

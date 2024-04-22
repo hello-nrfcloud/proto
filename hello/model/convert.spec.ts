@@ -1,11 +1,11 @@
 import jsonata from 'jsonata'
-import shadow from '../nrfCloud/examples/shadow.json' assert { type: 'json' }
+import shadow from '../../nrfCloud/examples/shadow.json' assert { type: 'json' }
 import { convert } from './convert.js'
 import { describe, test as it, mock } from 'node:test'
 import assert from 'node:assert/strict'
 import { check, objectMatching, anArray } from 'tsmatchers'
-import { Context } from './Context.js'
-import type { SingleCellGeoLocation } from './SingleCellGeoLocation.js'
+import { Context } from '../Context.js'
+import type { SingleCellGeoLocation } from '../SingleCellGeoLocation.js'
 import type { Static } from '@sinclair/typebox'
 
 void describe('convert()', () => {

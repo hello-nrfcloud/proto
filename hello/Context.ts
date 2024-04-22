@@ -10,6 +10,9 @@ export const Context = {
 	problemDetail: new URL(`${baseURL}/ProblemDetail`),
 	error: (type: string): URL =>
 		new URL(`https://hello.nrfcloud.com/errors/${type}`),
+	/**
+	 * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
+	 */
 	model: (
 		model: string,
 	): {
