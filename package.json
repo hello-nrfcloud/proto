@@ -6,22 +6,18 @@
   "exports": {
     ".": {
       "types": "./index.d.ts",
-      "import": "./export.js",
-      "node": "./export.js"
+      "default": "./export.js"
     },
     "./fingerprint": {
-      "import": "./dist/fingerprint/export.js",
-      "node": "./dist/fingerprint/export.js",
+      "default": "./dist/fingerprint/export.js",
       "types": "./fingerprint/index.d.ts"
     },
     "./hello": {
-      "import": "./dist/hello/export.js",
-      "node": "./dist/hello/export.js",
+      "default": "./dist/hello/export.js",
       "types": "./hello/index.d.ts"
     },
     "./hello/history": {
-      "import": "./dist/hello/history/export.js",
-      "node": "./dist/hello/history/export.js",
+      "default": "./dist/hello/history/export.js",
       "types": "./hello/history/index.d.ts"
     },
     "./hello/model": {
@@ -29,18 +25,15 @@
       "types": "./hello/model/export.ts"
     },
     "./hello/model/PCA20035+solar": {
-      "import": "./dist/hello/model/PCA20035+solar/export.js",
-      "node": "./dist/hello/model/PCA20035+solar/export.js",
+      "default": "./dist/hello/model/PCA20035+solar/export.js",
       "types": "./hello/model/PCA20035+solar/index.d.ts"
     },
     "./nrfCloud": {
-      "import": "./dist/nrfCloud/export.js",
-      "node": "./dist/nrfCloud/export.js",
+      "default": "./dist/nrfCloud/export.js",
       "types": "./nrfCloud/index.d.ts"
     },
     "./hello/map": {
-      "import": "./dist/hello/map/export.js",
-      "node": "./dist/hello/map/export.js",
+      "default": "./dist/hello/map/export.js",
       "types": "./hello/map/index.d.ts"
     }
   },
