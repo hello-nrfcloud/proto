@@ -16,8 +16,8 @@ export const LwM2MResourceUpdate = Type.Object(
 	{
 		'@context': Type.Literal(Context.lwm2mResourceUpdate.toString()),
 		ObjectID,
-		ObjectInstanceID,
-		ObjectVersion,
+		ObjectInstanceID: Type.Optional(ObjectInstanceID),
+		ObjectVersion: Type.Optional(ObjectVersion),
 		Resources,
 		ts: IsoDateType('Time when the update was received, formatted as ISO 8601'),
 	},
