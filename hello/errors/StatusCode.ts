@@ -22,6 +22,11 @@ export enum HttpStatusCode {
 	 */
 	BAD_REQUEST = 400,
 	/**
+	 * The request contained valid data and was understood by the server, but the server is refusing action.
+	 * The request should not be repeated.
+	 */
+	FORBIDDEN = 403,
+	/**
 	 * The requested resource could not be found but may be available in the future.
 	 * Subsequent requests by the client are permissible.
 	 */
