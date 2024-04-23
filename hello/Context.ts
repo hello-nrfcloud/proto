@@ -12,19 +12,4 @@ export const Context = {
 	senMLImports: new URL(`${baseURL}/senml/imports`),
 	error: (type: string): URL =>
 		new URL(`https://hello.nrfcloud.com/errors/${type}`),
-	/**
-	 * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
-	 */
-	model: (
-		model: string,
-	): {
-		transformed: (transformerId: string) => URL
-	} => ({
-		transformed: (transformerId) =>
-			new URL(
-				`${baseURL}/transformed/${encodeURIComponent(
-					model,
-				)}/${encodeURIComponent(transformerId)}`,
-			),
-	}),
 }

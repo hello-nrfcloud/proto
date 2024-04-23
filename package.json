@@ -15,26 +15,6 @@
     "./hello": {
       "default": "./dist/hello/export.js",
       "types": "./hello/index.d.ts"
-    },
-    "./hello/history": {
-      "default": "./dist/hello/history/export.js",
-      "types": "./hello/history/index.d.ts"
-    },
-    "./hello/model": {
-      "default": "./dist/hello/model/export.js",
-      "types": "./hello/model/export.ts"
-    },
-    "./hello/model/PCA20035+solar": {
-      "default": "./dist/hello/model/PCA20035+solar/export.js",
-      "types": "./hello/model/PCA20035+solar/index.d.ts"
-    },
-    "./nrfCloud": {
-      "default": "./dist/nrfCloud/export.js",
-      "types": "./nrfCloud/index.d.ts"
-    },
-    "./hello/map": {
-      "default": "./dist/hello/map/export.js",
-      "types": "./hello/map/index.d.ts"
     }
   },
   "repository": {
