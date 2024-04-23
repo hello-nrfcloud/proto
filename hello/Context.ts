@@ -9,6 +9,7 @@ export const Context = {
 	deviceConfigured: new URL(`${baseURL}/device-configured`),
 	problemDetail: new URL(`${baseURL}/ProblemDetail`),
 	lwm2mObjectUpdate: new URL(`${baseURL}/lwm2m/object/update`),
+	senMLImports: new URL(`${baseURL}/senml/imports`),
 	error: (type: string): URL =>
 		new URL(`https://hello.nrfcloud.com/errors/${type}`),
 	/**
