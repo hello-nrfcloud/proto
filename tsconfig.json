@@ -28,6 +28,5 @@
       ],
       "@hello.nrfcloud.com/proto/nrfCloud": ["nrfCloud/index.d.ts"]
     }
-  },
-  "exclude": ["nrfcloud-application-protocols"]
+  }
 }

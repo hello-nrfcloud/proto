@@ -1,6 +1,6 @@
 {
   "name": "@hello.nrfcloud.com/proto",
-  "version": "0.0.0-development",
+  "version": "8.0.0-development.1",
   "description": "Documents the communication protocol between the hello.nrfcloud.com backend and the web application",
   "type": "module",
   "exports": {
@@ -38,7 +38,7 @@
   },
   "scripts": {
     "prepare": "husky",
-    "test": "find ./ -type f -name *.spec.ts -not -path './nrfcloud-application-protocols/*' -not -path './node_modules/*' | xargs npx tsx --test --test-reporter spec",
+    "test": "find ./ -type f -name *.spec.ts -not -path './node_modules/*' | xargs npx tsx --test --test-reporter spec",
     "prepublishOnly": "./compile.sh"
   },
   "devDependencies": {
@@ -101,8 +101,7 @@
     "fingerprint",
     "validator",
     "schemas",
-    "generate",
-    "nrfcloud-application-protocols/schemas"
+    "generate"
   ],
   "peerDependencies": {
     "@hello.nrfcloud.com/proto-map": "^8.0.2",
