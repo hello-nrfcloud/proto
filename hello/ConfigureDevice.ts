@@ -2,9 +2,9 @@ import { Type } from '@sinclair/typebox'
 import { Context } from './Context.js'
 import { deviceId } from './deviceId.js'
 
-const ConfigurationRequest = Type.Object(
+export const ConfigureDevice = Type.Object(
 	{
-		'@id': Type.Optional(Type.String()),
+		'@context': Type.Literal(Context.configureDevice.toString()),
 		id: deviceId,
 		configuration: Type.Object({
 			gnss: Type.Optional(
@@ -26,17 +26,3 @@ const ConfigurationRequest = Type.Object(
 		description: 'Configures a device',
 	},
 )
-
-export const ConfigureDevice = Type.Composite([
-	Type.Object({
-		'@context': Type.Literal(Context.configureDevice.toString()),
-	}),
-	ConfigurationRequest,
-])
-
-export const DeviceConfigured = Type.Composite([
-	Type.Object({
-		'@context': Type.Literal(Context.deviceConfigured.toString()),
-	}),
-	ConfigurationRequest,
-])
