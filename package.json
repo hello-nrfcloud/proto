@@ -1,6 +1,6 @@
 {
   "name": "@hello.nrfcloud.com/proto",
-  "version": "8.0.0-development.2",
+  "version": "8.0.0-development.3",
   "description": "Documents the communication protocol between the hello.nrfcloud.com backend and the web application",
   "type": "module",
   "exports": {
