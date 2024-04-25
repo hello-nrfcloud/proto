@@ -10,6 +10,7 @@ export const Context = {
 	lwm2mObjectUpdate: new URL(`${baseURL}/lwm2m/object/update`),
 	senMLImports: new URL(`${baseURL}/senml/imports`),
 	shadow: new URL(`${baseURL}/shadow`),
+	apiHealth: new URL(`${baseURL}/api/health`),
 	error: (type: string): URL =>
 		new URL(`https://hello.nrfcloud.com/errors/${type}`),
 }
