@@ -8,6 +8,7 @@ export const Context = {
 	configureDevice: new URL(`${baseURL}/configure-device`),
 	problemDetail: new URL(`${baseURL}/ProblemDetail`),
 	lwm2mObjectUpdate: new URL(`${baseURL}/lwm2m/object/update`),
+	lwm2mObjectHistory: new URL(`${baseURL}/lwm2m/object/history`),
 	senMLImports: new URL(`${baseURL}/senml/imports`),
 	shadow: new URL(`${baseURL}/shadow`),
 	apiHealth: new URL(`${baseURL}/api/health`),
