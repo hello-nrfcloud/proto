@@ -11,9 +11,6 @@ export const ApiHealth = Type.Object(
 		}),
 	},
 	{
-		$id: new URL(
-			`https://raw.githubusercontent.com/hello-nrfcloud/proto/hello/ApiHealth.ts`,
-		).toString(),
 		title: 'ApiHealth',
 	},
 )
