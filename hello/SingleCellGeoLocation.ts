@@ -29,9 +29,6 @@ export const SingleCellGeoLocation = Type.Object(
 		ts,
 	},
 	{
-		$id: new URL(
-			`https://raw.githubusercontent.com/hello-nrfcloud/proto/hello/SingleCellGeoLocation.ts`,
-		).toString(),
 		title: 'SingleCellGeoLocation',
 	},
 )

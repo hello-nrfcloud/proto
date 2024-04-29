@@ -19,9 +19,6 @@ export const DeviceIdentity = Type.Object(
 		),
 	},
 	{
-		$id: new URL(
-			`https://raw.githubusercontent.com/hello-nrfcloud/proto/hello/DeviceIdentity.ts`,
-		).toString(),
 		title: 'DeviceIdentity',
 	},
 )

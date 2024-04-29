@@ -7,14 +7,21 @@ import { HttpStatusCode, StatusCode } from './StatusCode.js'
  *
  * @see https://datatracker.ietf.org/doc/draft-ietf-httpapi-rfc7807bis/
  */
-export const ProblemDetail = Type.Object({
-	'@context': Type.Literal(Context.problemDetail.toString()),
-	'@id': Type.Optional(Type.String()),
-	type: Type.Optional(Type.String()),
-	status: Type.Optional(StatusCode),
-	title: Type.String(),
-	detail: Type.Optional(Type.String()),
-})
+export const ProblemDetail = Type.Object(
+	{
+		'@context': Type.Literal(Context.problemDetail.toString()),
+		'@id': Type.Optional(Type.String()),
+		type: Type.Optional(Type.String()),
+		status: Type.Optional(StatusCode),
+		title: Type.String(),
+		detail: Type.Optional(Type.String()),
+	},
+	{
+		title: 'Problem Detail',
+		description:
+			'See see https://datatracker.ietf.org/doc/draft-ietf-httpapi-rfc7807bis/',
+	},
+)
 
 export const BadRequestError = ({
 	id,

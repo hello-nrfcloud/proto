@@ -6,25 +6,12 @@ export const Context = {
 	historicalDataResponse: new URL(`${baseURL}/historical-data-response`),
 	singleCellGeoLocation: new URL(`${baseURL}/single-cell-geo-location`),
 	configureDevice: new URL(`${baseURL}/configure-device`),
-	deviceConfigured: new URL(`${baseURL}/device-configured`),
 	problemDetail: new URL(`${baseURL}/ProblemDetail`),
 	lwm2mObjectUpdate: new URL(`${baseURL}/lwm2m/object/update`),
+	lwm2mObjectHistory: new URL(`${baseURL}/lwm2m/object/history`),
 	senMLImports: new URL(`${baseURL}/senml/imports`),
+	shadow: new URL(`${baseURL}/shadow`),
+	apiHealth: new URL(`${baseURL}/api/health`),
 	error: (type: string): URL =>
 		new URL(`https://hello.nrfcloud.com/errors/${type}`),
-	/**
-	 * @deprecated See https://github.com/hello-nrfcloud/proto/issues/137
-	 */
-	model: (
-		model: string,
-	): {
-		transformed: (transformerId: string) => URL
-	} => ({
-		transformed: (transformerId) =>
-			new URL(
-				`${baseURL}/transformed/${encodeURIComponent(
-					model,
-				)}/${encodeURIComponent(transformerId)}`,
-			),
-	}),
 }

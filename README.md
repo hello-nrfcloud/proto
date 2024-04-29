@@ -16,29 +16,12 @@ and the web application.
 npm i --save-exact @hello.nrfcloud.com/proto
 ```
 
-[Example](./example.ts)
-
 ## Setup
-
-Fetch the submodules
-
-```bash
-git submodule init
-git submodule update --remote
-```
 
 Install the dependencies:
 
 ```bash
 npm ci
-```
-
-## Update generated code
-
-```bash
-npx tsx generate/types/schema-to-type.ts
-npx tsx generate/schema/NRFCloudMessage.schema.ts
-npx prettier --write .
 ```
 
 ## Run tests

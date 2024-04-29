@@ -36,7 +36,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          submodules: true
 
       - uses: actions/setup-node@v4
         with:
@@ -57,9 +56,6 @@ jobs:
 
       - name: Run tests
         run: npm test
-
-      - name: Run example
-        run: npx tsx example.ts
 
       - name: Semantic release
         run: npx semantic-release
