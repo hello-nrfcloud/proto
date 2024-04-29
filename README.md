@@ -16,8 +16,6 @@ and the web application.
 npm i --save-exact @hello.nrfcloud.com/proto
 ```
 
-[Example](./example.ts)
-
 ## Setup
 
 Install the dependencies:
