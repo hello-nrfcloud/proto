@@ -5,7 +5,6 @@ export const Context = {
 	historicalDataRequest: new URL(`${baseURL}/historical-data-request`),
 	historicalDataResponse: new URL(`${baseURL}/historical-data-response`),
 	singleCellGeoLocation: new URL(`${baseURL}/single-cell-geo-location`),
-	configureDevice: new URL(`${baseURL}/configure-device`),
 	problemDetail: new URL(`${baseURL}/ProblemDetail`),
 	lwm2mObjectUpdate: new URL(`${baseURL}/lwm2m/object/update`),
 	lwm2mObjectHistory: new URL(`${baseURL}/lwm2m/object/history`),
