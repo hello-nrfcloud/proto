@@ -16,10 +16,6 @@ export const Shadow = Type.Object({
 	updatedAt: IsoDateType(
 		'The timestamp when the shadow document was last updated formatted as an ISO 8601 string',
 	),
-	connected: Type.Boolean({
-		title: 'Connected',
-		description: 'Whether the device is currently connected.',
-	}),
 })
 
 export type ShadowType = Static<typeof Shadow>
