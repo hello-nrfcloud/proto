@@ -1,13 +1,12 @@
 import { Type, type Static } from '@sinclair/typebox'
 import { IsoDateType } from './IsoDateType.js'
 import { Context } from './Context.js'
+import { LwM2MObjectInstance } from '@hello.nrfcloud.com/proto-map/api'
 
 export const Shadow = Type.Object({
 	'@context': Type.Literal(Context.shadow.toString()),
-	reported: Type.Record(Type.String({ minLength: 1 }), Type.Any()),
-	desired: Type.Optional(
-		Type.Record(Type.String({ minLength: 1 }), Type.Any()),
-	),
+	reported: Type.Array(LwM2MObjectInstance),
+	desired: Type.Array(LwM2MObjectInstance),
 	version: Type.Number({
 		minimum: 1,
 		title: 'Version',
