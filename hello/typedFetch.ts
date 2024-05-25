@@ -1,6 +1,7 @@
 import { type Static, type TObject, type TSchema } from '@sinclair/typebox'
 import { validateWithTypeBox } from '@hello.nrfcloud.com/proto'
-import { Context, ProblemDetail } from '@hello.nrfcloud.com/proto/hello'
+import type { ProblemDetail } from '@hello.nrfcloud.com/proto/hello'
+import { Context } from '@hello.nrfcloud.com/proto/hello'
 
 export type TypedFetchResponse<ResponseBodySchemaType extends TSchema> =
 	| {
