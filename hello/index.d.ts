@@ -1,7 +1,6 @@
 export * from './Context.js'
 export * from './errors/ProblemDetail.js'
 export * from './errors/StatusCode.js'
-export * from './SingleCellGeoLocation.js'
 export * from './DeviceIdentity.js'
 export * from './typedFetch.js'
 export * from './LwM2MObjectUpdate.js'
