@@ -6,7 +6,6 @@ import {
 	ObjectVersion,
 	Resources,
 } from '@hello.nrfcloud.com/proto-map/api'
-import { IsoDateType } from './IsoDateType.js'
 
 /**
  * Similar to the message for `hello.nrfcloud.com/map` but without the deviceId
@@ -19,7 +18,6 @@ export const LwM2MObjectUpdate = Type.Object(
 		ObjectInstanceID: Type.Optional(ObjectInstanceID),
 		ObjectVersion: Type.Optional(ObjectVersion),
 		Resources,
-		ts: IsoDateType('Time when the update was received, formatted as ISO 8601'),
 	},
 	{
 		title: 'Object update',

@@ -16,9 +16,8 @@ void describe('LwM2MObjectUpdate', () => {
 				'1': 31.104015,
 				'3': 1,
 				'6': 'Fixed',
-				'99': '${tsISO}',
+				'99': new Date('2024-04-19T08:30:00.000Z').getTime(),
 			},
-			ts: '2024-04-19T08:30:00.000Z',
 		}
 		const maybeValid = validateWithTypeBox(LwM2MObjectUpdate)(input)
 		assert.equal('errors' in maybeValid, false)
