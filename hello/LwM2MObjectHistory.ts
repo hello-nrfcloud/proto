@@ -6,26 +6,14 @@ import {
 	ObjectVersion,
 	Resources,
 } from '@hello.nrfcloud.com/proto-map/api'
-import { Timestamp } from './Timestamp.js'
 import { deviceId } from './deviceId.js'
 
 export const LwM2MObjectHistory = Type.Object(
 	{
 		'@context': Type.Literal(Context.lwm2mObjectHistory.toString()),
-		partialInstances: Type.Array(
-			Type.Intersect(
-				[
-					Resources,
-					Type.Object({
-						ts: Timestamp,
-					}),
-				],
-				{
-					title:
-						'The resources of the object instance and the timestamp the data was received.',
-				},
-			),
-		),
+		partialInstances: Type.Array(Resources, {
+			title: 'The resources of the object instance.',
+		}),
 		query: Type.Object(
 			{
 				ObjectID,
