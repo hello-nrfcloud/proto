@@ -26,8 +26,12 @@ export const FOTAJobExecution = Type.Object(
 				'COMPLETED',
 			],
 		}),
-		statusDetails: Type.Optional(
-			Type.String({ minLength: 1, title: 'Status Details' }),
+		statusDetail: Type.Optional(
+			Type.String({
+				minLength: 1,
+				title: 'Status Detail',
+				description: 'Detailed information about the current status',
+			}),
 		),
 		version: Type.String({
 			minLength: 1,
