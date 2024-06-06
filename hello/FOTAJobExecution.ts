@@ -6,6 +6,11 @@ import { deviceId } from './deviceId.js'
 export const FOTAJobExecution = Type.Object(
 	{
 		'@context': Type.Literal(Context.fotaJobExecution.toString()),
+		id: Type.String({
+			minLength: 1,
+			title: 'ID',
+			description: 'The ID of the job.',
+		}),
 		deviceId,
 		lastUpdatedAt: IsoDateType(
 			'Time formatted as ISO 8601 string when the job was last updated.',
@@ -38,7 +43,7 @@ export const FOTAJobExecution = Type.Object(
 export const FOTAJobExecutions = Type.Object(
 	{
 		'@context': Type.Literal(Context.fotaJobExecutions.toString()),
-		id: deviceId,
+		deviceId,
 		jobs: Type.Array(FOTAJobExecution, { minItems: 0 }),
 	},
 	{
