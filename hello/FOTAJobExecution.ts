@@ -34,3 +34,15 @@ export const FOTAJobExecution = Type.Object(
 		title: 'FOTAJobExecution',
 	},
 )
+
+export const FOTAJobExecutions = Type.Object(
+	{
+		'@context': Type.Literal(Context.fotaJobExecutions.toString()),
+		id: deviceId,
+		jobs: Type.Array(FOTAJobExecution, { minItems: 0 }),
+	},
+	{
+		title: 'FOTA jobs',
+		description: 'Lists the most recent FOTA jobs for a device.',
+	},
+)

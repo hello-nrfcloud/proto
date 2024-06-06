@@ -41,7 +41,7 @@ export const SenMLImports = Type.Object(
 	{
 		'@context': Type.Literal(Context.senMLImports.toString()),
 		id: deviceId,
-		imports: Type.Array(SenMLImport, { minItems: 1 }),
+		imports: Type.Array(SenMLImport, { minItems: 0 }),
 	},
 	{
 		title: 'SenML imports',
