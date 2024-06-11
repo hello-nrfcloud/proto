@@ -10,6 +10,8 @@ export const Context = {
 	senMLImports: new URL(`${baseURL}/senml/imports`),
 	shadow: new URL(`${baseURL}/shadow`),
 	apiHealth: new URL(`${baseURL}/api/health`),
+	fotaBundles: new URL(`${baseURL}/fota/bundles`),
+	fotaBundle: new URL(`${baseURL}/fota/bundle`),
 	fotaJobExecution: new URL(`${baseURL}/fota/job-execution`),
 	fotaJobExecutions: new URL(`${baseURL}/fota/job-executions`),
 	error: (type: string): URL =>
