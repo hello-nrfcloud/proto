@@ -1,31 +1,20 @@
-import { Type } from '@sinclair/typebox'
-import { Context } from './Context.js'
 import {
 	ObjectID,
 	ObjectInstanceID,
 	ObjectVersion,
 	Resources,
 } from '@hello.nrfcloud.com/proto-map/api'
+import { Type } from '@sinclair/typebox'
+import { Context } from './Context.js'
 import { deviceId } from './deviceId.js'
-import { IsoDateType } from './IsoDateType.js'
 
 export const LwM2MObjectHistory = Type.Object(
 	{
 		'@context': Type.Literal(Context.lwm2mObjectHistory.toString()),
-		partialInstances: Type.Array(
-			Type.Union([
-				Resources,
-				Type.Object({
-					ts: IsoDateType(
-						'Timestamp when the object was written, or in case of aggregates the beginning of the binned time span.',
-					),
-				}),
-			]),
-			{
-				title:
-					'The resources of the object instance. Does not include the Time resource.',
-			},
-		),
+		partialInstances: Type.Array(Resources, {
+			title:
+				'The resources of the object instance. The time resource should reflect the start of the bucket.',
+		}),
 		query: Type.Object(
 			{
 				ObjectID,
