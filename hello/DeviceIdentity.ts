@@ -17,6 +17,11 @@ export const DeviceIdentity = Type.Object(
 				'Time formatted as ISO 8601 string when the device last sent in a message.',
 			),
 		),
+		hideDataBefore: Type.Optional(
+			IsoDateType(
+				'Data before this date is not accessible. Time formatted as ISO 8601 string.',
+			),
+		),
 	},
 	{
 		title: 'DeviceIdentity',
