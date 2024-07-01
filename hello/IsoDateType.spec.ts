@@ -10,4 +10,10 @@ void describe('isoDateRegExp', () => {
 		assert.equal('errors' in maybeValid, false)
 		assert.equal('value' in maybeValid && maybeValid?.value, isoTs)
 	})
+	void it('should validate a date string with local timezone', () => {
+		const isoTs = '2024-07-01T16:33:15+02:00'
+		const maybeValid = validateWithTypeBox(IsoDateType())(isoTs)
+		assert.equal('errors' in maybeValid, false)
+		assert.equal('value' in maybeValid && maybeValid?.value, isoTs)
+	})
 })
