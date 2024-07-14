@@ -103,7 +103,7 @@
     "generate"
   ],
   "peerDependencies": {
-    "@hello.nrfcloud.com/proto-map": "^13.2.2",
+    "@hello.nrfcloud.com/proto-map": "^13.2.3",
     "@sinclair/typebox": "^0.32.34",
     "ajv": "^8.17.1",
     "jsonata": "^2.0.5"
