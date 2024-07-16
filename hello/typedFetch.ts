@@ -65,6 +65,14 @@ export const typedFetch = <
 		const hasContent =
 			parseInt(res.headers.get('content-length') ?? '0', 10) > 0
 		if (!res.ok) {
+			if (
+				res.headers.get('content-type')?.includes('application/problem+json') ??
+				false
+			) {
+				return {
+					error: await res.json(),
+				}
+			}
 			return {
 				error: {
 					'@context': Context.problemDetail.toString(),

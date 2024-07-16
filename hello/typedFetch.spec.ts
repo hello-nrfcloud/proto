@@ -145,6 +145,35 @@ void describe('typedFetch()', () => {
 			expectedTitle: 'Network error',
 		})
 	})
+
+	void it('should parse a problem detail response', async () => {
+		const response = JSON.stringify({
+			'@context': 'https://github.com/hello-nrfcloud/proto/ProblemDetail',
+			title: 'Invalid fingerprint provided!',
+			detail: '29a.aaaaaa',
+			status: 400,
+		})
+		const scope = nock('https://api.example.com')
+			.get('/error')
+			.reply(400, response, {
+				'content-type': 'application/problem+json',
+				'content-length': `${response.length}`,
+			})
+
+		const getData = typedFetch({
+			responseBodySchema: Type.Any(),
+		})
+
+		const res = await getData(new URL('https://api.example.com/error'))
+
+		assert.equal(scope.isDone(), true)
+		assert.equal(
+			'error' in res && res.error.title,
+			'Invalid fingerprint provided!',
+		)
+		assert.equal('error' in res && res.error.detail, '29a.aaaaaa')
+		assert.equal('error' in res && res.error.status, 400)
+	})
 })
 
 const assertProblem = ({
