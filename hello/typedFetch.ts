@@ -47,10 +47,21 @@ export const typedFetch = <
 				}
 			}
 		}
-		const res = await (fetchImplementation ?? fetch)(url, {
-			...(init ?? {}),
-			body: body !== undefined ? JSON.stringify(body) : undefined,
-		})
+		let res: Response | undefined = undefined
+		try {
+			res = await (fetchImplementation ?? fetch)(url, {
+				...(init ?? {}),
+				body: body !== undefined ? JSON.stringify(body) : undefined,
+			})
+		} catch (err) {
+			return {
+				error: {
+					'@context': Context.problemDetail.toString(),
+					title: (err as Error).message,
+				},
+			}
+		}
+
 		const hasContent =
 			parseInt(res.headers.get('content-length') ?? '0', 10) > 0
 		if (!res.ok) {

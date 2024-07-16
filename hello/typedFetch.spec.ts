@@ -130,6 +130,21 @@ void describe('typedFetch()', () => {
 			requireErrorsArray: true,
 		})
 	})
+
+	void it('should fail if fetch throws an error', async () => {
+		const postData = typedFetch({
+			responseBodySchema: Type.Any(),
+			fetchImplementation: async () => {
+				throw new Error('Network error')
+			},
+		})
+
+		const res = await postData(new URL('https://api.example.com/data'))
+		assertProblem({
+			res,
+			expectedTitle: 'Network error',
+		})
+	})
 })
 
 const assertProblem = ({
@@ -151,6 +166,7 @@ const assertProblem = ({
 	} = (res as { error: Static<typeof ProblemDetail> }).error
 	assert.equal(context, Context.problemDetail.toString())
 	assert.equal(title, expectedTitle)
+	if (expectedErrorDetailBody === undefined && detailJSON === undefined) return
 	const detail = JSON.parse(detailJSON!)
 	if (expectedErrorDetailBody !== undefined)
 		assert.deepEqual(
