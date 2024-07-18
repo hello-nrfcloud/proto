@@ -46,7 +46,7 @@
     "@bifravst/prettier-config": "1.0.4",
     "@commitlint/config-conventional": "19.2.2",
     "@swc/cli": "0.4.0",
-    "@swc/core": "1.6.13",
+    "@swc/core": "1.7.0",
     "@types/glob": "8.1.0",
     "@types/node": "20.14.11",
     "chalk": "5.3.0",
@@ -103,7 +103,7 @@
     "generate"
   ],
   "peerDependencies": {
-    "@hello.nrfcloud.com/proto-map": "^13.2.3",
+    "@hello.nrfcloud.com/proto-map": "^14.0.0",
     "@sinclair/typebox": "^0.32.34",
     "ajv": "^8.17.1",
     "jsonata": "^2.0.5"
