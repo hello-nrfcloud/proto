@@ -174,6 +174,28 @@ void describe('typedFetch()', () => {
 		assert.equal('error' in res && res.error.detail, '29a.aaaaaa')
 		assert.equal('error' in res && res.error.status, 400)
 	})
+
+	void it('should set the content-type header when a body is provided', async () => {
+		const scope = nock('https://api.example.com', {
+			reqheaders: {
+				'content-type': 'application/json; charset=utf-8',
+			},
+		})
+			.post('/post')
+			.reply(200)
+
+		const postData = typedFetch({
+			responseBodySchema: Type.Undefined(),
+		})
+
+		const res = await postData(new URL('https://api.example.com/post'), {
+			foo: 'bar',
+		})
+
+		assert.equal(scope.isDone(), true)
+		assert.equal('error' in res, false)
+		assert.deepEqual('result' in res && res.result, undefined)
+	})
 })
 
 const assertProblem = ({

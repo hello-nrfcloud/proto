@@ -49,8 +49,14 @@ export const typedFetch = <
 		}
 		let res: Response | undefined = undefined
 		try {
+			const hasBody = body !== undefined
+			const headers = new Headers(init?.headers)
+			if (hasBody)
+				headers.set('content-type', 'application/json; charset=utf-8')
 			res = await (fetchImplementation ?? fetch)(url, {
 				...(init ?? {}),
+				method: init?.method ?? (hasBody ? 'POST' : 'GET'),
+				headers,
 				body: body !== undefined ? JSON.stringify(body) : undefined,
 			})
 		} catch (err) {
