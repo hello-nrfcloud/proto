@@ -1,13 +1,13 @@
-import { Type } from '@sinclair/typebox'
-import { Context } from './Context.js'
-import { deviceId } from './deviceId.js'
-import { IsoDateType } from './IsoDateType.js'
 import {
 	ObjectID,
 	ObjectInstanceID,
 	ObjectVersion,
 	Resources,
 } from '@hello.nrfcloud.com/proto-map/api'
+import { Type } from '@sinclair/typebox'
+import { Context } from './Context.js'
+import { deviceId } from './deviceId.js'
+import { IsoDateType } from './IsoDateType.js'
 
 export const SenMLImport = Type.Object({
 	importId: Type.String({

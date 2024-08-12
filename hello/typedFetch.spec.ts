@@ -1,10 +1,10 @@
-import { describe, it } from 'node:test'
-import assert from 'node:assert/strict'
-import nock from 'nock'
-import { typedFetch, type TypedFetchResponse } from './typedFetch.js'
 import { Type, type Static } from '@sinclair/typebox'
+import nock from 'nock'
+import assert from 'node:assert/strict'
+import { describe, it } from 'node:test'
 import { Context } from './Context.js'
 import type { ProblemDetail } from './errors/ProblemDetail.js'
+import { typedFetch, type TypedFetchResponse } from './typedFetch.js'
 
 void describe('typedFetch()', () => {
 	void it('should validate a response', async () => {

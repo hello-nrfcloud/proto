@@ -1,8 +1,8 @@
-import { describe, it } from 'node:test'
+import { Type } from '@sinclair/typebox'
 import assert from 'node:assert/strict'
+import { describe, it } from 'node:test'
 import { formatTypeBoxErrors } from './formatTypeBoxErrors.js'
 import { validateWithTypeBox } from './validateWithTypeBox.js'
-import { Type } from '@sinclair/typebox'
 
 void describe('formatTypeBoxErrors()', async () =>
 	void it('should format TypeBox errors', () => {

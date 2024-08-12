@@ -1,9 +1,9 @@
-import { describe, test as it } from 'node:test'
-import assert from 'node:assert'
-import { ApiHealth } from './ApiHealth.js'
-import { validateWithTypeBox } from '../validator/validateWithTypeBox.js'
-import { Context } from './Context.js'
 import type { Static } from '@sinclair/typebox'
+import assert from 'node:assert'
+import { describe, test as it } from 'node:test'
+import { validateWithTypeBox } from '../validator/validateWithTypeBox.js'
+import { ApiHealth } from './ApiHealth.js'
+import { Context } from './Context.js'
 
 void describe('ApiHealth', () => {
 	void describe('validate device configuration requests', () => {

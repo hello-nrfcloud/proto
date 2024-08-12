@@ -1,6 +1,6 @@
+import { LwM2MObjectInstance } from '@hello.nrfcloud.com/proto-map/api'
 import { Type, type Static } from '@sinclair/typebox'
 import { Context } from './Context.js'
-import { LwM2MObjectInstance } from '@hello.nrfcloud.com/proto-map/api'
 
 export const Shadow = Type.Object({
 	'@context': Type.Literal(Context.shadow.toString()),

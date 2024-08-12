@@ -1,6 +1,6 @@
-import { isFingerprint } from './isFingerprint.js'
-import { describe, test as it } from 'node:test'
 import assert from 'node:assert/strict'
+import { describe, test as it } from 'node:test'
+import { isFingerprint } from './isFingerprint.js'
 
 void describe('isFingerprint()', () => {
 	void it('should validate a valid fingerprint', () =>
