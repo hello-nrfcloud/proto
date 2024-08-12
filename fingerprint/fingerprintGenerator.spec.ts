@@ -1,5 +1,5 @@
-import { describe, it } from 'node:test'
 import assert from 'node:assert/strict'
+import { describe, it } from 'node:test'
 import { fingerprintGenerator } from './fingerprintGenerator.js'
 import { isFingerprint } from './isFingerprint.js'
 
