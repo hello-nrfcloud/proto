@@ -12,8 +12,8 @@ export const Context = {
 	apiHealth: new URL(`${baseURL}/api/health`),
 	fotaBundles: new URL(`${baseURL}/fota/bundles`),
 	fotaBundle: new URL(`${baseURL}/fota/bundle`),
-	fotaJobExecution: new URL(`${baseURL}/fota/job-execution`),
-	fotaJobExecutions: new URL(`${baseURL}/fota/job-executions`),
+	fotaJob: new URL(`${baseURL}/fota/job`),
+	fotaJobs: new URL(`${baseURL}/fota/jobs`),
 	error: (type: string): URL =>
 		new URL(`https://hello.nrfcloud.com/errors/${type}`),
 }
