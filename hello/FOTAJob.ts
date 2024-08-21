@@ -24,9 +24,6 @@ export const FOTAJob = Type.Object(
 			description: 'The ID of the job.',
 		}),
 		deviceId,
-		target: Type.Enum(FOTAJobTarget, {
-			description: 'the firmware target of the job',
-		}),
 		upgradePath: Type.Record(
 			Type.RegExp(/[0-9]+\.[0-9]+\.[0-9]+/, {
 				title: 'Version',
@@ -41,6 +38,9 @@ export const FOTAJob = Type.Object(
 			),
 			{ minProperties: 1 },
 		),
+		timestamp: IsoDateType(
+			'Time formatted as ISO 8601 string when the job was last updated.',
+		),
 		status: Type.Enum(FOTAJobStatus, {
 			description: 'the status of the job',
 		}),
@@ -49,9 +49,12 @@ export const FOTAJob = Type.Object(
 			title: 'Status Detail',
 			description: 'Detailed information about the current status',
 		}),
-		timestamp: IsoDateType(
-			'Time formatted as ISO 8601 string when the job was last updated.',
-		),
+		reportedVersion: Type.String({
+			minLength: 1,
+			title: 'reported version',
+			description:
+				'The version of the target firmware that the device has reported.',
+		}),
 	},
 	{
 		title: 'FOTAJob',
