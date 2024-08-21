@@ -24,8 +24,22 @@ export const FOTAJob = Type.Object(
 			description: 'The ID of the job.',
 		}),
 		deviceId,
-		timestamp: IsoDateType(
-			'Time formatted as ISO 8601 string when the job was last updated.',
+		target: Type.Enum(FOTAJobTarget, {
+			description: 'the firmware target of the job',
+		}),
+		upgradePath: Type.Record(
+			Type.RegExp(/[0-9]+\.[0-9]+\.[0-9]+/, {
+				title: 'Version',
+				description: 'The version the bundle is targeting',
+			}),
+			Type.RegExp(
+				/^(APP|MODEM|BOOT|SOFTDEVICE|BOOTLOADER|MDM_FULL)\*[0-9a-zA-Z]{8}\*.*$/,
+				{
+					title: 'Bundle ID',
+					description: 'The nRF Cloud firmware bundle ID',
+				},
+			),
+			{ minProperties: 1 },
 		),
 		status: Type.Enum(FOTAJobStatus, {
 			description: 'the status of the job',
@@ -35,15 +49,9 @@ export const FOTAJob = Type.Object(
 			title: 'Status Detail',
 			description: 'Detailed information about the current status',
 		}),
-		target: Type.Enum(FOTAJobTarget, {
-			description: 'the firmware target of the job',
-		}),
-		reportedVersion: Type.String({
-			minLength: 1,
-			title: 'reported version',
-			description:
-				'The version of the target firmware that the device has reported.',
-		}),
+		timestamp: IsoDateType(
+			'Time formatted as ISO 8601 string when the job was last updated.',
+		),
 	},
 	{
 		title: 'FOTAJob',
