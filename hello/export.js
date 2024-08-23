@@ -1,4 +1,5 @@
 export * from './ApiHealth.js'
+export * from './bundleIdToType.js'
 export * from './Context.js'
 export * from './deviceId.js'
 export * from './DeviceIdentity.js'
