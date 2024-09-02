@@ -15,6 +15,21 @@ export enum FOTAJobTarget {
 	modem = 'modem',
 }
 
+export const UpgradePath = Type.Record(
+	Type.RegExp(/[0-9]+\.[0-9]+\.[0-9]+/, {
+		title: 'Version',
+		description: 'The version the bundle is targeting',
+	}),
+	Type.RegExp(
+		/^(APP|MODEM|BOOT|SOFTDEVICE|BOOTLOADER|MDM_FULL)\*[0-9a-zA-Z]{8}\*.*$/,
+		{
+			title: 'Bundle ID',
+			description: 'The nRF Cloud firmware bundle ID',
+		},
+	),
+	{ minProperties: 1 },
+)
+
 export const FOTAJob = Type.Object(
 	{
 		'@context': Type.Literal(Context.fotaJob.toString()),
@@ -24,20 +39,7 @@ export const FOTAJob = Type.Object(
 			description: 'The ID of the job.',
 		}),
 		deviceId,
-		upgradePath: Type.Record(
-			Type.RegExp(/[0-9]+\.[0-9]+\.[0-9]+/, {
-				title: 'Version',
-				description: 'The version the bundle is targeting',
-			}),
-			Type.RegExp(
-				/^(APP|MODEM|BOOT|SOFTDEVICE|BOOTLOADER|MDM_FULL)\*[0-9a-zA-Z]{8}\*.*$/,
-				{
-					title: 'Bundle ID',
-					description: 'The nRF Cloud firmware bundle ID',
-				},
-			),
-			{ minProperties: 1 },
-		),
+		upgradePath: UpgradePath,
 		timestamp: IsoDateType(
 			'Time formatted as ISO 8601 string when the job was last updated.',
 		),
