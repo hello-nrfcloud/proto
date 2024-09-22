@@ -16,10 +16,14 @@ export enum FOTAJobTarget {
 }
 
 export const UpgradePath = Type.Record(
-	Type.RegExp(/[0-9]+\.[0-9]+\.[0-9]+/, {
-		title: 'Version',
-		description: 'The version the bundle is targeting',
-	}),
+	Type.RegExp(
+		new RegExp(`^(${['<', '<=', '>', '>='].join('|')})?[0-9]+.[0-9]+.[0-9]+$`),
+		{
+			title: 'Version',
+			description:
+				'The version the bundle is targeting. Supports ranges (e.g >=1.0.0).',
+		},
+	),
 	Type.RegExp(
 		/^(APP|MODEM|BOOT|SOFTDEVICE|BOOTLOADER|MDM_FULL)\*[0-9a-zA-Z]{8}\*.*$/,
 		{
@@ -27,7 +31,7 @@ export const UpgradePath = Type.Record(
 			description: 'The nRF Cloud firmware bundle ID',
 		},
 	),
-	{ minProperties: 1 },
+	{ minProperties: 1, additionalProperties: false },
 )
 
 export const FOTAJob = Type.Object(
