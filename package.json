@@ -103,7 +103,7 @@
   ],
   "peerDependencies": {
     "@hello.nrfcloud.com/proto-map": "^16.1.9",
-    "@sinclair/typebox": "^0.33.12",
+    "@sinclair/typebox": "^0.33.13",
     "ajv": "^8.17.1",
     "jsonata": "^2.0.5"
   }
