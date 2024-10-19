@@ -48,7 +48,7 @@
     "@swc/cli": "0.4.0",
     "@swc/core": "1.7.36",
     "@types/glob": "8.1.0",
-    "@types/node": "22.7.6",
+    "@types/node": "22.7.7",
     "chalk": "5.3.0",
     "glob": "11.0.0",
     "husky": "9.1.6",
