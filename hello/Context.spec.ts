@@ -11,9 +11,7 @@ void describe('Context', () => {
 	void it('should generate a problemDetail context URL', () =>
 		assert.deepEqual(
 			Context.problemDetail,
-			new URL(
-				`https://github.com/hello-nrfcloud/proto/blob/saga/hello/errors/ProblemDetail.ts`,
-			),
+			new URL(`https://github.com/hello-nrfcloud/proto/ProblemDetail`),
 		))
 	void it('should generate a error context URL', () =>
 		assert.deepEqual(
