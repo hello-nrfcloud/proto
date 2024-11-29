@@ -105,6 +105,6 @@
     "@hello.nrfcloud.com/proto-map": "^16.1.28",
     "@sinclair/typebox": "^0.34.9",
     "ajv": "^8.17.1",
-    "jsonata": "^2.0.5"
+    "jsonata": "^2.0.6"
   }
 }
