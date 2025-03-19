@@ -3,6 +3,18 @@ import { Context } from '../Context.js'
 import { HttpStatusCode, StatusCode } from './StatusCode.js'
 
 /**
+ * Can be used to throw an error with a Problem Detail object.
+ */
+export class ProblemDetailError extends Error {
+	public readonly problem: Static<typeof ProblemDetail>
+	constructor(problem: Omit<Static<typeof ProblemDetail>, '@context'>) {
+		super(problem.title)
+		this.problem = { '@context': Context.problemDetail.toString(), ...problem }
+		this.name = 'ProblemDetailError'
+	}
+}
+
+/**
  * Problem Details Object
  *
  * @see https://datatracker.ietf.org/doc/draft-ietf-httpapi-rfc7807bis/
