@@ -55,7 +55,7 @@
     "lint-staged": "15.5.1",
     "nock": "14.0.4",
     "tsmatchers": "5.0.2",
-    "tsx": "4.19.3"
+    "tsx": "4.19.4"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
