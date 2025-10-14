@@ -2,8 +2,8 @@ import assert from 'node:assert/strict'
 import { describe, test as it } from 'node:test'
 import { validateWithTypeBox } from '../../validator/validateWithTypeBox.js'
 import { ProblemDetail } from './ProblemDetail.js'
-import BAD_REQUEST from './examples/BAD_REQUEST.json' assert { type: 'json' }
-import INTERNAL_ERROR from './examples/INTERNAL_ERROR.json' assert { type: 'json' }
+import BAD_REQUEST from './examples/BAD_REQUEST.json' with { type: 'json' }
+import INTERNAL_ERROR from './examples/INTERNAL_ERROR.json' with { type: 'json' }
 
 void describe('Error example messages', () => {
 	const validator = validateWithTypeBox(ProblemDetail)
