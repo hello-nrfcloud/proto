@@ -100,6 +100,9 @@
     "schemas",
     "generate"
   ],
+  "dependencies": {
+    "@jsr/nrfcloud__validate-with-typebox": "1.0.0"
+  },
   "peerDependencies": {
     "@hello.nrfcloud.com/proto-map": "^16.6.4",
     "@sinclair/typebox": "^0.34.48",
