@@ -1,7 +1,7 @@
-import { validateWithTypeBox } from '@hello.nrfcloud.com/proto'
-import type { ProblemDetail } from '@hello.nrfcloud.com/proto/hello'
-import { Context } from '@hello.nrfcloud.com/proto/hello'
 import { type Static, type TObject, type TSchema } from '@sinclair/typebox'
+import { validateWithTypeBox } from '../validator/validateWithTypeBox.ts'
+import { Context } from './Context.ts'
+import type { ProblemDetail } from './errors/ProblemDetail.ts'
 
 export type TypedFetchResponse<ResponseBodySchemaType extends TSchema> =
 	| {
