@@ -3,12 +3,12 @@ name: Build and Release
 permissions:
   contents: write
   issues: write
+  id-token: write
 
 on:
   push:
 
 env:
-  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
@@ -24,6 +24,7 @@ jobs:
         with:
           node-version: ">=24.19.0 <25"
           cache: "npm"
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install NPM version specified in package.json
         uses: ./.github/actions/install-npm
