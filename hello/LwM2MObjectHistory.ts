@@ -5,8 +5,8 @@ import {
 	Resources,
 } from '@hello.nrfcloud.com/proto-map/api'
 import { Type } from '@sinclair/typebox'
-import { Context } from './Context.js'
-import { deviceId } from './deviceId.js'
+import { Context } from './Context.ts'
+import { deviceId } from './deviceId.ts'
 
 export const LwM2MObjectHistory = Type.Object(
 	{

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, test as it } from 'node:test'
-import { validateWithTypeBox } from '../../validator/validateWithTypeBox.js'
-import { ProblemDetail } from './ProblemDetail.js'
+import { validateWithTypeBox } from '../../validator/validateWithTypeBox.ts'
+import { ProblemDetail } from './ProblemDetail.ts'
 import BAD_REQUEST from './examples/BAD_REQUEST.json' with { type: 'json' }
 import INTERNAL_ERROR from './examples/INTERNAL_ERROR.json' with { type: 'json' }
 

@@ -1,4 +1,4 @@
-import { generateCode } from './generateCode.js'
+import { generateCode } from './generateCode.ts'
 
 export const fingerprintGenerator = (productionRun: number): (() => string) => {
 	const productionRunCodes: string[] = []

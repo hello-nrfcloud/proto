@@ -1,9 +1,9 @@
 import type { Static } from '@sinclair/typebox'
 import assert from 'node:assert'
 import { describe, test as it } from 'node:test'
-import { validateWithTypeBox } from '../validator/validateWithTypeBox.js'
-import { ApiHealth } from './ApiHealth.js'
-import { Context } from './Context.js'
+import { validateWithTypeBox } from '../validator/validateWithTypeBox.ts'
+import { ApiHealth } from './ApiHealth.ts'
+import { Context } from './Context.ts'
 
 void describe('ApiHealth', () => {
 	void describe('validate device configuration requests', () => {

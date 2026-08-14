@@ -1,2 +1,2 @@
-export * from './validator/formatTypeBoxErrors.js'
-export * from './validator/validateWithTypeBox.js'
+export * from './validator/formatTypeBoxErrors.ts'
+export * from './validator/validateWithTypeBox.ts'

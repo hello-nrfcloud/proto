@@ -47,7 +47,7 @@ export const typedFetch = <
 				}
 			}
 		}
-		let res: Response | undefined = undefined
+		let res: Response
 		try {
 			const hasBody = body !== undefined
 			const headers = new Headers(init?.headers)

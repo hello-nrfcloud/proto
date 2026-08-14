@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { describe, test as it } from 'node:test'
-import { Context } from './Context.js'
+import { Context } from './Context.ts'
 
 void describe('Context', () => {
 	void it('should generate a deviceIdentity context URL', () =>

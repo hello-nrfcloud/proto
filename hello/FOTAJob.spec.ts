@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { validateWithTypeBox } from 'validator/validateWithTypeBox.js'
-import { UpgradePath } from './FOTAJob.js'
+import { validateWithTypeBox } from '../validator/validateWithTypeBox.ts'
+import { UpgradePath } from './FOTAJob.ts'
 
 const v = validateWithTypeBox(UpgradePath)
 

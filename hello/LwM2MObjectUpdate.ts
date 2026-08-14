@@ -5,7 +5,7 @@ import {
 	Resources,
 } from '@hello.nrfcloud.com/proto-map/api'
 import { Type } from '@sinclair/typebox'
-import { Context } from './Context.js'
+import { Context } from './Context.ts'
 
 /**
  * Similar to the message for `hello.nrfcloud.com/map` but without the deviceId

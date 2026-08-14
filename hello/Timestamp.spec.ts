@@ -1,8 +1,8 @@
 import type { Static } from '@sinclair/typebox'
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { validateWithTypeBox } from 'validator/validateWithTypeBox.js'
-import { Timestamp } from './Timestamp.js'
+import { validateWithTypeBox } from '../validator/validateWithTypeBox.ts'
+import { Timestamp } from './Timestamp.ts'
 
 void describe('Timestamp', () => {
 	void it('should validate', () => {

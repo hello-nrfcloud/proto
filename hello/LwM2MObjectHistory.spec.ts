@@ -1,8 +1,8 @@
 import type { Static } from '@sinclair/typebox'
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { validateWithTypeBox } from 'validator/validateWithTypeBox.js'
-import { LwM2MObjectHistory } from './LwM2MObjectHistory.js'
+import { validateWithTypeBox } from '../validator/validateWithTypeBox.ts'
+import { LwM2MObjectHistory } from './LwM2MObjectHistory.ts'
 
 void describe('LwM2MObjectHistory', () => {
 	void it('should validate', () => {

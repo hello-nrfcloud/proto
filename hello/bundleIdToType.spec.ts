@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, test as it } from 'node:test'
-import { bundleIdToType } from './bundleIdToType.js'
-import { FOTAJobTarget } from './FOTAJob.js'
+import { bundleIdToType } from './bundleIdToType.ts'
+import { FOTAJobTarget } from './FOTAJob.ts'
 
 void describe('bundleIdToType()', () => {
 	void it('should return application for APP bundleId', () => {

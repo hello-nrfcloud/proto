@@ -1,6 +1,6 @@
 import { Type } from '@sinclair/typebox'
-import { Context } from './Context.js'
-import { deviceId } from './deviceId.js'
+import { Context } from './Context.ts'
+import { deviceId } from './deviceId.ts'
 
 export const FOTABundle = Type.Object(
 	{

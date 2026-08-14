@@ -1,7 +1,7 @@
 import { Type } from '@sinclair/typebox'
-import { Context } from './Context.js'
-import { IsoDateType } from './IsoDateType.js'
-import { deviceId } from './deviceId.js'
+import { Context } from './Context.ts'
+import { IsoDateType } from './IsoDateType.ts'
+import { deviceId } from './deviceId.ts'
 
 export const DeviceIdentity = Type.Object(
 	{

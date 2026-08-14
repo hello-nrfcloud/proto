@@ -5,9 +5,9 @@ import {
 	Resources,
 } from '@hello.nrfcloud.com/proto-map/api'
 import { Type } from '@sinclair/typebox'
-import { Context } from './Context.js'
-import { deviceId } from './deviceId.js'
-import { IsoDateType } from './IsoDateType.js'
+import { Context } from './Context.ts'
+import { deviceId } from './deviceId.ts'
+import { IsoDateType } from './IsoDateType.ts'
 
 export const SenMLImport = Type.Object({
 	importId: Type.String({

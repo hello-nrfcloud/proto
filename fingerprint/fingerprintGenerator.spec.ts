@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { fingerprintGenerator } from './fingerprintGenerator.js'
-import { isFingerprint } from './isFingerprint.js'
+import { fingerprintGenerator } from './fingerprintGenerator.ts'
+import { isFingerprint } from './isFingerprint.ts'
 
 void describe('fingerprintGenerator()', () => {
 	void it('should generated a fingerprint', () => {

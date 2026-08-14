@@ -1,6 +1,6 @@
 import { Type, type Static } from '@sinclair/typebox'
-import { Context } from '../Context.js'
-import { HttpStatusCode, StatusCode } from './StatusCode.js'
+import { Context } from '../Context.ts'
+import { HttpStatusCode, StatusCode } from './StatusCode.ts'
 
 /**
  * Can be used to throw an error with a Problem Detail object.
