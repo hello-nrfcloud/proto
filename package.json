@@ -48,7 +48,7 @@
     "@swc/cli": "0.8.1",
     "@swc/core": "1.15.47",
     "@types/glob": "9.0.0",
-    "@types/node": "24.9.1",
+    "@types/node": "24.13.3",
     "chalk": "5.6.2",
     "check-node-version": "4.2.1",
     "glob": "11.1.0",
