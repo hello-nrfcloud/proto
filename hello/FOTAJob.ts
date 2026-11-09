@@ -3,17 +3,19 @@ import { Context } from './Context.ts'
 import { IsoDateType } from './IsoDateType.ts'
 import { deviceId } from './deviceId.ts'
 
-export enum FOTAJobStatus {
-	NEW = 'NEW',
-	IN_PROGRESS = 'IN_PROGRESS',
-	SUCCEEDED = 'SUCCEEDED',
-	FAILED = 'FAILED',
-}
+export const FOTAJobStatus = {
+	NEW: 'NEW',
+	IN_PROGRESS: 'IN_PROGRESS',
+	SUCCEEDED: 'SUCCEEDED',
+	FAILED: 'FAILED',
+} as const
+export type FOTAJobStatus = (typeof FOTAJobStatus)[keyof typeof FOTAJobStatus]
 
-export enum FOTAJobTarget {
-	application = 'app',
-	modem = 'modem',
-}
+export const FOTAJobTarget = {
+	application: 'app',
+	modem: 'modem',
+} as const
+export type FOTAJobTarget = (typeof FOTAJobTarget)[keyof typeof FOTAJobTarget]
 
 export const UpgradePath = Type.Record(
 	Type.RegExp(
