@@ -33,8 +33,8 @@
   "author": "Nordic Semiconductor ASA | nordicsemi.no",
   "license": "BSD-3-Clause",
   "engines": {
-    "node": ">=24.19.0 <27",
-    "npm": ">=12.0.2 <13"
+    "node": ">=24.19.0 <25 || >=26.13.1 <27",
+    "npm": ">=12.2.3 <13"
   },
   "scripts": {
     "test": "node --no-warnings --experimental-transform-types --test \"!(node_modules)/**/*.spec.ts\"",
